@@ -1,0 +1,50 @@
+<% provide(:title, 'Резервирование оборудования') %>
+<h1>Зарезервировать <%= @reservation.hardware.name %> </h1>
+
+<div>
+	<h2>Акивные резервы</h2>
+	<ul>
+		<% @reservations.active.each do |r| %>
+    <li>
+      <%= r.name %> <%= r.from_time %> <%= r.to_time %> <%= r.user.firstname %> <%= r.user.lastname %>
+    </li>
+  	<% end %>
+	</ul>
+</div>
+
+
+<div classs="row">
+  <div>
+    <h2>Для пользователя <%= @reservation.user.firstname %> <%= @reservation.user.lastname %></h2>
+   
+    <%= form_for( [@hardware, @reservation] ) do |f| %>
+			
+      
+      <%= f.label 'Назначение' %>
+      <%= f.text_field :name %>
+      
+      <table>
+      	<tr>
+      		<td>
+      			C
+      		</td>
+      		<td>
+      			<%= f.date_field :from_time %>
+      		</td>
+      		<td>
+      			по
+      		</td>
+      		<td>
+      			<%= f.date_field :to_time %>
+      		</td>
+      	</tr>
+      </table>      
+      
+      
+      
+
+      <%= f.submit "Создать", class: "btn btn-large btn-primary" %>
+    <% end %>
+   
+  </div>
+</div>

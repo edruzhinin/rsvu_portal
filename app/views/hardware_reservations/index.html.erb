@@ -1,0 +1,14 @@
+<% provide(:title, 'Оборудование полигона') %>
+<h1>Резервирование оборудования</h1>
+
+<h2>
+	<%= @hardware.name %>
+</h2>
+
+<ul class="hardwares">
+  <% @reservations.each do |r| %>
+    <li>
+      <%= r.name %> <%= r.from_time %> <%= r.to_time %> <%= r.user %>
+    </li>
+  <% end %>
+</ul>

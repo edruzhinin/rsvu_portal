@@ -1,0 +1,19 @@
+<% provide(:title, @hardware.name) %>
+<div class="row">
+	
+		<section>
+			<h1>
+				<%= @hardware.name %>
+			</h1>
+			<% @reserves.each do |r| %>
+   			<li>
+      	<%= r.name %> <%= r.from_time %> <%= r.to_time %> <%= r.user.firstname  %>
+    	</li>
+  		<% end %>
+		</section>
+	
+
+
+
+	
+</div>

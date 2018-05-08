@@ -1,2 +1,31 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% if signed_in? %>
+
+	<div>
+		<ul>
+			<li><%= link_to "Оборудование", hardwares_path %></li>
+			<li><%= link_to "Виртуальные машины", '#' %></li>
+		</ul>
+			
+			
+	
+	</div>
+
+<% else %>
+
+	<div class="center hero-unit">
+	
+		<h1>Добро пожаловать на портал отдела РСВУ</h1>
+		<h2>
+			Это домашняя страница портала отдела разработки СВУ
+		</h2>
+
+		<%= link_to "Зарегистрироваться", signup_path, class: "btn btn-large btn-primary" %>
+	
+	</div>
+<% end %>
+	
+	
+	
+
+	
+

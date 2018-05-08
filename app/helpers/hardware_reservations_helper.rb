@@ -1,0 +1,2 @@
+module HardwareReservationsHelper
+end

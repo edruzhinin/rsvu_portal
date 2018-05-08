@@ -1,6 +1,25 @@
 RsvuPortal::Application.routes.draw do
-  get "static_pages/home"
-  get "static_pages/help"
+  get "hardware_reservations/new"
+  get "hardware_reservations/index"
+  get "hardware_reservations/create"
+  get "hardwares/new"
+  get "hardwares/index"
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :hardwares do
+  	resources :hardware_reservations
+  end
+  
+  root 'static_pages#home'
+  match '/signup',		to: 'users#new',						via: 'get'
+  match '/help',			to: 'static_pages#help',	via: 'get'
+  match '/about',			to: 'static_pages#about',	via: 'get'
+  match '/contact',		to: 'static_pages#contact',	via: 'get'
+  match '/signin',		to: 'sessions#new',		via: 'get'
+  match '/signout',		to:	'sessions#destroy',		via: 'delete'
+  
+ 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
