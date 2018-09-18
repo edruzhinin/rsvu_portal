@@ -1,9 +1,9 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
-	<div class="navbar-inner">
+	
 		<div class="container">
 			<%= link_to "Портал отдела разработки СВУ", '#', id: "logo" %>
 			<nav>
-				<ul class="nav pull-right">
+				<ul class="nav navbar-nav navbar-right">
 					<li><%= link_to "Home", root_path %></li>
 					<li><%= link_to "Help", help_path %></li>
 					<% if signed_in? %>
@@ -26,6 +26,7 @@
 					<% end %>
 				</ul>
 			</nav>
-		</div>
+		
 	</div>
+</header>
 	
