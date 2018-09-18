@@ -2,25 +2,49 @@
 <h1>Все оборудование</h1>
 
 
-
-<table class="hardwares">
   <% @hardwares.each do |hardware| %>
+  	<div class="card">
+    	<div class="card-header" id="headingOne">
+      		<div class="container"> 
+  					<div class="row">
+    					<div class="col-lg-3"><%= link_to hardware.name, hardware %></div>
+    					<div class="col-lg-2"><%=hardware.identificator%></div>
+    					<div class="col-lg-2"><%=hardware.hw_type%></div>
+    					<div class="col-lg-2"><%=hardware.hw_location%></div>
+  						<div class="col-lg-2">
+								<% if hardware.hardware_reservations.occupied.count > 0 %>
+									<a class="btn btn-danger" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    								Резервы
+  								</a>
+  							<% else %>	
+  								<div class="btn btn-success" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  									Резервы
+  								</div>	
+  							<% end %>
+  							
+        			</div>
+        			<div class="col-lg-1">
+        				<div class="btn btn-default">
+        					<%=link_to "Заказать", new_hardware_hardware_reservation_path(hardware) %>
+        				</div>
+        			</div>
+						</div>
+       		</div> 
+      
+    	</div>
     
-			<tr>
-				<td class="hardwares_name"><%= link_to hardware.name, hardware %></td>
-				
-				<% if hardware.hardware_reservations.occupied.count > 0 %>
-					<td>Занято</td>
-				<% else %>
-					<td>Свободно</td>
-				<% end %>
-				<td class="hardwares_ident"><%=hardware.identificator%></td>
-				<td class="hardwares_type"><%=hardware.hw_type%></td>
-				<td class="hardwares_location"><%=hardware.hw_location%></td>
-				<td><%=link_to "Зарезервировать", new_hardware_hardware_reservation_path(hardware) %></td>
-			</tr>
+			<div class="collapse" id="<%=hardware.id%>">
+  <div class="card card-body">
+    
+    	<ul>
+ 				<% hardware.hardware_reservations.each do |reserv| %>
+ 					<li>c <%=reserv.from_time.to_date %> по <%=reserv.to_time.to_date %></li>
+ 				<% end %>	
+ 			</ul>
+ 			
+ 			
+  </div>
+</div>
+  </div>
+			<%end%>
 		
-    
-    
-  <% end %>
-</table>
