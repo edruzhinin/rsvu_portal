@@ -22,6 +22,7 @@ class HardwareReservationsController < ApplicationController
 	def create
 		
 	@reservation = @hardware.hardware_reservations.build(reservation_params)
+		
 	
 	@reservation.user=current_user
 		

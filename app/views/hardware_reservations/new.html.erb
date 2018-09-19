@@ -6,7 +6,7 @@
 	<ul>
 		<% @reservations.active.each do |r| %>
     <li>
-      <%= r.name %> <%= r.from_time %> <%= r.to_time %> <%= r.user.firstname %> <%= r.user.lastname %>
+      <%= r.name %> <%= r.from_time.to_date %> <%= r.to_time.to_date %> <%= r.user.firstname %> <%= r.user.lastname %>
     </li>
   	<% end %>
 	</ul>

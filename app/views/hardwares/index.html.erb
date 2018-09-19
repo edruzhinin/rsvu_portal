@@ -38,7 +38,7 @@
     
     	<ul>
  				<% hardware.hardware_reservations.each do |reserv| %>
- 					<li>c <%=reserv.from_time.to_date %> по <%=reserv.to_time.to_date %></li>
+ 					<li>c <%=reserv.from_time.to_date%> по <%=reserv.to_time.to_date%> <%=reserv.name%> <%=reserv.user.firstname%> <%=reserv.user.lastname%></li>
  				<% end %>	
  			</ul>
  			
