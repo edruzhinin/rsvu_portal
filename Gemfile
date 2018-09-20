@@ -20,6 +20,9 @@ group :development, :test do
  
 end
 
+group :production do
+  gem 'mysql2', '0.3.21'
+end
 
 
 
