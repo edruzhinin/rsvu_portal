@@ -7,7 +7,7 @@
 			</h1>
 			<% @reserves.each do |r| %>
    			<li>
-      	<%= r.name %> <%= r.from_time %> <%= r.to_time %> <%= r.user.firstname  %>
+      	<%= r.name %> <%= r.from_time.to_date %> <%= r.to_time.to_date %> <%= r.user.firstname  %>
     	</li>
   		<% end %>
 		</section>

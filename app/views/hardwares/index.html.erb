@@ -6,22 +6,33 @@
   	<div class="card">
     	<div class="card-header" id="headingOne">
       		<div class="container"> 
-  					<div class="row">
+  					<div class="row table">
     					<div class="col-lg-3"><%= link_to hardware.name, hardware %></div>
     					<div class="col-lg-2"><%=hardware.identificator%></div>
     					<div class="col-lg-2"><%=hardware.hw_type%></div>
     					<div class="col-lg-2"><%=hardware.hw_location%></div>
   						<div class="col-lg-2">
-								<% if hardware.hardware_reservations.occupied.count > 0 %>
-									<a class="btn btn-danger" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    								Резервы
-  								</a>
-  							<% else %>	
-  								<div class="btn btn-success" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  									Резервы
-  								</div>	
-  							<% end %>
-  							
+								<% if hardware.hardware_reservations.occupied.count > 0 %> <!-- Оборудование сейчас занято-->
+										<a class="btn btn-danger" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    									<span class="badge"><%=hardware.hardware_reservations.occupied.last.to_time.to_date%></span>
+  									</a>
+  							<%else%>
+									<% if hardware.hardware_reservations.active.count > 0 %> <!-- Есть резервы на обоудование -->
+  									<% if hardware.hardware_reservations.occupied_nextweek.count > 0 %> <!-- Есть резервы на обоудование на следующей неделе-->
+  										<a class="btn btn-warning" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    										<span class="badge"><%=hardware.hardware_reservations.occupied_nextweek.first.from_time.to_date%></span>
+  									  </a>
+  									<% else %>
+  										<div class="btn btn-info" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  											<span class="badge"><%=hardware.hardware_reservations.active.first.from_time.to_date%></span>
+  										</div>	
+  									<% end %>
+  								<%else%>
+  									<div class="btn btn-success" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  											<span class="badge">Свободно</span>
+  									</div>	
+  								<%end%>
+  							<%end%>
         			</div>
         			<div class="col-lg-1">
         				<div class="btn btn-default">
