@@ -1,50 +1,37 @@
 <% provide(:title, 'Резервирование оборудования') %>
 <h1>Зарезервировать <%= @reservation.hardware.name %> </h1>
 
-<div>
-	<h2>Акивные резервы</h2>
-	<ul>
-		<% @reservations.active.each do |r| %>
-    <li>
-      <%=r.name%> <%=r.from_time.to_date%> <%= r.to_time.to_date%> <%=r.user.firstname%> <%=r.user.lastname%>
-    </li>
-  	<% end %>
-	</ul>
-</div>
+<div class="container">
+
+<%=render 'shared/show_reserves' %>
 
 
-<div classs="row">
-  <div>
-    <h2>Для пользователя <%= @reservation.user.firstname %> <%= @reservation.user.lastname %></h2>
-   
-    <%= form_for( [@hardware, @reservation] ) do |f| %>
-			
-      
-      <%= f.label 'Назначение' %>
-      <%= f.text_field :name %>
-      
-      <table>
-      	<tr>
-      		<td>
-      			C
-      		</td>
-      		<td>
-      			<%= f.date_field :from_time %>
-      		</td>
-      		<td>
-      			по
-      		</td>
-      		<td>
-      			<%= f.date_field :to_time %>
-      		</td>
-      	</tr>
-      </table>      
-      
-      
-      
-
-      <%= f.submit "Создать", class: "btn btn-large btn-primary" %>
+<div class="panel panel-info">
+ 	<div class="panel-heading">Зарезервировать оборудование</div>
+  <div class="panel-body">
+  	<%= form_for( [@hardware, @reservation] ) do |f| %>
+  			
+  			<%=render 'shared/reservation_error' %>
+  			
+  			<%= f.text_field :name, :placeholder => "Проводимые работы" %>
+   			
+   			<div class="margin-1"></div>
+   		   		    
+      	<div class="raw">
+      		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">с </div>
+      		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-11"><%= f.date_field :from_time %></div>
+      		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"> по </div>
+      		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-11"><%= f.date_field :to_time %></div>
+      		
+      	</div>
+      	
+      	<div class="margin-1"></div>
+      	
+      	<div><%= f.submit "Резервировать", class: "btn btn-large btn-primary" %></div>
+      	
+      	
+      	
+			</div>
     <% end %>
-   
   </div>
 </div>

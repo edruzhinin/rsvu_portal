@@ -5,11 +5,8 @@
 			<h1>
 				<%= @hardware.name %>
 			</h1>
-			<% @reserves.each do |r| %>
-   			<li>
-      	<%= r.name %> <%= r.from_time.to_date %> <%= r.to_time.to_date %> <%= r.user.firstname  %>
-    	</li>
-  		<% end %>
+			
+			<%=render 'shared/show_reserves' %>
 		</section>
 	
 
