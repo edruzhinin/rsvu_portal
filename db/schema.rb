@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405145151) do
+ActiveRecord::Schema.define(version: 20181001090331) do
 
-  create_table "device_types", force: true do |t|
+  create_table "device_types", force: :cascade do |t|
     t.string   "name"
     t.string   "comment"
     t.string   "sparam1"
@@ -24,18 +24,26 @@ ActiveRecord::Schema.define(version: 20180405145151) do
     t.string   "iparam3"
     t.datetime "created_at"
     t.datetime "updated_at"
-    
   end
 
-  create_table "devices", force: true do |t|
+  create_table "devices", force: :cascade do |t|
     t.string   "name"
     t.integer  "hardware_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "device_type_id"
+    t.integer  "status"
+    t.string   "description"
+    t.string   "comment"
+    t.string   "sparam1"
+    t.string   "sparam2"
+    t.string   "sparam3"
+    t.string   "iparam1"
+    t.string   "iparam2"
+    t.string   "iparam3"
   end
 
-  create_table "hardware_reservations", force: true do |t|
+  create_table "hardware_reservations", force: :cascade do |t|
     t.string   "name"
     t.integer  "hardware_id"
     t.integer  "user_id"
@@ -45,7 +53,7 @@ ActiveRecord::Schema.define(version: 20180405145151) do
     t.datetime "updated_at"
   end
 
-  create_table "hardware_types", force: true do |t|
+  create_table "hardware_types", force: :cascade do |t|
     t.string   "name"
     t.string   "comment"
     t.string   "sparam1"
@@ -58,9 +66,9 @@ ActiveRecord::Schema.define(version: 20180405145151) do
     t.datetime "updated_at"
   end
 
-  add_index "hardware_types", ["hardware_id"], name: "index_hardware_types_on_hardware_id"
+  add_index "hardware_types", [nil], name: "index_hardware_types_on_hardware_id"
 
-  create_table "hardwares", force: true do |t|
+  create_table "hardwares", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -85,18 +93,52 @@ ActiveRecord::Schema.define(version: 20180405145151) do
     t.integer  "iparam1"
     t.integer  "iparam2"
     t.integer  "iparam3"
+    t.string   "model_number"
+    t.string   "place"
+    t.integer  "status"
+    t.string   "description"
   end
 
-  create_table "locations", force: true do |t|
+  create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  
+  create_table "software_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "comment"
+    t.string   "sparam1"
+    t.string   "sparam2"
+    t.string   "sparam3"
+    t.string   "iparam1"
+    t.string   "iparam2"
+    t.string   "iparam3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
-  create_table "users", force: true do |t|
+  create_table "softwares", force: :cascade do |t|
+    t.integer  "hardware_id"
+    t.integer  "software_type_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "sparam1"
+    t.string   "sparam2"
+    t.string   "sparam3"
+    t.integer  "iparam1"
+    t.integer  "iparam2"
+    t.integer  "iparam3"
+    t.integer  "status"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "softwares", ["hardware_id"], name: "index_softwares_on_hardware_id"
+  add_index "softwares", ["software_type_id"], name: "index_softwares_on_software_type_id"
+
+  create_table "users", force: :cascade do |t|
     t.string   "login"
     t.string   "firstname"
     t.string   "secondname"

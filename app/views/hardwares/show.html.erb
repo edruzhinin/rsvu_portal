@@ -5,8 +5,142 @@
 			<h1>
 				<%= @hardware.name %>
 			</h1>
-			
+			<p><%= @hardware.description %></p>
 			<%=render 'shared/show_reserves' %>
+			
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Параметры оборудования</h3>
+  			</div>
+  			<div class="panel-body">
+    			<ul class="nav nav-tabs">
+  					<li class="active"><a href="#general" data-toggle="tab">Общие</a></li>
+  					<li><a href="#about" data-toggle="tab">Описание</a></li>
+  					<li><a href="#access" data-toggle="tab">Доступ</a></li>
+  					<li><a href="#hardware" data-toggle="tab">Оборудование</a></li>
+  					<li><a href="#software" data-toggle="tab">ПО</a></li>
+					</ul>
+    			
+    			<div class="tab-content">
+  					<div class="tab-pane active" id="general">
+  						<div class="col-lg-6">
+  							<br>
+  							<p><b>Тип:</b> <%=@hardware.hardware_type.name%></p>
+  							<p><b>Название:</b> <%=@hardware.name%></p>
+  							<p><b>Модель:</b> <%=@hardware.model%></p>
+  							<p><b>№ Модели:</b> <%=@hardware.model_number%></p>
+  							<p><b>Серийный №:</b> <%=@hardware.serial_number%></p>
+ 							</div>
+  						<div class="col-lg-6">
+  							<br>
+  							<p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
+  							<p><b>Имя:</b> <%=@hardware.identificator%></p>
+  							<p><b>Стойка:</b> <%=@hardware.location.name%></p>
+  							<p><b>Позиция:</b> <%=@hardware.place%></p>
+  							<p><b>Эл. мощность:</b> <%=@hardware.el_power%></p>
+  						</div>
+  					</div>
+  					<div class="tab-pane" id="about">
+  						<div class="col-lg-6">
+  							<br>
+  							<% if !@hardware.hardware_type.sparam1.nil? %>
+  								<p><b><%=@hardware.hardware_type.sparam1%>:</b> <%=@hardware.sparam1%></p>
+  							<%end%>
+  							<% if !@hardware.hardware_type.sparam2.nil? %>
+  								<p><b><%=@hardware.hardware_type.sparam2%>:</b> <%=@hardware.sparam2%></p>
+  							<%end%>
+  							<% if !@hardware.hardware_type.sparam3.nil? %>
+  								<p><b><%=@hardware.hardware_type.sparam3%>:</b> <%=@hardware.sparam3%></p>
+  							<%end%>
+  							<% if !@hardware.hardware_type.iparam1.nil? %>
+  								<p><b><%=@hardware.hardware_type.iparam1%>:</b> <%=@hardware.iparam1%></p>
+  							<%end%>
+  							<% if !@hardware.hardware_type.iparam2.nil? %>
+  								<p><b><%=@hardware.hardware_type.iparam2%>:</b> <%=@hardware.iparam2%></p>
+  							<%end%>
+  							<% if !@hardware.hardware_type.iparam3.nil? %>
+  								<p><b><%=@hardware.hardware_type.iparam3%>:</b> <%=@hardware.iparam3%></p>
+  							<%end%>
+ 							</div>
+  						<div class="col-lg-6">
+  							<br>
+  							<p><%=@hardware.comment%></p>
+  						</div>
+  					</div>
+  					<div class="tab-pane" id="access">
+  						<div class="col-lg-6">
+  							<br>
+  							<p><b>IP адм.</b> <%=@hardware.ip_adr_adm%></p>
+  							<p><b>IP сервера</b> <%=@hardware.ip_adr%></p>
+  							<p><b>Пользоваетль:</b> <%=@hardware.login%></p>
+  							<p><b>Пароль:</b> <%=@hardware.password%></p>
+							</div>
+  						<div class="col-lg-6">
+  							<br>
+  							<p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
+  							<p><b>Метка:</b> <%=@hardware.identificator%></p>
+  							<p><b>Стойка:</b> <%=@hardware.location.name%></p>
+  							<p><b>Место:</b> <%=@hardware.place%></p>
+  						</div>
+  					</div>
+  					<div class="tab-pane" id="hardware">
+  						<ol>
+  							<% @hardware.devices.each do |d| %>
+  								<li>
+  										<%=d.device_type.name%> <%=d.name%> <%=d.comment%> 
+  										<% if !d.device_type.sparam1.nil? %>
+  											<%=d.device_type.sparam1%>: <%=d.sparam1%>
+  										<%end%>
+  										<% if !d.device_type.sparam2.nil? %>
+  											<%=d.device_type.sparam2%>: <%=d.sparam2%>
+  										<%end%>
+  										<% if !d.device_type.sparam3.nil? %>
+  											<%=d.device_type.sparam3%>: <%=d.sparam3%>
+  										<%end%>
+  										<% if !d.device_type.iparam1.nil? %>
+  											<%=d.device_type.iparam1%>: <%=d.iparam1%>
+  										<%end%>
+  										<% if !d.device_type.iparam2.nil? %>
+  											<%=d.device_type.iparam2%>: <%=d.iparam2%>
+  										<%end%>
+  										<% if !d.device_type.iparam3.nil? %>
+  											<%=d.device_type.iparam3%>: <%=d.iparam3%>
+  										<%end%>
+  								</li>			
+  							<% end %>
+  						</ol>
+  					</div>
+  					<div class="tab-pane" id="software">
+  						<ol>
+  							<% @hardware.softwares.each do |s| %>
+  								<li>
+  										<%=s.software_type.name%> <%=s.name%> <%=s.comment%> 
+  										<% if !s.software_type.sparam1.nil? %>
+  											<%=s.software_type.sparam1%>: <%=s.sparam1%>
+  										<%end%>
+  										<% if !s.software_type.sparam2.nil? %>
+  											<%=s.software_type.sparam2%>: <%=s.sparam2%>
+  										<%end%>
+  										<% if !s.softwaree_type.sparam3.nil? %>
+  											<%=s.software_type.sparam3%>: <%=s.sparam3%>
+  										<%end%>
+  										<% if !s.software_type.iparam1.nil? %>
+  											<%=s.software_type.iparam1%>: <%=s.iparam1%>
+  										<%end%>
+  										<% if !s.software_type.iparam2.nil? %>
+  											<%=s.software_type.iparam2%>: <%=s.iparam2%>
+  										<%end%>
+  										<% if !s.software_type.iparam3.nil? %>
+  											<%=s.software_type.iparam3%>: <%=s.iparam3%>
+  										<%end%>
+  								</li>			
+  							<% end %>
+  						</ol>
+  					</div>
+					</div>
+  			</div>
+			</div>
+		
 		</section>
 	
 

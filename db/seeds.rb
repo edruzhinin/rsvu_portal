@@ -14,12 +14,16 @@ HardwareType.create([{name: 'коммутатор', iparam1: 'Количеств
 											{name: 'ИБП',iparam1: 'Нагрузка'},
 											{name: 'KVM'}])
 											
-DeviceType.create([{name: 'HDD', iparam1: 'Объем'},
+DeviceType.create([{name: 'HDD', iparam1: 'Объем', sparam1: 'Интерфейс'},
 										{name: 'Сетевая карта', sparam1: 'MAC', sparam2: 'IP'},
 										{name: 'Модуль GigabitOver Copper'},
 										{name: 'Модуль 8-port 10/100Base-TX Uplink'},
 										{name: 'Модуль AC power supply'},
 										{name: 'Корпус'}])
+
+
+
+
 
 
 current_location=	Location.find_by(name: '3002NET01')
@@ -49,4 +53,11 @@ Hardware.create(hardware_type: hardwaretype_server, name: "HP Proliant DL580 Gen
 Hardware.create(hardware_type: hardwaretype_server, name: "HP Proliant DL380G5",model: "DL380G5",inv_number: "1-000241",serial_number: "CZC7424SJD",identificator: "К482",ip_adr_adm: "10.15.180.131", location: current_location, sparam1: "2xXeon 3,06GHz", el_power: "850" )	
 Hardware.create(hardware_type: hardwaretype_server, name: "HP Proliant DL380G5",model: "DL380G5",inv_number: "1-000241",serial_number: "CZC7424SJL",identificator: "К482",ip_adr_adm: "10.15.180.132", location: current_location, sparam1: "2xXeon 3,06GHz", el_power: "850" )	
 
+
+device_type_hdd = DeviceType.find_by(name:'HDD')
+
+srv1 = Hardware.find_by(name: "HP Proliant DL580 Gen5")
+
+Device.create(hardware: srv1, device_type: device_type_hdd, name: "Диск 1", description: "Система", sparam1: "SAS", iparam1: "72")
+Device.create(hardware: srv1, device_type: device_type_hdd, name: "Диск 2", description: "Архив", sparam1: "SAS", iparam1: "72")
 

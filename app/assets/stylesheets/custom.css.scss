@@ -150,10 +150,12 @@ aside {
 input, textarea,select, .uneditable-input {
 	border: 1px solid #bbb;
 	width: 100%;
+	margin-top: 15px;
 	margin-botom: 15px;
 	@include box_sizing;
 	
 }
+
 
 input {
 	height: auto !important;
