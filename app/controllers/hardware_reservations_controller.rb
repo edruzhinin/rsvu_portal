@@ -19,6 +19,12 @@ class HardwareReservationsController < ApplicationController
 		@reservations = @hardware.hardware_reservations
 	end
 	
+	def destroy
+		@hardware.hardware_reservations.find(params[:id]).destroy
+		redirect_to @hardware
+		
+	end
+	
 	def create
 		
 	@reservation = @hardware.hardware_reservations.build(reservation_params)

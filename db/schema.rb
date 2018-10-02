@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181001090331) do
+ActiveRecord::Schema.define(version: 20181001200854) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20181001090331) do
     t.string   "place"
     t.integer  "status"
     t.string   "description"
+    t.integer  "height"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 20181001090331) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
+    t.boolean  "admin",           default: false
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
