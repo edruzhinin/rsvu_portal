@@ -15,7 +15,8 @@
   			<div class="panel-body">
     			<ul class="nav nav-tabs">
   					<li class="active"><a href="#general" data-toggle="tab">Общие</a></li>
-  					<li><a href="#about" data-toggle="tab">Описание</a></li>
+  					<li><a href="#serial" data-toggle="tab">Описание</a></li>
+  					<li><a href="#about" data-toggle="tab">Параметры</a></li>
   					<li><a href="#access" data-toggle="tab">Доступ</a></li>
   					<li><a href="#hardware" data-toggle="tab">Оборудование</a></li>
   					<li><a href="#software" data-toggle="tab">ПО</a></li>
@@ -26,19 +27,29 @@
   						<div class="col-lg-6">
   							<br>
   							<p><b>Тип:</b> <%=@hardware.hardware_type.name%></p>
+  							<p><b>Статус:</b> <%=@hardware.get_status%></p>
   							<p><b>Название:</b> <%=@hardware.name%></p>
-  							<p><b>Модель:</b> <%=@hardware.model%></p>
-  							<p><b>№ Модели:</b> <%=@hardware.model_number%></p>
-  							<p><b>Серийный №:</b> <%=@hardware.serial_number%></p>
- 							</div>
+  							<p><b>Описание:</b> <%=@hardware.description%></p>
+  						</div>
   						<div class="col-lg-6">
   							<br>
-  							<p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
-  							<p><b>Имя:</b> <%=@hardware.identificator%></p>
-  							<p><b>Стойка:</b> <%=@hardware.location.name%></p>
-  							<p><b>Позиция:</b> <%=@hardware.place%></p>
-  							<p><b>Эл. мощность:</b> <%=@hardware.el_power%></p>
+  							<p><b>Модель:</b> <%=@hardware.model%></p>
+  							<p><b>ID Модели:</b> <%=@hardware.model_number%></p>
+  							<p><b>Метка:</b> <%=@hardware.identificator%></p>
+  							
   						</div>
+  					</div>
+  					<div class="tab-pane" id="serial">
+  						<div class="col-lg-6">
+  							<p><b>Серийный №:</b> <%=@hardware.serial_number%></p>
+  							<p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
+  							<p><b>Стойка:</b> <%=@hardware.location.name%></p>
+  							<p><b>Позиция (сверху):</b> <%=@hardware.place%></p>
+							</div>
+							<div class="col-lg-6">
+  							<p><b>Высота (U):</b> <%=@hardware.height%></p>
+  							<p><b>Эл. мощность (Вт):</b> <%=@hardware.el_power%></p>
+							</div>
   					</div>
   					<div class="tab-pane" id="about">
   						<div class="col-lg-6">
@@ -139,6 +150,12 @@
   					</div>
 					</div>
   			</div>
+			</div>
+			
+			<div class="btn-group pull-right">
+  			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path%></button>
+  			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_hardware_reservation_path(@hardware) %></button>
+  			<button type="button" class="btn btn-default"><%=link_to "Редактировать", edit_hardware_path(@hardware) %></button>
 			</div>
 		
 		</section>

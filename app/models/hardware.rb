@@ -10,4 +10,21 @@ class Hardware < ActiveRecord::Base
 	
 	def reserved?
 	end
+	
+	def get_status
+		if status.nil?
+			"Не определен"
+		else
+			if status < 0
+				"Сломан"
+			else
+				if status > 0 
+					"Недоступен"
+				else
+					"Доступен"
+				end
+			end
+		end
+			
+	end
 end

@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181001200854) do
+ActiveRecord::Schema.define(version: 20181003065617) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "sparam1"
     t.string   "sparam2"
     t.string   "sparam3"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20181001200854) do
     t.integer  "device_type_id"
     t.integer  "status"
     t.string   "description"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "sparam1"
     t.string   "sparam2"
     t.string   "sparam3"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20181001200854) do
 
   create_table "hardware_types", force: :cascade do |t|
     t.string   "name"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "sparam1"
     t.string   "sparam2"
     t.string   "sparam3"
@@ -65,8 +65,6 @@ ActiveRecord::Schema.define(version: 20181001200854) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "hardware_types", [nil], name: "index_hardware_types_on_hardware_id"
 
   create_table "hardwares", force: :cascade do |t|
     t.string   "name"
@@ -84,7 +82,7 @@ ActiveRecord::Schema.define(version: 20181001200854) do
     t.string   "ip_adr_adm"
     t.string   "ip_adr"
     t.integer  "el_power"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "login"
     t.string   "password"
     t.string   "sparam1"
@@ -102,14 +100,14 @@ ActiveRecord::Schema.define(version: 20181001200854) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
-    t.string   "comment"
+    t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "software_types", force: :cascade do |t|
     t.string   "name"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "sparam1"
     t.string   "sparam2"
     t.string   "sparam3"
@@ -134,6 +132,7 @@ ActiveRecord::Schema.define(version: 20181001200854) do
     t.integer  "status"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.text     "comment"
   end
 
   add_index "softwares", ["hardware_id"], name: "index_softwares_on_hardware_id"
