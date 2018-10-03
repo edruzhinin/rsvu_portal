@@ -75,7 +75,7 @@
  							</div>
   						<div class="col-lg-6">
   							<br>
-  							<p><%=@hardware.comment%></p>
+  							<pre><%=@hardware.comment%></pre>
   						</div>
   					</div>
   					<div class="tab-pane" id="access">
@@ -153,7 +153,7 @@
 			</div>
 			
 			<div class="btn-group pull-right">
-  			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path%></button>
+  			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path %></button>
   			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_hardware_reservation_path(@hardware) %></button>
   			<% if (current_user.admin?) %>
   				<button type="button" class="btn btn-default"><%=link_to "Редактировать", edit_hardware_path(@hardware) %></button>
