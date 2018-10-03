@@ -1,4 +1,5 @@
 class HardwaresController < ApplicationController
+	before_action :admin_user, only: [:edit, :update, :destroy]
   def new
   	@hardware = Hardware.new
   end
@@ -45,5 +46,9 @@ class HardwaresController < ApplicationController
   
   	def hardware_params
 			params.require(:hardware).permit(:name,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3)		
+		end
+		
+		def admin_user
+			redirect_to Hardware.find(params[:id]) unless current_user.admin?
 		end
 end

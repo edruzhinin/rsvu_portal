@@ -155,7 +155,9 @@
 			<div class="btn-group pull-right">
   			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path%></button>
   			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_hardware_reservation_path(@hardware) %></button>
-  			<button type="button" class="btn btn-default"><%=link_to "Редактировать", edit_hardware_path(@hardware) %></button>
+  			<% if (current_user.admin?) %>
+  				<button type="button" class="btn btn-default"><%=link_to "Редактировать", edit_hardware_path(@hardware) %></button>
+  			<% end %>
 			</div>
 		
 		</section>
