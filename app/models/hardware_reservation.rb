@@ -12,7 +12,7 @@ class HardwareReservation < ActiveRecord::Base
 	
 	
 	def isHardwareFree
-    if HardwareReservation.where("hardware_id = ? AND (from_time < ? AND ? <to_time) OR ( from_time < ? AND ? <to_time)", hardware_id, from_time,from_time, to_time,to_time).count >0 
+    if HardwareReservation.where("hardware_id = ? AND ((from_time <= ? AND ? <= to_time) OR ( from_time <= ? AND ? <= to_time) OR (? <= from_time AND to_time <= ? ))", hardware_id, from_time,from_time, to_time,to_time,from_time,to_time).count >0 
       errors.add(:hardware_already_reserved, "Оборудование уже занято")
     end
   end
