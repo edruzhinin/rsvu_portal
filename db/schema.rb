@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181003065617) do
+ActiveRecord::Schema.define(version: 20181004194741) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20181003065617) do
     t.string   "iparam2"
     t.string   "iparam3"
   end
+
+  create_table "hardware_messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "hardware_id"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "hardware_messages", ["hardware_id"], name: "index_hardware_messages_on_hardware_id"
+  add_index "hardware_messages", ["user_id"], name: "index_hardware_messages_on_user_id"
 
   create_table "hardware_reservations", force: :cascade do |t|
     t.string   "name"

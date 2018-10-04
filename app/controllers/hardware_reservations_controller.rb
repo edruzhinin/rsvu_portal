@@ -26,15 +26,13 @@ class HardwareReservationsController < ApplicationController
 	end
 	
 	def create
-		
-	@reservation = @hardware.hardware_reservations.build(reservation_params)
+		@reservation = @hardware.hardware_reservations.build(reservation_params)
 		
 		@reservation.user=current_user
 		
 		if @reservation.save
 			redirect_to @hardware
 		else
-			
 			render 'new'
 		end
 	end
