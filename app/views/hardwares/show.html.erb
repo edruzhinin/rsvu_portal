@@ -95,58 +95,90 @@
   						</div>
   					</div>
   					<div class="tab-pane" id="hardware">
-  						<ol>
+  						
   							<% @hardware.devices.each do |d| %>
-  								<li>
-  										<%=d.device_type.name%> <%=d.name%> <%=d.comment%> 
-  										<% if !d.device_type.sparam1.nil? %>
-  											<%=d.device_type.sparam1%>: <%=d.sparam1%>
-  										<%end%>
-  										<% if !d.device_type.sparam2.nil? %>
-  											<%=d.device_type.sparam2%>: <%=d.sparam2%>
-  										<%end%>
-  										<% if !d.device_type.sparam3.nil? %>
-  											<%=d.device_type.sparam3%>: <%=d.sparam3%>
-  										<%end%>
-  										<% if !d.device_type.iparam1.nil? %>
-  											<%=d.device_type.iparam1%>: <%=d.iparam1%>
-  										<%end%>
-  										<% if !d.device_type.iparam2.nil? %>
-  											<%=d.device_type.iparam2%>: <%=d.iparam2%>
-  										<%end%>
-  										<% if !d.device_type.iparam3.nil? %>
-  											<%=d.device_type.iparam3%>: <%=d.iparam3%>
-  										<%end%>
-  								</li>			
+  								
+  									<div class="row">
+  									<div class="col-lg-3"><b><%=d.device_type.name%></b> <%=d.name%></div>
+  									<div class="col-lg-3">
+  										<%=d.description%>
+  										<%=d.comment%>
+  									</div>
+  									<div class="col-lg-4">
+  									<% if !d.device_type.sparam1.nil? %>
+  										<b><%=d.device_type.sparam1%>:</b> <%=d.sparam1%>
+  									<% end %>
+  									<% if !d.device_type.sparam2.nil? %>
+  										<b><%=d.device_type.sparam2%>:</b> <%=d.sparam2%>
+  									<% end %>
+  									<% if !d.device_type.sparam3.nil? %>
+  										<b><%=d.device_type.sparam3%>:</b> <%=d.sparam3%>
+  									<% end %>
+  									<% if !d.device_type.iparam1.nil? %>
+  										<b><%=d.device_type.iparam1%>:</b> <%=d.iparam1%>
+  									<% end %>
+  									<% if !d.device_type.iparam2.nil? %>
+  										<b><%=d.device_type.iparam2%>:</b> <%=d.iparam2%>
+  									<% end %>
+  									<% if !d.device_type.iparam3.nil? %>
+  										<b><%=d.device_type.iparam3%>:</b> <%=d.iparam3%>
+  									<% end %>
+  									</div>
+  									<% if (current_user.admin?) %>
+  										<div class="col-lg-2">
+  											<%= link_to "Редактировать", edit_hardware_device_path(@hardware, d) %>
+  											<%= link_to "Удалить", hardware_device_path(@hardware, d), method: :delete, data: {confirm: "Вы уверены?"} %>
+  										</div>
+  									<% end %>
+  									</div>
+  										
   							<% end %>
-  						</ol>
+  						
+  						<% if (current_user.admin?) %>
+  								<button type="button" class="btn btn-default pull-right"><%=link_to "Добавить",  new_hardware_device_path(@hardware) %></button>
+  						<% end %>
   					</div>
   					<div class="tab-pane" id="software">
-  						<ol>
-  							<% @hardware.softwares.each do |s| %>
-  								<li>
-  										<%=s.software_type.name%> <%=s.name%> <%=s.comment%> 
-  										<% if !s.software_type.sparam1.nil? %>
-  											<%=s.software_type.sparam1%>: <%=s.sparam1%>
-  										<%end%>
-  										<% if !s.software_type.sparam2.nil? %>
-  											<%=s.software_type.sparam2%>: <%=s.sparam2%>
-  										<%end%>
-  										<% if !s.softwaree_type.sparam3.nil? %>
-  											<%=s.software_type.sparam3%>: <%=s.sparam3%>
-  										<%end%>
-  										<% if !s.software_type.iparam1.nil? %>
-  											<%=s.software_type.iparam1%>: <%=s.iparam1%>
-  										<%end%>
-  										<% if !s.software_type.iparam2.nil? %>
-  											<%=s.software_type.iparam2%>: <%=s.iparam2%>
-  										<%end%>
-  										<% if !s.software_type.iparam3.nil? %>
-  											<%=s.software_type.iparam3%>: <%=s.iparam3%>
-  										<%end%>
-  								</li>			
-  							<% end %>
-  						</ol>
+  						<% @hardware.softwares.each do |s| %>
+  							<div class="row">
+  								<div class="col-lg-3">
+  									<b><%=s.software_type.name%></b> <%=s.name%> 
+  								</div>
+  								<div class="col-lg-3">
+  									<%=s.description%> <%=s.comment%>
+  								</div>
+  								<div class="col-lg-4">	
+  									<% if !s.software_type.sparam1.nil? %>
+  										<b><%=s.software_type.sparam1%>:</b> <%=s.sparam1%>
+  									<% end %>
+  									<% if !s.software_type.sparam2.nil? %>
+  										<b><%=s.software_type.sparam2%>:</b> <%=s.sparam2%>
+  									<% end %>
+  									<% if !s.software_type.sparam3.nil? %>
+  										<b><%=s.software_type.sparam3%>:</b> <%=s.sparam3%>
+  									<% end %>
+  									<% if !s.software_type.iparam1.nil? %>
+  										<b><%=s.software_type.iparam1%>:</b> <%=s.iparam1%>
+  									<% end %>
+  									<% if !s.software_type.iparam2.nil? %>
+  										<b><%=s.software_type.iparam2%>:</b> <%=s.iparam2%>
+  									<% end %>
+  									<% if !s.software_type.iparam3.nil? %>
+  										<b><%=s.software_type.iparam3%>:</b> <%=s.iparam3%>
+  									<% end %>
+  								</div>
+  								<div class="col-lg-2">	
+  									<% if (current_user.admin?) %>
+  										<%= link_to "Редактировать", edit_hardware_software_path(@hardware, s) %>
+  										<%= link_to "Удалить", hardware_software_path(@hardware, s), method: :delete, data: {confirm: "Вы уверены?"} %>
+  									<% end %>
+  								</div>	
+  							</div>
+  						<% end %>
+  						
+  						<% if (current_user.admin?) %>
+  								<button type="button" class="btn btn-default pull-right"><%=link_to "Добавить",  new_hardware_software_path(@hardware) %></button>
+  						<% end %>
   					</div>
 					</div>
   			</div>

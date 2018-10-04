@@ -9,6 +9,8 @@ RsvuPortal::Application.routes.draw do
   resources :hardwares
   resources :hardwares do
   	resources :hardware_reservations
+  	resources :devices
+  	resources :softwares
   end
   
   root 'static_pages#home'

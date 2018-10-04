@@ -1,0 +1,58 @@
+<% provide(:title, @software.name) %>
+
+<h1>Редактировать GJ</h1>
+
+<div class="row">
+	<%=form_for([@hardware, @software]) do |f| %>
+		<div class="col-md-6">
+			<%=f.label :name, "Название" %>
+			<%=f.text_field :name, class: 'form-control' %>
+			<%=f.label :description, "Описание" %>
+			<%=f.text_field :description, class: 'form-control' %>
+			
+			<%=f.label :status,"Статус" %>
+		  <%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]])%>
+			
+			
+		</div>	
+			
+		<div class="col-md-6">
+					
+			<%=f.label :comment,"Коментарий" %>
+			<%=f.text_area :comment,  size: "60x12" %>
+			
+			<% if !@software.software_type.sparam1.nil? %>
+  			<%=f.label :sparam1, @software.software_type.sparam1 %>
+				<%=f.text_field :sparam1, class: 'form-control' %>
+			<%end%>
+			
+			<% if !@software.software_type.sparam2.nil? %>
+  			<%=f.label :sparam2, @software.software_type.sparam2 %>
+				<%=f.text_field :sparam2, class: 'form-control' %>
+			<%end%>	
+			
+			<% if !@software.software_type.sparam3.nil? %>
+  			<%=f.label :sparam3, @software.software_type.sparam31 %>
+				<%=f.text_field :sparam3, class: 'form-control' %>
+			<%end%>
+			
+			<% if !@software.software_type.iparam1.nil? %>
+  			<%=f.label :iparam1, @software.software_type.iparam1 %>
+				<%=f.text_field :iparam1, class: 'form-control' %>
+			<%end%>
+			
+			<% if !@software.software_type.iparam2.nil? %>
+  			<%=f.label :iparam2, @software.software_type.iparam2 %>
+				<%=f.text_field :iparam2, class: 'form-control' %>
+			<%end%>	
+			
+			<% if !@software.software_type.iparam3.nil? %>
+  			<%=f.label :iparam3, @software.software_type.iparam31 %>
+				<%=f.text_field :iparam3, class: 'form-control' %>
+			<%end%>
+		</div>
+		<div class="col-md-12">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>
