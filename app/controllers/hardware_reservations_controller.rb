@@ -1,6 +1,7 @@
 class HardwareReservationsController < ApplicationController
 	before_filter :get_hardware
 	
+	
 	def new
 		@reservations = @hardware.hardware_reservations
 		@reservation = @reservations.build(user: current_user)

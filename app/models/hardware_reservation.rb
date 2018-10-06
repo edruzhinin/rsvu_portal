@@ -1,4 +1,5 @@
 class HardwareReservation < ActiveRecord::Base
+	before_save { self.from_time = from_timetime.to_date, self.to_time = to_time.to_date }
 	belongs_to :hardware
 	belongs_to :user
 	validates :to_time, presence: { message: 'Необходимо указать дату начала'}
@@ -6,9 +7,9 @@ class HardwareReservation < ActiveRecord::Base
 	validates :name, presence: { message: 'Необходимо указать название'}
 	validate	:isHardwareFree
 	
-	scope :active,lambda { where('to_time >= ?',Time.now )}
-	scope :occupied, lambda { where('from_time <= ? and ? <= to_time',Time.now,Time.now)}
-	scope :occupied_nextweek, lambda { where('from_time > ? and from_time < ?',Time.now,1.week.from_now)}
+	scope :active,lambda { where('to_time >= ?',Time.now.to_date)}
+	scope :occupied, lambda { where('from_time <= ? and ? <= to_time',Time.now.to_date,Time.now.to_date)}
+	scope :occupied_nextweek, lambda { where('from_time > ? and from_time < ?',Time.now.to_date,1.week.from_now.to_date)}
 	
 	
 	def isHardwareFree
