@@ -1,5 +1,4 @@
 class HardwareReservation < ActiveRecord::Base
-	before_save { self.from_time = from_timetime.to_date, self.to_time = to_time.to_date }
 	belongs_to :hardware
 	belongs_to :user
 	validates :to_time, presence: { message: 'Необходимо указать дату начала'}
