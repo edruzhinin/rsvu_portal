@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181004194741) do
+ActiveRecord::Schema.define(version: 20181025203448) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -164,5 +164,48 @@ ActiveRecord::Schema.define(version: 20181004194741) do
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "vmhosts", force: :cascade do |t|
+    t.integer  "hardware_id"
+    t.string   "name"
+    t.string   "esxi_version"
+    t.integer  "cpu_count"
+    t.integer  "cpu_core_count"
+    t.integer  "memory_size"
+    t.text     "hardware_description"
+    t.integer  "powerState"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "vmhosts", ["hardware_id"], name: "index_vmhosts_on_hardware_id"
+
+  create_table "vmresourcepools", force: :cascade do |t|
+    t.integer  "vmhost_id"
+    t.string   "name"
+    t.integer  "status"
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "vmresourcepools", ["vmhost_id"], name: "index_vmresourcepools_on_vmhost_id"
+
+  create_table "vms", force: :cascade do |t|
+    t.integer  "vmresource_id"
+    t.string   "name"
+    t.string   "guest"
+    t.string   "uuid"
+    t.integer  "state"
+    t.string   "ip"
+    t.datetime "boottime"
+    t.string   "annotation"
+    t.boolean  "vmtools"
+    t.string   "path"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "vms", ["vmresource_id"], name: "index_vms_on_vmresource_id"
 
 end

@@ -1,4 +1,8 @@
 RsvuPortal::Application.routes.draw do
+  get 'vmhosts/index'
+
+  get 'vmhosts/show'
+
   get "hardware_reservations/new"
   get "hardware_reservations/index"
   get "hardware_reservations/create"

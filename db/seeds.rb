@@ -21,8 +21,9 @@ DeviceType.create([{name: 'HDD', iparam1: 'Объем', sparam1: 'Интерфе
 										{name: 'Модуль AC power supply'},
 										{name: 'Корпус'}])
 
+SoftwareType.create([{name: 'Гипервизор', sparam1: 'Логин', sparam2: 'Пароль', sparam3: 'Версия'}])
 
-
+software_type_esxi = SoftwareType.find_by(name: 'Гипервизор')
 
 
 
@@ -61,3 +62,10 @@ srv1 = Hardware.find_by(name: "HP Proliant DL580 Gen5")
 Device.create(hardware: srv1, device_type: device_type_hdd, name: "Диск 1", description: "Система", sparam1: "SAS", iparam1: "72")
 Device.create(hardware: srv1, device_type: device_type_hdd, name: "Диск 2", description: "Архив", sparam1: "SAS", iparam1: "72")
 
+
+Hardware.create(hardware_type: hardwaretype_server, name: "VM HP Proliant DL580 Gen5",model: "DL580",inv_number: "1-000207",serial_number: "GB874622YM",identificator: "К482",ip_adr_adm: "192.168.110.20",login: "root",password: "271828",ip_adr: "192.168.107.204",location: current_location, sparam1: "2xXeon E7310@1.6GHz", el_power: "2400" ).softwares.create(name: 'esxi-4', software_type: software_type_esxi, sparam1: "root", sparam2: "31415926pls")
+Hardware.create(hardware_type: hardwaretype_server, name: "VM HP Proliant DL580 Gen5",model: "DL580",inv_number: "1-000207",serial_number: "GB874622YM",identificator: "К482",ip_adr_adm: "192.168.110.20",login: "root",password: "271828",ip_adr: "192.168.107.205",location: current_location, sparam1: "2xXeon E7310@1.6GHz", el_power: "2400" ).softwares.create(name: 'esxi-5', software_type: software_type_esxi, sparam1: "root", sparam2: "31415926pls")
+Hardware.create(hardware_type: hardwaretype_server, name: "VM HP Proliant DL580 Gen5",model: "DL580",inv_number: "1-000207",serial_number: "GB874622YM",identificator: "К482",ip_adr_adm: "192.168.110.20",login: "root",password: "271828",ip_adr: "192.168.107.206",location: current_location, sparam1: "2xXeon E7310@1.6GHz", el_power: "2400" ).softwares.create(name: 'esxi-6', software_type: software_type_esxi, sparam1: "root", sparam2: "31415926pls")
+Hardware.create(hardware_type: hardwaretype_server, name: "VM HP Proliant DL580 Gen5",model: "DL580",inv_number: "1-000207",serial_number: "GB874622YM",identificator: "К482",ip_adr_adm: "192.168.110.20",login: "root",password: "271828",ip_adr: "192.168.107.212",location: current_location, sparam1: "2xXeon E7310@1.6GHz", el_power: "2400" ).softwares.create(name: 'esxi-12', software_type: software_type_esxi, sparam1: "root", sparam2: "31415926Pls")
+Hardware.create(hardware_type: hardwaretype_server, name: "VM HP Proliant DL580 Gen5",model: "DL580",inv_number: "1-000207",serial_number: "GB874622YM",identificator: "К482",ip_adr_adm: "192.168.110.20",login: "root",password: "271828",ip_adr: "192.168.107.214",location: current_location, sparam1: "2xXeon E7310@1.6GHz", el_power: "2400" ).softwares.create(name: 'esxi-14', software_type: software_type_esxi, sparam1: "root", sparam2: "31415926pls")
+Hardware.create(hardware_type: hardwaretype_server, name: "VM HP Proliant DL580 Gen5",model: "DL580",inv_number: "1-000207",serial_number: "GB874622YM",identificator: "К482",ip_adr_adm: "192.168.110.20",login: "root",password: "271828",ip_adr: "192.168.107.217",location: current_location, sparam1: "2xXeon E7310@1.6GHz", el_power: "2400" ).softwares.create(name: 'esxi-17', software_type: software_type_esxi, sparam1: "root", sparam2: "31415926Pls")
