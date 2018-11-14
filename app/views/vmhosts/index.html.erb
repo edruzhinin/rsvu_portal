@@ -1,21 +1,24 @@
-<h1>Vmhosts#index</h1>
-<p>Find me in app/views/vmhosts/index.html.erb</p>
+<% provide(:title, 'Виртуальный полигон') %>
+<h1>Хосты esxi</h1>
 
-<% @vmhosts_data.each do |child| %>
 
-<% child.each do |x| %>
-	<p><%=x.resourcePool.name%></p>
-	Configured Memory <%=x.resourcePool.summary.configuredMemoryMB%>
-	<% if !x.resourcePool.summary.quickStats.nil? %>
-		Host Memory Usage <%=x.resourcePool.summary.quickStats.hostMemoryUsage%>
-		Swapped Memory <%=x.resourcePool.summary.quickStats.swappedMemory%>
-		OverAll CPU Usage <%=x.resourcePool.summary.quickStats.overallCpuUsage%>
-	<% end %>
-	Status <%=x.resourcePool.runtime.overallStatus%>
-	Memory overallUsage <%=x.resourcePool.runtime.memory.overallUsage%>
-	CPU overall usage <%=x.resourcePool.runtime.cpu.overallUsage%>
-	
-	
-<% end %>
-
+<% @vmhosts.each do |vmhost| %>
+  <div class="card">
+   	<div class="card-header" id="headingOne">
+      <div class="container"> 
+  			<div class="row table">
+    			<div class="col-lg-3"><%=link_to vmhost.name,vmhost%></div>
+    			<div class="col-lg-1"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></div>
+    			<div class="col-lg-3"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
+    			<div class="col-lg-3"><a href='http://<%= vmhost.hardware.ip_adr%>'><%= vmhost.hardware.ip_adr%></a></div>
+    		</div>
+    	</div>
+    </div>
+    <div class="collapse" id="<%=vmhost.id%>">
+  		<div class="card card-body">
+  		</div>
+  	</div>
+  </div>
 <%end%>
+
+ 

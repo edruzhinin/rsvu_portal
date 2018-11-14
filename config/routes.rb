@@ -1,7 +1,5 @@
 RsvuPortal::Application.routes.draw do
-  get 'vmhosts/index'
-
-  get 'vmhosts/show'
+  
 
   get "hardware_reservations/new"
   get "hardware_reservations/index"
@@ -11,6 +9,7 @@ RsvuPortal::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :hardwares
+  resources :vmhosts, only: [:index, :show]
   resources :hardwares do
   	resources :hardware_reservations
   	resources :devices

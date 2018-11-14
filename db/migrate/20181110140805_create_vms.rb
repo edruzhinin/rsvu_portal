@@ -1,7 +1,7 @@
 class CreateVms < ActiveRecord::Migration
   def change
     create_table :vms do |t|
-      t.references :vmresource, index: true
+      t.references :vmresourcepool, index: true
       t.string :name
       t.string :guest
       t.string :uuid
@@ -14,6 +14,6 @@ class CreateVms < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :vms, :vmresources
+    add_foreign_key :vms, :vmresourcepools
   end
 end

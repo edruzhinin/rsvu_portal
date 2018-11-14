@@ -1,2 +1,55 @@
-<h1>Vmhosts#show</h1>
-<p>Find me in app/views/vmhosts/show.html.erb</p>
+<% provide(:title, @vmhost.name) %>
+<div class="row">
+	
+		<section>
+			<h1>
+				<%= @vmhost.name %>
+			</h1>
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Параметры хоста</h3>
+  			</div>
+  			<div class="panel-body">
+    			<ul class="nav nav-tabs">
+  					<li class="active"><a href="#general" data-toggle="tab">Общие</a></li>
+  					<li><a href="#resourcepool" data-toggle="tab">Пулы ресурсов</a></li>
+  					<li><a href="#vm" data-toggle="tab">Виртуальные машины</a></li>
+  				</ul>
+    			
+    			<div class="tab-content">
+  					<div class="tab-pane active" id="general">
+  						<div class="col-lg-6">
+  							<br>
+  							
+	 							<p><b>Версия ESXi:</b> <%=@vmhost.esxi_version%></p>
+  							<p><b>Количество CPU:</b> <%=@vmhost.cpu_count%></p>
+  							<p><b>Количество ядер:</b> <%=@vmhost.cpu_core_count%></p>
+  							<p><b>Объем памяти:</b> <%=@vmhost.memory_size%></p>
+  						</div>
+  						<div class="col-lg-6">
+  							<br>
+  							<p><b>Состояние питания:</b> <%=Vmhost.powerstate_to_s(@vmhost.powerState)%></p>
+  							<p><b>Описание:</b> <%=@vmhost.hardware_description%></p>
+  						</div>
+  					</div>
+  					<div class="tab-pane" id="resourcepool">
+  						<% @vmhost.vmresourcepools.each do |rpool| %>
+	  						<div class="col-lg-6">
+	  							<p><b><%=rpool.name%></b></p>
+  							</div>
+  							<div class="col-lg-3">	
+  								<p><b><%=rpool.status%></b></p>
+  							</div>
+  							<% rpool.vms.each do |vm| %>
+  								<div class="col-lg-6 col-lg-offset-1">
+  									<p><b><%=vm.name%></b></p>
+  								</div>	
+  								<div class="col-lg-1 col-lg-offset-1">
+  										<p><%=Vm.powerstate_to_s(vm.state)%></p>
+  								</div>
+  							<%end%>
+  								
+  							
+  						<%end%>
+							
+  					</div>

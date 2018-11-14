@@ -2,6 +2,10 @@ require 'rbvmomi'
 
 class VmhostsController < ApplicationController
   def index
+  	@vmhosts = Vmhost.all
+	end
+  
+  def indexOld
   	
   	vmhosts=[]
   	
@@ -26,5 +30,11 @@ class VmhostsController < ApplicationController
   end
 
   def show
+  	@vmhost = Vmhost.find(params[:id])
   end
+  
+  
+    	  
+
+  
 end
