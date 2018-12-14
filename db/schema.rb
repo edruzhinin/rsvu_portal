@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181110140805) do
+ActiveRecord::Schema.define(version: 20181128153810) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20181110140805) do
     t.string   "iparam2"
     t.string   "iparam3"
   end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "from_time"
+    t.datetime "to_time"
+    t.boolean  "permanent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "hardware_messages", force: :cascade do |t|
     t.integer  "user_id"
@@ -116,6 +128,17 @@ ActiveRecord::Schema.define(version: 20181110140805) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "reservable_id"
+    t.string   "reservable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "reservations", ["event_id"], name: "index_reservations_on_event_id"
+  add_index "reservations", ["reservable_type", "reservable_id"], name: "index_reservations_on_reservable_type_and_reservable_id"
 
   create_table "software_types", force: :cascade do |t|
     t.string   "name"

@@ -1,0 +1,26 @@
+<% provide(:title, 'Запланированные работы') %>
+<h1>Резервы</h1>
+
+
+<% @events.each do |event| %>
+	<div class="container"> 
+  	<div class="row table">
+    	<div class="col-lg-3"><%=link_to event.name, event%></div>
+    	<% if !event.from_time.nil? %>
+    		<div class="col-lg-2"><%=event.from_time.to_date%></div>
+    	<% end %>
+    	<% if !event.to_time.nil? %>
+    		<div class="col-lg-2"><%=event.to_time.to_date%></div>
+    	<% end %>
+    	<div class="col-lg-1"><%=event.user.firstname%></div>
+    	<div class="col-lg-1"><%=event.user.lastname%></div>
+    	
+    </div>
+  </div>
+ 
+<% end %>
+ <div class="btn-group pull-right">
+  			<button type="button" class="btn btn-default"><%=link_to "Добавить", new_event_path %></button>
+  			
+	</div>
+  

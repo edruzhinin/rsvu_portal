@@ -9,7 +9,18 @@ RsvuPortal::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :hardwares
+  resources :events
+	
+  
   resources :vmhosts, only: [:index, :show]
+  
+  resources :vmhosts do
+  	resources :vms	
+  end
+  resources :vms do
+  	resources :reservations
+  end
+  
   resources :hardwares do
   	resources :hardware_reservations
   	resources :devices

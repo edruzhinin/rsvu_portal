@@ -1,0 +1,37 @@
+<% provide(:title, 'Резервы') %>
+<h1>Заказ оборудования</h1>
+
+<div class="container">
+
+
+
+
+	<div class="panel panel-info">
+ 		<div class="panel-heading">Зарезервировать для мероприятия</div>
+  	<div class="panel-body">
+  		<%= form_for [@context, @reservation] do |f| %>
+  			<div class="form-group">
+  			 	<%=render 'shared/reservation_error' %>		
+  				<%=f.label :event_id,"Выбрать из созданных" %>
+		  	  
+		  	  		  	
+		  	
+  				<div class="form-inline">
+    				<%=f.collection_select(:event_id, current_user.events.active, :id,:name) %>
+    				
+    				
+    				<button type="button" class="btn btn-xs btn-default pull-right"><%= link_to "Создать новое", new_event_path %></button>
+  				</div>
+  				
+				
+				
+				
+				
+  				
+      		<div><%= f.submit "Создать", class: "btn btn-primary vert-align" %></div>
+      	</div>
+      	
+			<% end %>
+		</div>
+  </div>
+</div>

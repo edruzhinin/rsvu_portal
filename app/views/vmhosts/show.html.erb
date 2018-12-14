@@ -42,7 +42,7 @@
   							</div>
   							<% rpool.vms.each do |vm| %>
   								<div class="col-lg-6 col-lg-offset-1">
-  									<p><b><%=vm.name%></b></p>
+  									<p><b><%=link_to vm.name, vm_path(vm)%></b></p>
   								</div>	
   								<div class="col-lg-1 col-lg-offset-1">
   										<p><%=Vm.powerstate_to_s(vm.state)%></p>

@@ -1,4 +1,5 @@
 class Vm < ActiveRecord::Base
+  has_many :reservations, as: :reservable
   belongs_to :vmresourcepool
   
   

@@ -1,0 +1,31 @@
+<% provide(:title, @vm.name) %>
+
+<h1><%= @vm.name %></h1>
+<div class="row">
+		<%=render 'shared/show_reservation' %>		
+		<section>
+			<div class="panel panel-default">
+  			<div class="panel-heading">Пареметры виртуальной машины</div>
+  			<div class="panel-body">
+    		<%=@vm.guest%>
+    		<%=@vm.uuid%>
+    		<%=@vm.state%>
+    		<%=@vm.ip%>
+    		<%=@vm.boottime%>
+    		<%=@vm.annotation%>
+    		<%=@vm.vmtools%>
+    		<%=@vm.path%>
+    		
+    		
+  			</div>
+			</div>
+			
+			
+			
+				<div class="btn-group pull-right">
+  			
+  			<button type="button" class="btn btn-default"><%=link_to "Заказать",  new_vm_reservation_path(@vm) %></button>
+  			
+			</d iv>
+		</section>
+	</div>
