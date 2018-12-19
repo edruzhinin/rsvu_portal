@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181128153810) do
+ActiveRecord::Schema.define(version: 20181217163552) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(version: 20181128153810) do
     t.integer  "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   add_index "vmresourcepools", ["vmhost_id"], name: "index_vmresourcepools_on_vmhost_id"
@@ -227,6 +228,7 @@ ActiveRecord::Schema.define(version: 20181128153810) do
     t.string   "path"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "user_id"
   end
 
   add_index "vms", ["vmresourcepool_id"], name: "index_vms_on_vmresourcepool_id"
