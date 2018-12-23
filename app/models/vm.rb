@@ -1,6 +1,8 @@
 class Vm < ActiveRecord::Base
   has_many :reservations, as: :reservable
   belongs_to :vmresourcepool
+  belongs_to :user
+  
   
   
 	def Vm.tools_status_to_s(_tools_status)
@@ -31,4 +33,19 @@ class Vm < ActiveRecord::Base
 				return "Не определено"
 		end
 	end		
+	
+	def Vm.powerstate_to_label(_powerState)
+    case _powerState
+    	
+    	when -1
+    		return "warning"
+      when 1
+      	return "success"
+      when 2
+      	return "info"
+      else
+      	return "default"
+  		end
+	end
+	
 end

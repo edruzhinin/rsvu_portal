@@ -29,10 +29,10 @@ class Reservation < ActiveRecord::Base
 
 	validates_with ReservationValidator
   
-  scope :active, -> {joins(:event).where('events.to_time >= ?',Time.now.to_date)}
+  scope :active, -> {joins(:event).where('DATE(events.to_time) >= ?',Time.now.to_date)}
   
-  scope :occupied, -> {joins(:event).where('events.from_time <= ? and ? <= events.to_time',Time.now.to_date,Time.now.to_date)}
-	scope :occupied_nextweek, -> {joins(:event).where('events.from_time > ? and events.from_time < ?',Time.now.to_date,1.week.from_now.to_date)}
+  scope :occupied, -> {joins(:event).where('DATE(events.from_time) <= ? and ? <= DATE(events.to_time)',Time.now.to_date,Time.now.to_date)}
+	scope :occupied_nextweek, -> {joins(:event).where('DATE(events.from_time) > ? and DATE(events.from_time) < ?',Time.now.to_date,1.week.from_now.to_date)}
 	
 	
 

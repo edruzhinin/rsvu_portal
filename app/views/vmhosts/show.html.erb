@@ -11,13 +11,13 @@
   			</div>
   			<div class="panel-body">
     			<ul class="nav nav-tabs">
-  					<li class="active"><a href="#general" data-toggle="tab">Общие</a></li>
-  					<li><a href="#resourcepool" data-toggle="tab">Пулы ресурсов</a></li>
-  					<li><a href="#vm" data-toggle="tab">Виртуальные машины</a></li>
+  					<li><a href="#general" data-toggle="tab">Общие</a></li>
+  					<li class="active"><a href="#resourcepool" data-toggle="tab">Пулы ресурсов</a></li>
+  					
   				</ul>
     			
     			<div class="tab-content">
-  					<div class="tab-pane active" id="general">
+  					<div class="tab-pane" id="general">
   						<div class="col-lg-6">
   							<br>
   							
@@ -28,28 +28,96 @@
   						</div>
   						<div class="col-lg-6">
   							<br>
-  							<p><b>Состояние питания:</b> <%=Vmhost.powerstate_to_s(@vmhost.powerState)%></p>
+  							<p><b>Состояние питания:</b><%=Vmhost.powerstate_to_s(@vmhost.powerState)%></p>
   							<p><b>Описание:</b> <%=@vmhost.hardware_description%></p>
   						</div>
   					</div>
-  					<div class="tab-pane" id="resourcepool">
-  						<% @vmhost.vmresourcepools.each do |rpool| %>
-	  						<div class="col-lg-6">
-	  							<p><b><%=rpool.name%></b></p>
-  							</div>
-  							<div class="col-lg-3">	
-  								<p><b><%=rpool.status%></b></p>
-  							</div>
-  							<% rpool.vms.each do |vm| %>
-  								<div class="col-lg-6 col-lg-offset-1">
-  									<p><b><%=link_to vm.name, vm_path(vm)%></b></p>
+  					<div class="tab-pane active" id="resourcepool">
+  						<div class="panel-group" id="accordion">
+  							<% @vmhost.vmresourcepools.each do |rpool| %>
+  								<div class="panel panel-<%=Vmresourcepool.status_to_s(rpool.status)%>">
+    								<div class="panel-heading">
+      								<h4 class="panel-title">
+              					<a data-toggle="collapse" data-parent="#accordion" href="#<%=rpool.name%>">
+                					<%=rpool.name%>
+                				<a>
+            					</h4>
+            				</div>
+    								<div id="<%=rpool.name%>" class="panel-collapse collapse in">
+      								<div class="panel-body">
+      									<% rpool.vms.each do |vm| %>
+  												<div class="card">
+   													<div class="card-header" id="headingOne">
+   														<div class="container"> 
+  															<div class="row table">
+  																<div class="col-lg-5 col-lg-offset-1">
+  																	<p><b><%=link_to vm.name, vm_path(vm)%></b></p>
+  																</div>	
+  																<div class="col-lg-1 col-lg-offset-1">
+  																	<span class="label label-<%=Vm.powerstate_to_label(vm.state)%>"><%=Vm.powerstate_to_s(vm.state)%></span>
+  																</div>
+  																<div class="col-lg-2">
+  																	<% unless vm.user.nil? %>
+  																		<a class="btn btn-primary btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    																		<span class="badge"><%=vm.user.firstname%> <%=vm.user.lastname%></span>
+  							  										</a>
+  																	<% else %>
+  																		<% if vm.reservations.occupied.count > 0 %>
+  																			<a class="btn btn-danger btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    																			<span class="badge"><%=vm.reservations.occupied.last.event.to_time.to_date%></span>
+  																			</a>
+  																		<% else %>
+																				<% if vm.reservations.active.count > 0 %> <!-- Есть резервы на обоудование -->
+  																				<% if vm.reservations.occupied_nextweek.count > 0 %> <!-- Есть резервы на обоудование на следующей неделе-->
+  																					<a class="btn btn-warning btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    																					<span class="badge"><%=vm.reservations.occupied_nextweek.first.event.from_time.to_date%></span>
+  							  													</a>
+  																				<% else %>
+  																					<div class="btn btn-info btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  																						<span class="badge"><%=vm.reservations.active.first.event.from_time.to_date%></span>
+  																					</div>	
+  																				<% end %>
+  																			<% else %>
+  																				<div class="btn btn-success btn-block">
+  																					<span class="badge">Свободно</span>
+  																				</div>	
+  																			<% end %>
+  																	  <% end %>
+  																	 <% end %>
+  																</div>
+  																<div class="col-lg-1">
+  																	<% if (current_user.admin? || vm.user.nil? || vm.user==current_user ) %>
+  																		<button type="button" class="btn btn-default"><%=link_to "Заказать",  new_vm_reservation_path(vm) %></button>
+  																	<%end%>
+  																</div>
+  														</div>
+  														</div>
+  													</div>
+  													<div class="collapse" id="<%=vm.id%>">
+  														<div class="card card-body">
+   	   													<div class="col-lg-6 col-lg-offset-1">
+   	   														<ul>
+ 																		<% vm.reservations.active.each do |reserv| %>
+ 																			<li>c <%=reserv.event.from_time.to_date%> по <%=reserv.event.to_time.to_date%> <%=reserv.event.name%> <%=reserv.event.user.firstname%> <%=reserv.event.user.lastname%></li>
+ 																		<% end %>	
+ 																	</ul>
+ 																</div>
+ 															</div>
+														</div>
+  													
+  												</div>
+  											<%end%>
+  										</div>
+  									</div>
   								</div>	
-  								<div class="col-lg-1 col-lg-offset-1">
-  										<p><%=Vm.powerstate_to_s(vm.state)%></p>
-  								</div>
   							<%end%>
-  								
+  						</div>
+  						
+  					 								
   							
-  						<%end%>
+  						
 							
   					</div>
+  				</div>
+  			</div>
+  		</div>

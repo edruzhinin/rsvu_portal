@@ -7,14 +7,27 @@
 			<div class="panel panel-default">
   			<div class="panel-heading">Пареметры виртуальной машины</div>
   			<div class="panel-body">
-    		<%=@vm.guest%>
-    		<%=@vm.uuid%>
-    		<%=@vm.state%>
-    		<%=@vm.ip%>
-    		<%=@vm.boottime%>
-    		<%=@vm.annotation%>
-    		<%=@vm.vmtools%>
-    		<%=@vm.path%>
+    			<div class="col-lg-6">
+  					<br>
+  					<p><b>Статус:</b> <%=Vm.powerstate_to_s(@vm.state)%></p>
+  					<p><b>VM tools:</b> <%=Vm.tools_status_to_s(@vm.vmtools)%></p>
+  					<p><b>Тип ОС:</b> <%=@vm.guest%></p>
+ 						<p><b>Время старта:</b> <%=@vm.boottime%></p>
+ 					</div>
+  				<div class="col-lg-6">
+  					<br>
+  					<p><b>IP адрес:</b> <%=@vm.ip%></p>
+  					<p><b>UUID:</b> <%=@vm.uuid%></p>
+  					<p><b>Путь:</b> <%=@vm.path%></p>
+  					<p><b>Описание:</b> <%=@vm.annotation%></p>
+  							
+  				</div>
+    		
+    		
+    		
+    		
+ 
+    	
     		
     		
   			</div>

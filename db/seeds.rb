@@ -6,6 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+
+User.create([{login: 'edruzhinin', firstname: 'Евгений', secondname: 'Владимирович', lastname: 'Дружинин',email: 'evd@yandex.ru',admin: true, password_digest:'$2a$10$RTcIdghXxRCMj2fcPZTtfe4S1uVfvfYbOX75PhZVUfnYvLdIUqy1W',remember_token: 'feed32b31b54c6d4b78abae8d0b20d0e3a715dd5'},
+							{login: 'test1', firstname: 'Первый', secondname: 'Владимирович', lastname: 'Тестер',email: 'evd@yandex.ru', password_digest:'$2a$10$RTcIdghXxRCMj2fcPZTtfe4S1uVfvfYbOX75PhZVUfnYvLdIUqy1W'},
+							{login: 'test2', firstname: 'Второй', secondname: 'Владимирович', lastname: 'Тестер',email: 'evd@yandex.ru', password_digest:'$2a$10$RTcIdghXxRCMj2fcPZTtfe4S1uVfvfYbOX75PhZVUfnYvLdIUqy1W'},
+						{login: 'test3', firstname: 'Третий', secondname: 'Владимирович', lastname: 'Тестер',email: 'evd@yandex.ru', password_digest:'$2a$10$RTcIdghXxRCMj2fcPZTtfe4S1uVfvfYbOX75PhZVUfnYvLdIUqy1W'}])
+
 Location.create([{name: '3002NET01'} ,{name: '3002PC01'},{name: '3002PROLIANT01'},{name: '3002ITANIUMT01'},{name: '3002ALPHA01'}])
 HardwareType.create([{name: 'коммутатор', iparam1: 'Количество портов'},
 											{name: 'сервер',sparam1: 'CPU', iparam1: 'Объем памяти'},
@@ -72,15 +79,15 @@ Hardware.create(hardware_type: hardwaretype_server, name: "VM6 HP Proliant DL580
 
 
 srv1 = Hardware.find_by(name: "VM1 HP Proliant DL580 Gen5")
-Vmhost.create(hardware: srv1,name: "esxi-srv1", esxi_version: "5.5", cpu_count: 2, cpu_core_count: 12, memory_size: 96, powerState:1)
+Vmhost.create(hardware: srv1, name: "esxi-srv1", esxi_version: "VMware ESXi 5.5.0 build-2068190", cpu_count: 2, cpu_core_count: 12, memory_size: 96,hardware_description: "Intel(R) Xeon(R) CPU           X5675  @ 3.07GHz", powerState:1)
 vmhost=Vmhost.find_by(name: "esxi-srv1")
 Vmresourcepool.create(vmhost: vmhost,name: "Resource",status: 1)
 rootres = Vmresourcepool.find_by(vmhost: vmhost, name: "Resource")
-Vmresourcepool.create(vmhost: vmhost,name: "Pool 1",status: 1,parent_id: rootres.id)
+Vmresourcepool.create(vmhost: vmhost,name: "TC_test_alarm_AES-2006",status: 1,parent_id: rootres.id)
 Vmresourcepool.create(vmhost: vmhost,name: "Pool 2",status: 1,parent_id: rootres.id)
-vmres =  Vmresourcepool.find_by(vmhost: vmhost, name: "Pool 1")
-Vm.create(vmresourcepool: vmres, name: "WS1", guest: "www", uuid: "123123-3131-3131-3131-3101", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: true, path: "DataStore1")
-Vm.create(vmresourcepool: vmres, name: "WS2", guest: "www", uuid: "123123-3131-3131-3131-3102", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: true, path: "DataStore1")
+vmres =  Vmresourcepool.find_by(vmhost: vmhost, name: "TC_test_alarm_AES-2006")
+Vm.create(vmresourcepool: vmres, name: "10CFL10GJ502", guest: "Other Linux (64-bit)", uuid: "527431dc-8d01-1c65-f91c-27cbfad4a0cd", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: true, path: "[DataStore1] Gate_RO1_A/Gate_RO1_A.vmx")
+Vm.create(vmresourcepool: vmres, name: "Windows XP", guest: "Microsoft Windows XP Professional (32-bit)", uuid: "52e63a49-7de4-50cf-79cb-0dc7626336d8", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: true, path: "[DataStore1] 20CKM20/20CKM20.vmx")
 Vm.create(vmresourcepool: vmres, name: "WS3", guest: "www", uuid: "123123-3131-3131-3131-3103", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: true, path: "DataStore1")
 Vm.create(vmresourcepool: vmres, name: "WS4", guest: "www", uuid: "123123-3131-3131-3131-3104", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: false, path: "DataStore1")
 Vm.create(vmresourcepool: vmres, name: "WS5", guest: "www", uuid: "123123-3131-3131-3131-3105", state: 1, ip: "127.0.0.1", annotation: "First VM", vmtools: true, path: "DataStore1")

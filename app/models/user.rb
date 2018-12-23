@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_many :hardwares, through: :hardware_reservations
 	has_many :hardware_messages
 	has_many :events
+	has_many :vms
 	before_save { self.email = email.downcase}
 	before_create :create_remember_token
 	validates :firstname, presence: true

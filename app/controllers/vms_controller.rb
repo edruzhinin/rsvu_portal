@@ -4,4 +4,6 @@ class VmsController < ApplicationController
 		@vm = Vm.find(params[:id])
 		
 	end
+	
+
 end

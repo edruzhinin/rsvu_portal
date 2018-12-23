@@ -8,7 +8,11 @@
       <div class="container"> 
   			<div class="row table">
     			<div class="col-lg-3"><%=link_to vmhost.name,vmhost%></div>
-    			<div class="col-lg-1"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></div>
+    			<div class="col-lg-1">
+    				
+    				<span class="label label-<%=Vmhost.powerstate_to_label(vmhost.powerState)%>"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></span>
+    				
+    			</div>
     			<div class="col-lg-3"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
     			<div class="col-lg-3"><a href='http://<%= vmhost.hardware.ip_adr%>'><%= vmhost.hardware.ip_adr%></a></div>
     		</div>
