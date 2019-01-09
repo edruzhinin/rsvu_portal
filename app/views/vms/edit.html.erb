@@ -1,0 +1,37 @@
+<% provide(:title, 'Постоянное резервирование') %>
+<h1>Зарезервировать оборудование</h1>
+
+<div class="container">
+
+
+
+
+	<div class="panel panel-info">
+ 		<div class="panel-heading">Установить постоянного владельца</div>
+  	<div class="panel-body">
+  		<%= form_for [@vm] do |f| %>
+  			<div class="form-group">
+  			 		
+  				<%=f.label :user_id,"Пользователь" %>
+		  	  
+		  	  		  	
+		  	
+  				<div class="form-inline">
+    				<%=f.collection_select(:user_id,User.all, :id,:get_fullname) %>
+    				
+    				
+    				
+  				</div>
+  				
+				
+				
+				
+				
+  				
+      		<div><%= f.submit "Сохранить", class: "btn btn-primary vert-align" %></div>
+      	</div>
+      	
+			<% end %>
+		</div>
+  </div>
+</div>

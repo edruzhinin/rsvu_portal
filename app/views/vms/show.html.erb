@@ -13,6 +13,9 @@
   					<p><b>VM tools:</b> <%=Vm.tools_status_to_s(@vm.vmtools)%></p>
   					<p><b>Тип ОС:</b> <%=@vm.guest%></p>
  						<p><b>Время старта:</b> <%=@vm.boottime%></p>
+ 						<% if (!@vm.user.nil?) %>
+  						<p><b>Владелец:</b> <%=@vm.user.get_fullname%></p>
+  					<%end%>
  					</div>
   				<div class="col-lg-6">
   					<br>
@@ -20,7 +23,7 @@
   					<p><b>UUID:</b> <%=@vm.uuid%></p>
   					<p><b>Путь:</b> <%=@vm.path%></p>
   					<p><b>Описание:</b> <%=@vm.annotation%></p>
-  							
+  					
   				</div>
     		
     		
@@ -36,9 +39,14 @@
 			
 			
 				<div class="btn-group pull-right">
+  			<% if (current_user.admin? ) %>
+  				<button type="button" class="btn btn-default"><%=link_to "Редактировать",  edit_vm_path(@vm) %></button>
+  			<%end%>
   			
-  			<button type="button" class="btn btn-default"><%=link_to "Заказать",  new_vm_reservation_path(@vm) %></button>
-  			
+  			<% if (current_user.admin? || @vm.user.nil? || @vm.user==current_user ) %>
+  				<button type="button" class="btn btn-default"><%=link_to "Заказать",  new_vm_reservation_path(@vm) %></button>
+  			<%end%>
+  			<button type="button" class="btn btn-default"><%=link_to "К хосту",  vmhost_path(@vm.vmresourcepool.vmhost) %></button>
 			</d iv>
 		</section>
 	</div>

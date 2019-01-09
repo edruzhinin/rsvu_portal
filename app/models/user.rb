@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
 		SecureRandom.urlsafe_base64
 	end
 	
+	def get_fullname
+		self.lastname+" "+self.firstname
+	end
+	
 	def User.encrypt(token)
 		Digest::SHA1.hexdigest(token.to_s)
 	end
