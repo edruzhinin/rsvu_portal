@@ -17,9 +17,16 @@ class ReservationsController < ApplicationController
 	end
 	
 	def destroy
-		Reservation.find(params[:id]).destroy
+		@reservation = Reservation.find(params[:id])
+		
+		if @reservation.reservable_type == "Vm"
+			return_path = vm_path(Vm.find(@reservation.reservable_id))
+		else
+			return_path = hardware_path(Hardware.find(@reservation.reservable_id))
+		end
+		@reservation.destroy
     		
-		redirect_to context_url(context), notice: "Резервирование удалено"
+		redirect_to return_path, notice: "Резервирование удалено"
 		
 	end
 	

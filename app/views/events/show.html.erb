@@ -27,7 +27,7 @@
   			</div>
   		<% end %>
   		
-  		<%if !@event.reservations.where(reservable_type: "Vm").nil? %>
+  		<%if !@event.reservations.find_by(reservable_type: "Vm").nil? %>
   			<div class="panel panel-default">
   				<div class="panel-heading">
     				<h3 class="panel-title">Виртуальные машины</h3>
