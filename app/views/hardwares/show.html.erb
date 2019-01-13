@@ -182,35 +182,14 @@
   						<% end %>
   					</div>
   					<div class="tab-pane" id="message">
-  						<% @hardware.hardware_messages.each do |msg| %>
-  							<div class="row">
-  								<div class="col-lg-12">
-  									<b>Тема:</b> <%=msg.subject%> 
-  								</div>
-  								<div class="col-lg-12">
-  									<pre><%= msg.body %></pre>
-  								</div>
-  								<div class="col-lg-6 col-lg-offset-6">
-  									<b>Автор:</b><%= msg.user.firstname %> <%= msg.user.lastname %> <b>Создано:</b> <%= msg.created_at %> 
-  								</div>
-  								<% if (current_user.admin? || msg.user==current_user) %>	
-  									<div class="btn-group pull-right">
-  										<button type="button" class="btn btn-default"><%= link_to "Редактировать", edit_hardware_hardware_message_path(@hardware, msg) %></button>
-  										<button type="button" class="btn btn-default"><%= link_to "Удалить", hardware_hardware_message_path(@hardware, msg), method: :delete, data: {confirm: "Вы уверены?"} %></button>
-  									</div>
-  								<% end %>	
-  								
-  									
-  								
-  							</div>
-  						<% end %>
-  						<button type="button" class="btn btn-default pull-right"><%=link_to "Новое",  new_hardware_hardware_message_path(@hardware) %></button>
-						</div>
+  						<%= render partial: "shared/show_user_messages", locals: {messages:  @hardware.user_messages} %>
+  					</div>
 					</div>
   			</div>
 			</div>
 			
 			<div class="btn-group pull-right">
+  			<button type="button" class="btn btn-default pull-right"><%=link_to "Сообщение",  new_hardware_user_message_path(@hardware) %></button>
   			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path %></button>
   			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_reservation_path(@hardware) %></button>
   			<% if (current_user.admin?) %>

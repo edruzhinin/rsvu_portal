@@ -11,22 +11,24 @@ RsvuPortal::Application.routes.draw do
   resources :hardwares
   resources :events
 	resources :reservations, only: [:destroy]
+	resources :user_messages, only: [:destroy, :edit, :update]
   
   resources :vmhosts, only: [:index, :show]
   
   resources :vmhosts do
-  	resources :vms	
+  	resources :vms
+  	
   end
   resources :vms do
   	resources :reservations
+  	resources :user_messages
   end
   
   resources :hardwares do
-  	resources :hardware_reservations
   	resources :reservations
   	resources :devices
   	resources :softwares
-  	resources :hardware_messages
+  	resources :user_messages
   end
   
   root 'static_pages#home'

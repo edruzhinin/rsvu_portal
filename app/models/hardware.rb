@@ -2,7 +2,7 @@ class Hardware < ActiveRecord::Base
 	has_many :reservations, as: :reservable
 	has_many :devices
 	has_many :softwares
-	has_many :hardware_messages
+	has_many :user_messages, as: :commentable
 	belongs_to :hardware_type
 	belongs_to :location
 	belongs_to :user

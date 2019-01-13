@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-	has_many :hardware_reservations
 	has_many :hardwares
 	has_many :hardware_messages
+	has_many :user_messages
 	has_many :events
 	has_many :vms
 	before_save { self.email = email.downcase}

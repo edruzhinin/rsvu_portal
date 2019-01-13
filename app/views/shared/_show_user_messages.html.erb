@@ -1,0 +1,22 @@
+
+<% messages.each do |msg| %>
+	<div class="row">
+  	<div class="col-lg-12">
+  		<%=msg.subject%> 
+  	</div>
+  	<div class="col-lg-12">
+  		<pre><%= msg.body %></pre>
+  	</div>
+  	<div class="col-lg-5 col-lg-offset-7">
+  		<b>Автор:</b><%= msg.user.firstname %> <%= msg.user.lastname %> <b>Создано:</b> <%= msg.created_at %> 
+  	</div>
+  	<div class="col-lg-4 col-lg-offset-8">
+  	<% if (current_user.admin? || msg.user==current_user) %>	
+  		<div class="btn-group pull-right">
+  			<button type="button" class="btn btn-default"><%= link_to "Редактировать", edit_user_message_path(msg) %></button>
+  			<button type="button" class="btn btn-default"><%= link_to "Удалить", user_message_path( msg), method: :delete, data: {confirm: "Вы уверены?"} %></button>
+  		</div>
+		<% end %>
+	</div>	
+	</div>
+<% end %>

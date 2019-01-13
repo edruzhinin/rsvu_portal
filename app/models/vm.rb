@@ -1,5 +1,6 @@
 class Vm < ActiveRecord::Base
   has_many :reservations, as: :reservable
+  has_many :user_messages, as: :commentable
   belongs_to :vmresourcepool
   belongs_to :user
   
