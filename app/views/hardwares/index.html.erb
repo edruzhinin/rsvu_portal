@@ -9,9 +9,10 @@
   			<div class="row table">
     			<div class="col-lg-3"><%= link_to hardware.name, hardware %></div>
     			<div class="col-lg-2"><%=hardware.identificator%></div>
-    			<div class="col-lg-2"><%=hardware.hw_type%></div>
-    			<div class="col-lg-2"><%=hardware.hw_location%></div>
+    			<div class="col-lg-2"><%=hardware.hardware_type.name%></div>
+    			<div class="col-lg-2"><%=hardware.location.name%></div>
   				<div class="col-lg-2">
+						
 						<% if hardware.status.nil? || hardware.status < 0 %> <!-- оборудование сломано -->
 							<div class="btn btn-default btn-block">
   							<span class="badge" >Сломано</span>
@@ -22,27 +23,7 @@
   								<span class="badge">Недоступно</span>
   							</div>
   						<% else %>
-  							<% if hardware.hardware_reservations.occupied.count > 0 %> <!-- Оборудование сейчас занято-->
-									<a class="btn btn-danger btn-block" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    								<span class="badge"><%=hardware.hardware_reservations.occupied.last.to_time.to_date%></span>
-  								</a>
-  							<% else %>
-									<% if hardware.hardware_reservations.active.count > 0 %> <!-- Есть резервы на обоудование -->
-  									<% if hardware.hardware_reservations.occupied_nextweek.count > 0 %> <!-- Есть резервы на обоудование на следующей неделе-->
-  										<a class="btn btn-warning btn-block" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    										<span class="badge"><%=hardware.hardware_reservations.occupied_nextweek.first.from_time.to_date%></span>
-  							  		</a>
-  									<% else %>
-  										<div class="btn btn-info btn-block" data-toggle="collapse" href="#<%=hardware.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  											<span class="badge"><%=hardware.hardware_reservations.active.first.from_time.to_date%></span>
-  										</div>	
-  									<% end %>
-  								<% else %>
-  									<div class="btn btn-success btn-block">
-  										<span class="badge">Свободно</span>
-  									</div>	
-  								<% end %>
-  							<% end %>
+  							<%= render partial: "shared/show_reserves_badge", locals: {res_subject: hardware} %>
   						<% end %>
   					<% end %>
       		</div>
@@ -58,11 +39,7 @@
     </div>
    	<div class="collapse" id="<%=hardware.id%>">
   		<div class="card card-body">
-   	   	<ul>
- 					<% hardware.hardware_reservations.active.each do |reserv| %>
- 						<li>c <%=reserv.from_time.to_date%> по <%=reserv.to_time.to_date%> <%=reserv.name%> <%=reserv.user.firstname%> <%=reserv.user.lastname%></li>
- 					<% end %>	
- 				</ul>
+   	   	<%= render partial: "shared/show_reserves", locals: {res_subject: hardware} %>
  			</div>
 		</div>
   </div>

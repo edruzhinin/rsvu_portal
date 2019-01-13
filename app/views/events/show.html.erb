@@ -3,9 +3,51 @@
 	
 		<section>
 			<h1>
-				<%= @event.name %>
+				Мероприятие
 			</h1>
-			
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title"><%=@event.name%></h3>
+  			</div>
+  			<div class="panel-body">
+  				c <%=@event.from_time.to_date%> по <%=@event.to_time.to_date%> <%=@event.user.firstname%> <%=@event.user.lastname%>
+  			</div>
+  		</div>
+  		
+  		
+  		<%if !@event.reservations.find_by(reservable_type: "Hardware").nil? %>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">Оборудование</h3>
+  				</div>
+  				<div class="panel-body">
+  					<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: @event.reservations.where(reservable_type: "Hardware")} %>
+  									
+  				</div>
+  			</div>
+  		<% end %>
+  		
+  		<%if !@event.reservations.where(reservable_type: "Vm").nil? %>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">Виртуальные машины</h3>
+  				</div>
+  				<div class="panel-body">
+  					<%= render partial: "shared/show_reservable_vms", locals: {reserve: @event.reservations.where(reservable_type: "Vm")} %>
+  				</div>
+  			</div>
+  		<% end %>
+  		
+  		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Сообщения</h3>
+  			</div>
+  			<div class="panel-body">
+  				
+  			</div>
+  		</div>
+  		
+  	
 		</section>
 	
 

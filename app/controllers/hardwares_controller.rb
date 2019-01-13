@@ -36,10 +36,7 @@ class HardwaresController < ApplicationController
 	end
 	
 	def index
-		@hardwares= Hardware.includes(:hardware_reservations).joins(:hardware_type, :location).select('hardwares.id,hardwares.status, hardwares.name, hardwares.identificator, hardwares.place,locations.name as hw_location, hardware_types.name as hw_type').order('hw_type desc, hw_location, place')
-
-		
-		#@hardwares = Hardware.all.order_location
+		@hardwares = Hardware.all
 	end
 
   private

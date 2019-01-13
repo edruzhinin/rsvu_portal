@@ -1,0 +1,27 @@
+<% unless res_subject.user.nil? %>
+	<a class="btn btn-primary btn-block" data-toggle="collapse" href="#<%=res_subject.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  	<span class="badge"><%=res_subject.user.firstname%> <%=res_subject.user.lastname%></span>
+  </a>
+<% else %>
+	<% if res_subject.reservations.occupied.count > 0 %>
+		<a class="btn btn-danger btn-block" data-toggle="collapse" href="#<%=res_subject.id%>" role="button" aria-expanded="false" aria-controls="collapseExample"
+			<span class="badge"><%=res_subject.reservations.occupied.last.event.to_time.to_date%></span>
+  	</a>
+  <% else %>
+		<% if res_subject.reservations.active.count > 0 %> <!-- Есть резервы на обоудование -->
+  		<% if res_subject.reservations.occupied_nextweek.count > 0 %> <!-- Есть резервы на обоудование на следующей неделе-->
+  			<a class="btn btn-warning btn-block" data-toggle="collapse" href="#<%=res_subject.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    			<span class="badge"><%=res_subject.reservations.occupied_nextweek.first.event.from_time.to_date%></span>
+  			</a>
+  		<% else %>
+  			<div class="btn btn-info btn-block" data-toggle="collapse" href="#<%=res_subject.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+  				<span class="badge"><%=res_subject.reservations.active.first.event.from_time.to_date%></span>
+  			</div>	
+  		<% end %>
+  	<% else %>
+  		<div class="btn btn-success btn-block">
+  			<span class="badge">Свободно</span>
+  		</div>	
+  	<% end %>
+  <% end %>
+<% end %>

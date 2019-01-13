@@ -2,7 +2,8 @@
 
 <h1><%= @vm.name %></h1>
 <div class="row">
-		<%=render 'shared/show_reservation' %>		
+		
+		<%= render partial: "shared/show_reserves_panel", locals: {reservations:  @vm.reservations} %>
 		<section>
 			<div class="panel panel-default">
   			<div class="panel-heading">Пареметры виртуальной машины</div>
@@ -40,7 +41,7 @@
 			
 				<div class="btn-group pull-right">
   			<% if (current_user.admin? ) %>
-  				<button type="button" class="btn btn-default"><%=link_to "Редактировать",  edit_vm_path(@vm) %></button>
+  				<button type="button" class="btn btn-default"><%=link_to "Владелец",  edit_vm_path(@vm) %></button>
   			<%end%>
   			
   			<% if (current_user.admin? || @vm.user.nil? || @vm.user==current_user ) %>

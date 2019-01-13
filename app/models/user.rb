@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :hardware_reservations
-	has_many :hardwares, through: :hardware_reservations
+	has_many :hardwares
 	has_many :hardware_messages
 	has_many :events
 	has_many :vms

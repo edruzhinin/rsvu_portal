@@ -57,33 +57,7 @@
   																	<span class="label label-<%=Vm.powerstate_to_label(vm.state)%>"><%=Vm.powerstate_to_s(vm.state)%></span>
   																</div>
   																<div class="col-lg-2">
-  																	<% unless vm.user.nil? %>
-  																		<a class="btn btn-primary btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    																		<span class="badge"><%=vm.user.firstname%> <%=vm.user.lastname%></span>
-  							  										</a>
-  																	<% else %>
-  																		<% if vm.reservations.occupied.count > 0 %>
-  																			<a class="btn btn-danger btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    																			<span class="badge"><%=vm.reservations.occupied.last.event.to_time.to_date%></span>
-  																			</a>
-  																		<% else %>
-																				<% if vm.reservations.active.count > 0 %> <!-- Есть резервы на обоудование -->
-  																				<% if vm.reservations.occupied_nextweek.count > 0 %> <!-- Есть резервы на обоудование на следующей неделе-->
-  																					<a class="btn btn-warning btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    																					<span class="badge"><%=vm.reservations.occupied_nextweek.first.event.from_time.to_date%></span>
-  							  													</a>
-  																				<% else %>
-  																					<div class="btn btn-info btn-block" data-toggle="collapse" href="#<%=vm.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  																						<span class="badge"><%=vm.reservations.active.first.event.from_time.to_date%></span>
-  																					</div>	
-  																				<% end %>
-  																			<% else %>
-  																				<div class="btn btn-success btn-block">
-  																					<span class="badge">Свободно</span>
-  																				</div>	
-  																			<% end %>
-  																	  <% end %>
-  																	 <% end %>
+  																	<%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %>
   																</div>
   																<div class="col-lg-1">
   																	<% if (current_user.admin? || vm.user.nil? || vm.user==current_user ) %>
@@ -96,11 +70,7 @@
   													<div class="collapse" id="<%=vm.id%>">
   														<div class="card card-body">
    	   													<div class="col-lg-6 col-lg-offset-1">
-   	   														<ul>
- 																		<% vm.reservations.active.each do |reserv| %>
- 																			<li>c <%=reserv.event.from_time.to_date%> по <%=reserv.event.to_time.to_date%> <%=reserv.event.name%> <%=reserv.event.user.firstname%> <%=reserv.event.user.lastname%></li>
- 																		<% end %>	
- 																	</ul>
+   	   														<%= render partial: "shared/show_reserves", locals: {res_subject: vm} %>
  																</div>
  															</div>
 														</div>

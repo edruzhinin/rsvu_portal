@@ -1,17 +1,17 @@
-<%if @vm.reservations.active.count > 0 %>
+<%if reservations.active.count > 0 %>
 	<div class="panel panel-warning">
  		<div class="panel-heading">Активные резервирования</div>
   	<div class="panel-body">
    		<ul>
 				<div class="row">
-				<% @vm.reservations.active.each do |r| %>    				
+				<% reservations.active.each do |r| %>    				
 					<li>
      				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6"><b><%=r.event.from_time.to_date%> - <%= r.event.to_time.to_date%></b></div>
      				<div class="col-lg-5 col-md-4 col-sm-4 hidden-xs"><%=r.event.name%></div>
      				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-5"><b>Отв.</b>	<%=r.event.user.firstname%> <%=r.event.user.lastname%></div>
      				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
      					<% if current_user.admin? || current_user?(r.event.user) %>
-     						<%=link_to "Удалить", vm_reservation_path(@vm,r), method: :delete, data: {confirm: "Вы уверены?"}%>
+     						<%=link_to "Удалить", reservation_path(r), method: :delete, data: {confirm: "Вы уверены?"}%>
      					<%end%>
      				</div>
     			</li>

@@ -1,28 +1,5 @@
-
-<%if @hardware.hardware_reservations.active.count > 0 %>
-	<div class="panel panel-warning">
- 		<div class="panel-heading">Использование оборудования</div>
-  	<div class="panel-body">
-   		<ul>
-				<div class="row">
-				<% @hardware.hardware_reservations.active.each do |r| %>    				
-					<li>
-     				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-6"><b><%=r.from_time.to_date%> - <%= r.to_time.to_date%></b></div>
-     				<div class="col-lg-5 col-md-4 col-sm-4 hidden-xs"><%=r.name%></div>
-     				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-5"><b>Отв.</b>	<%=r.user.firstname%> <%=r.user.lastname%></div>
-     				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-     					<% if current_user.admin? || current_user?(r.user) %>
-     						
-     						<%=link_to "Удалить", hardware_hardware_reservation_path(@hardware, r), method: :delete, data: {confirm: "Вы уверены?"}%>
-     								
-     							
-     						
-     					<%end%>
-    				</div>
-    			</li>
-  			<% end %>
-  		</div>
-			</ul>
-  	</div>
-	</div>
-<%end%>
+<ul>
+	<% res_subject.reservations.active.each do |reserv| %>
+ 		<li>c <%=reserv.event.from_time.to_date%> по <%=reserv.event.to_time.to_date%> <%=reserv.event.name%> <%=reserv.event.user.firstname%> <%=reserv.event.user.lastname%></li>
+ 	<% end %>	
+</ul>

@@ -6,7 +6,7 @@
 				<%= @hardware.name %>
 			</h1>
 			<p><%= @hardware.description %></p>
-			<%=render 'shared/show_reserves' %>
+			<%= render partial: "shared/show_reserves_panel", locals: {reservations:  @hardware.reservations} %>
 			
 			<div class="panel panel-default">
   			<div class="panel-heading">
@@ -212,7 +212,7 @@
 			
 			<div class="btn-group pull-right">
   			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path %></button>
-  			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_hardware_reservation_path(@hardware) %></button>
+  			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_reservation_path(@hardware) %></button>
   			<% if (current_user.admin?) %>
   				<button type="button" class="btn btn-default"><%=link_to "Редактировать", edit_hardware_path(@hardware) %></button>
   			<% end %>
