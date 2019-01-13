@@ -17,7 +17,7 @@ class HardwaresController < ApplicationController
   
   def show
 		@hardware = Hardware.find(params[:id])
-		@reserves = @hardware.hardware_reservations
+		
 	end
 	
 	def edit
