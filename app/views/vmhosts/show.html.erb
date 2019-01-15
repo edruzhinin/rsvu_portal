@@ -61,7 +61,7 @@
   																</div>
   																<div class="col-lg-1">
   																	<% if (current_user.admin? || vm.user.nil? || vm.user==current_user ) %>
-  																		<button type="button" class="btn btn-default"><%=link_to "Заказать",  new_vm_reservation_path(vm) %></button>
+  																		<%=link_to "Заказать",  new_vm_reservation_path(vm), class: "btn btn-default"%>
   																	<%end%>
   																</div>
   														</div>

@@ -20,7 +20,7 @@
     				<%=f.collection_select(:event_id, current_user.events.active, :id,:name) %>
     				
     				
-    				<button type="button" class="btn btn-xs btn-default pull-right"><%= link_to "Создать новое", new_event_path %></button>
+    				<%= link_to "Создать новое", new_event_path, class: "btn btn-xs btn-default pull-right" %>
   				</div>
   				
 				

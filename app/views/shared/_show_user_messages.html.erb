@@ -13,8 +13,8 @@
   	<div class="col-lg-4 col-lg-offset-8">
   	<% if (current_user.admin? || msg.user==current_user) %>	
   		<div class="btn-group pull-right">
-  			<button type="button" class="btn btn-default"><%= link_to "Редактировать", edit_user_message_path(msg) %></button>
-  			<button type="button" class="btn btn-default"><%= link_to "Удалить", user_message_path( msg), method: :delete, data: {confirm: "Вы уверены?"} %></button>
+  			<%= link_to "Редактировать", edit_user_message_path(msg), class: "btn btn-default" %>
+  			<%= link_to "Удалить", user_message_path( msg),class: "btn btn-default", method: :delete, data: {confirm: "Вы уверены?"} %>
   		</div>
 		<% end %>
 	</div>	

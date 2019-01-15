@@ -136,7 +136,7 @@
   							<% end %>
   						
   						<% if (current_user.admin?) %>
-  								<button type="button" class="btn btn-default pull-right"><%=link_to "Добавить",  new_hardware_device_path(@hardware) %></button>
+  								<%=link_to "Добавить",  new_hardware_device_path(@hardware), class: "btn btn-default pull-right"%>
   						<% end %>
   					</div>
   					<div class="tab-pane" id="software">
@@ -178,7 +178,7 @@
   						<% end %>
   						
   						<% if (current_user.admin?) %>
-  								<button type="button" class="btn btn-default pull-right"><%=link_to "Добавить",  new_hardware_software_path(@hardware) %></button>
+  								<%=link_to "Добавить",  new_hardware_software_path(@hardware), class: "btn btn-default pull-right" %>
   						<% end %>
   					</div>
   					<div class="tab-pane" id="message">
@@ -189,11 +189,11 @@
 			</div>
 			
 			<div class="btn-group pull-right">
-  			<button type="button" class="btn btn-default pull-right"><%=link_to "Сообщение",  new_hardware_user_message_path(@hardware) %></button>
-  			<button type="button" class="btn btn-default"><%=link_to "Назад",  hardwares_path %></button>
-  			<button type="button" class="btn btn-default"><%=link_to "Заказать", new_hardware_reservation_path(@hardware) %></button>
+  			<%=link_to "Сообщение",  new_hardware_user_message_path(@hardware), class: "btn btn-default"  %>
+  			<%=link_to "Назад",  hardwares_path, class: "btn btn-default"   %>
+  			<%=link_to "Заказать", new_hardware_reservation_path(@hardware), class: "btn btn-default"   %>
   			<% if (current_user.admin?) %>
-  				<button type="button" class="btn btn-default"><%=link_to "Редактировать", edit_hardware_path(@hardware) %></button>
+  				<%=link_to "Редактировать", edit_hardware_path(@hardware), class: "btn btn-default"   %>
   			<% end %>
 			</div>
 		
