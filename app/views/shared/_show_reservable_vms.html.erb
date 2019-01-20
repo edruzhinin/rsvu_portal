@@ -1,9 +1,15 @@
 <% reserve.each do |r| %>
 	<div class="row table">
 		<div class="col-lg-3"><%= link_to r.reservable.name, r.reservable %></div>
-  	<div class="col-lg-2"><%=Vm.powerstate_to_s(r.reservable.state)%></div>
-  	<div class="col-lg-3"><%=r.reservable.vmresourcepool.name%></div>
+  	<div class="col-lg-1"><%=Vm.powerstate_to_s(r.reservable.state)%></div>
+  	<div class="col-lg-2"><%=r.reservable.vmresourcepool.name%></div>
   	<div class="col-lg-3"><%=r.reservable.vmresourcepool.vmhost.name%></div>
+  	
+  	<% if show_user %>
+  		<div class="col-lg-2">
+  			<%=r.event.user.lastname%> <%=r.event.user.firstname%>
+  		</div>
+  	<%end%>
   	
   	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
     	<% if current_user.admin? || current_user?(r.event.user) %>

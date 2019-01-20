@@ -21,7 +21,7 @@
     				<h3 class="panel-title">Оборудование</h3>
   				</div>
   				<div class="panel-body">
-  					<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: @event.reservations.where(reservable_type: "Hardware")} %>
+  					<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: @event.reservations.where(reservable_type: "Hardware"), show_user: false} %>
   									
   				</div>
   			</div>
@@ -33,7 +33,7 @@
     				<h3 class="panel-title">Виртуальные машины</h3>
   				</div>
   				<div class="panel-body">
-  					<%= render partial: "shared/show_reservable_vms", locals: {reserve: @event.reservations.where(reservable_type: "Vm")} %>
+  					<%= render partial: "shared/show_reservable_vms", locals: {reserve: @event.reservations.where(reservable_type: "Vm"), show_user: false} %>
   				</div>
   			</div>
   		<% end %>
