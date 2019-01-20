@@ -1,0 +1,12 @@
+<% hardwares.each do |h| %>
+	<div class="row table">
+		<div class="col-lg-3"><%= link_to h.name, h %></div>
+  	<div class="col-lg-2"><%=h.identificator%></div>
+  	<div class="col-lg-2"><%=h.hardware_type.name%></div>
+  	<div class="col-lg-2"><%=h.location.name%></div>
+  	<div class="col-lg-2"><%=h.place%></div>
+  	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+    
+  	
+	</div>
+<% end %>

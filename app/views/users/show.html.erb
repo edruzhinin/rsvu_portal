@@ -4,7 +4,7 @@
 		<section>
 			<h1>
 				<%= gravatar_for @user %>
-				<%= @user.firstname+' '+@user.lastname %>
+				<%=@user.lastname+' '+@user.firstname%>
 			</h1>
 		</section>
 	
@@ -12,4 +12,42 @@
 
 
 	</aside>
+	
+	<% if @user.events.active.count >0 %>
+		<div class="panel panel-default">
+  		<div class="panel-heading">
+    		<h3 class="panel-title">Мероприятия пользователя</h3>
+  		</div>
+  		<div class="panel-body">
+  			<%= render partial: "shared/show_events", locals: {events: @user.events.active} %>
+  		</div>
+  	</div>
+  <% end %>
+	
+	
+	<%if @user.hardwares.count > 0  %>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">Оборудование пользователя</h3>
+  				</div>
+  				<div class="panel-body">
+  					<%= render partial: "shared/show_hardwares", locals: {hardwares: @user.hardwares} %>
+  									
+  				</div>
+  			</div>
+  		<% end %>
+	<%if @user.vms.count > 0  %>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">ВМ пользователя</h3>
+  				</div>
+  				<div class="panel-body">
+  					<%= render partial: "shared/show_vms", locals: {vms: @user.vms} %>
+  									
+  				</div>
+  			</div>
+   <% end %>
+  
+  
+	
 </div>

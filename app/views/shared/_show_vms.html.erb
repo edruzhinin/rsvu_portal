@@ -1,0 +1,10 @@
+<% vms.each do |v| %>
+	<div class="row table">
+		<div class="col-lg-3"><%= link_to v.name, v %></div>
+  	<div class="col-lg-2"><%=Vm.powerstate_to_s(v.state)%></div>
+  	<div class="col-lg-3"><%=v.vmresourcepool.name%></div>
+  	<div class="col-lg-3"><%=v.vmresourcepool.vmhost.name%></div>
+  	
+  	 	
+	</div>
+<% end %>

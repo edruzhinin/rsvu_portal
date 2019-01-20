@@ -1,17 +1,48 @@
 <% if signed_in? %>
+	<div class="panel panel-default">
+  	<div class="panel-heading">
+    	<h3 class="panel-title">Работы на сегодня</h3>
+  	</div>
+  	<div class="panel-body">
+  		<% if Event.active.count >0 %>
+  			<%= render partial: "shared/show_events", locals: {events: Event.active} %>
+  		<%else%>
+  			Мероприятий не запланировано
+  		<% end %>
+  	</div>
+  </div>
 
-	<div>
-		<ul>
-			<li><%= link_to "Оборудование", hardwares_path %></li>
-			<li><%= link_to "Виртуальные машины", vmhosts_path %></li>
-			<li><%= link_to "Резервирования", events_path %></li>
-		</ul>
-			
-			
-	
-	</div>
-	
-		
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title">Оборудование в работе</h3>
+  </div>
+	<div class="panel-body">
+		<% Event.active.each do |event| %>
+			<% if !event.reservations.find_by(reservable_type: "Hardware").nil? %>  
+  			<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: event.reservations.where(reservable_type: "Hardware")} %>
+  		<% end %>
+  	<% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title">Виртуальные машины в работе</h3>
+  </div>
+	<div class="panel-body">
+		<% Event.active.each do |event| %>
+			<% if !event.reservations.find_by(reservable_type: "Vm").nil? %>  
+  			<%= render partial: "shared/show_reservable_vms", locals: {reserve: event.reservations.where(reservable_type: "Vm")} %>
+  		<% end %>
+  	<% end %>
+  </div>
+</div> 
+ 
+ 
+ 
+  
+  
 <% else %>
 
 	<div class="center hero-unit">
