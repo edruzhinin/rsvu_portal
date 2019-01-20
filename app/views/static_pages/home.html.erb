@@ -20,7 +20,7 @@
 	<div class="panel-body">
 		<% Event.active.each do |event| %>
 			<% if !event.reservations.find_by(reservable_type: "Hardware").nil? %>  
-  			<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: event.reservations.where(reservable_type: "Hardware")} %>
+  			<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: event.reservations.where(reservable_type: "Hardware"), show_user: true} %>
   		<% end %>
   	<% end %>
   </div>
@@ -33,7 +33,7 @@
 	<div class="panel-body">
 		<% Event.active.each do |event| %>
 			<% if !event.reservations.find_by(reservable_type: "Vm").nil? %>  
-  			<%= render partial: "shared/show_reservable_vms", locals: {reserve: event.reservations.where(reservable_type: "Vm")} %>
+  			<%= render partial: "shared/show_reservable_vms", locals: {reserve: event.reservations.where(reservable_type: "Vm"), show_user: true} %>
   		<% end %>
   	<% end %>
   </div>

@@ -1,7 +1,7 @@
 <% provide(:title, 'Запланированные работы') %>
 <h1>Мероприятия</h1>
 
-<%= render partial: "shared/show_events", locals: {events: @events} %>
+<%= render partial: "shared/show_events", locals: {events: @events.active} %>
  
 
  <div class="btn-group pull-right">
