@@ -10,7 +10,8 @@ class ReservationsController < ApplicationController
     @reservation = @context.reservations.new(reservation_params)
 		
     if @reservation.save
-      redirect_to context_url(context), notice: "Резервирование добавлено"
+  		flash[:success]= "Резервирование добавлено"
+  		redirect_to context_url(context)
     else
      render 'new'
     end
@@ -25,8 +26,8 @@ class ReservationsController < ApplicationController
 			return_path = hardware_path(Hardware.find(@reservation.reservable_id))
 		end
 		@reservation.destroy
-    		
-		redirect_to return_path, notice: "Резервирование удалено"
+    flash[:danger]=  "Резервирование удалено"		
+		redirect_to return_path
 		
 	end
 	

@@ -1,6 +1,6 @@
 <% provide(:title, 'Резервы') %>
 <h1>Заказ оборудования</h1>
-
+<%= render 'shared/error_messages', obj: @reservation%>		
 <div class="container">
 
 
@@ -11,7 +11,7 @@
   	<div class="panel-body">
   		<%= form_for [@context, @reservation] do |f| %>
   			<div class="form-group">
-  			 	<%=render 'shared/reservation_error' %>		
+  			 	
   				<%=f.label :event_id,"Выбрать из созданных" %>
 		  	  
 		  	  		  	
