@@ -7,23 +7,30 @@
 	<div class="panel panel-info">
  		<div class="panel-heading">Мероприятие</div>
   	<div class="panel-body">
-  		<%= form_for( @event ) do |f| %>
-  			<div class="form-group">
-  			 			
-  				<%= f.text_field :name, :placeholder => "Проводимые работы" , class: "form-control"%>
-   			
-	     		<div class="raw">
-      		
-      			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-left">с </div>
-      			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-11"><%= f.date_field :from_time, class: "form-control"%></div>
+  		
+  			<div class="col-xs-12">
+  				<%= form_for( @event, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+  					<div class="form-group">
+  						<%= f.text_field :name, :placeholder => "Проводимые работы" , class: "form-control"%>
+   					</div>
+   					<div class="form-group form-center">
+	     				<div class="col-sm-6">
+      					
+      					<label class="control-label">Начало: </label>
+      					<%= f.date_field :from_time, class: "form-control"%>
+      					</div>
+      				<div class="col-sm-6">
+      					<label class="control-label">Окончание: </label>
+      					<%= f.date_field :to_time, class: "form-control"  %>
+      				</div>
+      			</div>
+      			<div class="form-group">
+      				<div><%= f.submit "Сохранить", class: "btn btn-primary" %></div>
+      			</div>
       	
-      			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-left"> по </div>
-      			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-11"><%= f.date_field :to_time, class: "form-control"  %></div>
-      		</div>
-      		<div><%= f.submit "Создать", class: "btn btn-primary vert-align" %></div>
-      	</div>
-      	
-			<% end %>
+					<% end %>
+				</div>
+			
 		</div>
   </div>
 </div>
