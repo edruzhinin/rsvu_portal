@@ -1,17 +1,4 @@
 <% provide(:title, 'Новое оборудование') %>
-<h1>Sign up</h1>
+<h1>Новое оборудование</h1>
 
-<div classs="row">
-  <div>
-    <%= form_for(@hardware) do |f| %>
-			
-      
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-      
-      
-
-      <%= f.submit "Создать", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
-</div>
+<%=render 'form'%>

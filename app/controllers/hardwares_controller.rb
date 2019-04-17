@@ -8,7 +8,7 @@ class HardwaresController < ApplicationController
   	@hardware = Hardware.new(hardware_params)
   	
   	if @hardware.save
-			redirect_to hardwares
+			redirect_to @hardware
 		else
 		
 			render 'new'
@@ -42,7 +42,7 @@ class HardwaresController < ApplicationController
   private
   
   	def hardware_params
-			params.require(:hardware).permit(:name,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3, :height, :place)		
+			params.require(:hardware).permit(:name,:hardware_type_id,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:location_id,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3, :height, :place)		
 		end
 		
 		def admin_user

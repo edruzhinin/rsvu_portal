@@ -6,6 +6,8 @@ class Hardware < ActiveRecord::Base
 	belongs_to :hardware_type
 	belongs_to :location
 	belongs_to :user
+	accepts_nested_attributes_for :location
+	accepts_nested_attributes_for :hardware_type
 	
 	#scope :order_location, order("location_id desc")
 	

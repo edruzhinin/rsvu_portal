@@ -44,4 +44,10 @@
 		</div>
   </div>
 <%end%>
+<div class="btn-group pull-right">
+	<% if (current_user.admin?) %>
+  	<%=link_to "Добавить", new_hardware_path(@hardware), class: "btn btn-default"   %>
+  <% end %>
+
+</div>
 		
