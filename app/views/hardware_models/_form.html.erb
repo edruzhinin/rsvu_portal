@@ -1,0 +1,49 @@
+<div class="row">
+	<%=form_for([@hardware_type,@hardware_model]) do |f| %>
+		<div class="col-md-6">
+				
+			<%=f.label :name, "Модель" %>
+			<%=f.text_field :name, class: 'form-control' %>
+			
+			<%=f.label :modelNo, "ID модели" %>
+			<%=f.text_field :modelNo, class: 'form-control' %>
+			
+			<%=f.label :comment,"Коментарий" %>
+			<%=f.text_area :comment,  size: "60x12" %>
+			
+			<% if @hardware_model.hardware_type.sparam1%>
+    		<%=f.label :sparam1, @hardware_model.hardware_type.sparam1 %>
+  			<%=f.text_field :sparam1, class: 'form-control' %>
+  		<%end%>
+  			
+  		<% if @hardware_model.hardware_type.sparam2%>
+    		<%=f.label :sparam2, @hardware_model.hardware_type.sparam2 %>
+  			<%=f.text_field :sparam2, class: 'form-control' %>
+  		<%end%>	
+  			
+  		<% if @hardware_model.hardware_type.sparam3 %>
+    		<%=f.label :sparam3, @hardware_model.hardware_type.sparam3 %>
+  			<%=f.text_field :sparam3, class: 'form-control' %>
+  		<%end%>
+  			
+  		<% if @hardware_model.hardware_type.iparam1 %>
+    		<%=f.label :iparam1, @hardware_model.hardware_type.iparam1 %>
+  			<%=f.text_field :iparam1, class: 'form-control' %>
+  		<%end%>
+  			
+  		<% if @hardware_model.hardware_type.iparam2 %>
+    			<%=f.label :iparam2, @hardware_model.hardware_type.iparam2 %>
+  				<%=f.text_field :iparam2, class: 'form-control' %>
+  			<%end%>	
+  			
+  			<% if @hardware_model.hardware_type.iparam3 %>
+    			<%=f.label :iparam3, @hardware_model.hardware_type.iparam3 %>
+  				<%=f.text_field :iparam3, class: 'form-control' %>
+  			<%end%>
+  		
+		</div>
+		<div class="col-md-12">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>

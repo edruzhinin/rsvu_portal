@@ -1,0 +1,35 @@
+<div class="row">
+	<%=form_for(@hardware_type) do |f| %>
+		<div class="col-md-6">
+				
+			<%=f.label :name, "Тип" %>
+			<%=f.text_field :name, class: 'form-control' %>
+						
+			<%=f.label :comment,"Коментарий" %>
+			<%=f.text_area :comment,  size: "60x12" %>
+			
+			<%=f.label :sparam1, "Текстовый параметр 1" %>
+			<%=f.text_field :sparam1, class: 'form-control' %>
+			
+			<%=f.label :sparam2, "Текстовый параметр 2" %>
+			<%=f.text_field :sparam2, class: 'form-control' %>
+			
+			<%=f.label :sparam3, "Текстовый параметр 3" %>
+			<%=f.text_field :sparam3, class: 'form-control' %>
+			
+			<%=f.label :iparam1, "Числовой параметр 1" %>
+			<%=f.text_field :iparam1, class: 'form-control' %>
+			
+			<%=f.label :iparam2, "Числовой параметр 2" %>
+			<%=f.text_field :iparam2, class: 'form-control' %>
+			
+			<%=f.label :iparam3, "Числовой параметр 3" %>
+			<%=f.text_field :iparam3, class: 'form-control' %>
+			
+		  		
+		</div>
+		<div class="col-md-12">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>

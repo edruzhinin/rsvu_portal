@@ -1,0 +1,59 @@
+<% provide(:title, @hardware_model.name) %>
+<div class="row">
+	
+		<section>
+			<h1>
+				<%= @hardware_model.name %>
+			</h1>
+			
+			
+			
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Параметры модели</h3>
+    			    			
+    			
+  			</div>
+  			<div class="panel-body">
+  				<p><b>Имя:</b> <%= @hardware_model.name %></p>
+  				<p><b>ID модели:</b> <%= @hardware_model.modelNo %></p>
+  				<b>Комментарий:</b>
+  				<pre><%=@hardware_model.comment%></pre>
+  				<br>
+  				<% if @hardware_model.hardware_type.sparam1 %>
+  					<p><b><%= @hardware_model.hardware_type.sparam1 %>: </b><%= @hardware_model.sparam1 %></p>
+    			<% end %>
+    			<% if @hardware_model.hardware_type.sparam2 %>
+    				<p><b><%= @hardware_model.hardware_type.sparam2 %>: </b><%= @hardware_model.sparam2 %></p>
+    			<% end %>
+    			<% if @hardware_model.hardware_type.sparam3 %>
+    				<p><b><%= @hardware_model.hardware_type.sparam3 %>: </b><%= @hardware_model.sparam3 %></p>
+    			<% end %>
+    			<% if @hardware_model.hardware_type.iparam1 %>
+    				<p><b><%= @hardware_model.hardware_type.iparam1 %>: </b><%= @hardware_model.iparam1 %></p>
+    			<% end %>
+    			<% if @hardware_model.hardware_type.iparam2 %>
+    				<p><b><%= @hardware_model.hardware_type.iparam2 %>: </b><%= @hardware_model.iparam2 %></p>
+    			<% end %>
+    			<% if @hardware_model.hardware_type.iparam3 %>
+    				<p><b><%= @hardware_model.hardware_type.iparam3 %>: </b><%= @hardware_model.iparam3 %></p>
+  				<% end %>
+				</div>
+			</div>
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Оборудование</h3>
+    		</div>
+  			<div class="panel-body">
+  				
+				</div>
+			</div>
+			<div class="btn-group pull-right">
+				<% if (current_user.admin?) %>
+  				
+  				<%=link_to "Редактировать", edit_hardware_type_hardware_model_path(@hardware_type,@hardware_model), class: "btn btn-default"   %>
+  			<% end %>
+  
+</div>
+		</section>
+	</div>

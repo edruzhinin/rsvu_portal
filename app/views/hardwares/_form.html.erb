@@ -24,7 +24,7 @@
 			<%=f.text_field :identificator, class: 'form-control' %>
 			<%=f.label :identificator, "Стойка" %>
 			<%=f.select(:location_id, Location.all().pluck('name','id')) %>
-			<%=f.label :place, "Позиция" %>
+			<%=f.label :place, "Позиция  " %>
 			<%= f.number_field(:place, in: 1..42, step: 1) %>
 			<%=f.label :height, "Высота (U)" %>
 			<%= f.number_field(:height, in: 1..42, step: 1) %>

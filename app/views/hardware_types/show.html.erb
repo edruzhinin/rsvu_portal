@@ -1,0 +1,72 @@
+<h1><%=@hardware_type.name%></h1>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title">Тип оборудования</h3>
+  </div>
+  <div class="panel-body">
+  	<p><b>Тип:</b> <%= @hardware_type.name %></p>
+  	<p><b>Характерные параметры:</b></p>
+  	<ul>
+  		<% if @hardware_type.sparam1 %>
+  			<li><%= @hardware_type.sparam1 %></li>
+  		<% end %>
+  		<% if @hardware_type.sparam2 %>
+  			<li><%= @hardware_type.sparam2 %></li>
+  		<% end %>
+  		<% if @hardware_type.sparam3 %>
+  			<li><%= @hardware_type.sparam3 %></li>
+  		<% end %>
+  		<% if @hardware_type.iparam1 %>
+  			<li><%= @hardware_type.iparam1 %></li>
+  		<% end %>
+  		<% if @hardware_type.iparam2 %>
+  			<li><%= @hardware_type.iparam2 %></li>
+  		<% end %>
+  		<% if @hardware_type.iparam3 %>
+  			<li><%= @hardware_type.iparam3 %></li>
+  		<% end %>
+  	</ul>
+  	
+  	<p><b>Комментарий:</b></p>
+  	<pre><%=@hardware_type.comment%></pre>
+  	
+  	
+  </div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title">Модели оборудования</h3>
+  </div>
+  <div class="panel-body">
+		<table class="table table-striped">
+  		<thead>
+     		<tr>
+        	<th>Модель</th>
+        	<th>ID модели</th>
+        
+        
+      	</tr>
+  		</thead>
+  		<tbody>
+      	<% @hardware_type.hardware_models.each do |hmodel| %>
+        	<tr>
+          	<td><%= link_to hmodel.name, hardware_type_hardware_model_path(@hardware_type,hmodel) %></td>
+          	<td><%= hmodel.modelNo %> </td>
+        	</tr>
+      	<% end %>
+  		</tbody>
+		<table>
+	</div>
+</div>		
+<div class="btn-group pull-right">
+	<% if (current_user.admin?) %>
+  	<%=link_to "Добавить", new_hardware_type_hardware_model_path(@hardware_type), class: "btn btn-default"   %>
+  	<%=link_to "Редактировать", edit_hardware_type_path(@hardware_type), class: "btn btn-default"   %>
+  <% end %>
+  
+</div>
+
+
+

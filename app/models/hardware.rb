@@ -4,10 +4,12 @@ class Hardware < ActiveRecord::Base
 	has_many :softwares
 	has_many :user_messages, as: :commentable
 	belongs_to :hardware_type
+	belongs_to :hardware_model
 	belongs_to :location
 	belongs_to :user
 	accepts_nested_attributes_for :location
 	accepts_nested_attributes_for :hardware_type
+	accepts_nested_attributes_for :hardware_model
 	
 	#scope :order_location, order("location_id desc")
 	

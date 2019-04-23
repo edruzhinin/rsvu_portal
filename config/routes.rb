@@ -1,6 +1,22 @@
 RsvuPortal::Application.routes.draw do
   
 
+  get 'hardware_models/index'
+
+  get 'hardware_models/show'
+
+  get 'hardware_models/create'
+
+  get 'hardware_models/update'
+
+  get 'hardware_types/index'
+
+  get 'hardware_types/show'
+
+  get 'hardware_types/create'
+
+  get 'hardware_types/update'
+
   get "hardware_reservations/new"
   get "hardware_reservations/index"
   get "hardware_reservations/create"
@@ -12,6 +28,12 @@ RsvuPortal::Application.routes.draw do
   resources :events
 	resources :reservations, only: [:destroy]
 	resources :user_messages, only: [:destroy, :edit, :update]
+  
+  resources :hardware_types do
+  	resources :hardware_models do
+  		resources :hardwares
+  	end
+  end
   
   resources :vmhosts, only: [:index, :show]
   

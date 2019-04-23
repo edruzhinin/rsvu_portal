@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190402185753) do
+ActiveRecord::Schema.define(version: 20190423201410) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,23 @@ ActiveRecord::Schema.define(version: 20190402185753) do
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id"
+
+  create_table "hardware_models", force: :cascade do |t|
+    t.string   "name"
+    t.string   "modelNo"
+    t.text     "comment"
+    t.string   "sparam1"
+    t.string   "sparam2"
+    t.string   "sparam3"
+    t.integer  "iparam1"
+    t.integer  "iparam2"
+    t.integer  "iparam3"
+    t.integer  "hardware_type_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "hardware_models", ["hardware_type_id"], name: "index_hardware_models_on_hardware_type_id"
 
   create_table "hardware_types", force: :cascade do |t|
     t.string   "name"
@@ -99,6 +116,8 @@ ActiveRecord::Schema.define(version: 20190402185753) do
     t.string   "description"
     t.integer  "height"
     t.integer  "user_id"
+    t.integer  "hardware_model_id"
+    t.boolean  "canBook"
   end
 
   create_table "locations", force: :cascade do |t|
