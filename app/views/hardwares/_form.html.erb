@@ -67,7 +67,7 @@
   			<%end%>	
   			
   			<% if !@hardware.hardware_type.sparam3.nil? %>
-    			<%=f.label :sparam3, @hardware.hardware_type.sparam31 %>
+    			<%=f.label :sparam3, @hardware.hardware_type.sparam3 %>
   				<%=f.text_field :sparam3, class: 'form-control' %>
   			<%end%>
   			
@@ -82,7 +82,7 @@
   			<%end%>	
   			
   			<% if !@hardware.hardware_type.iparam3.nil? %>
-    			<%=f.label :iparam3, @hardware.hardware_type.iparam31 %>
+    			<%=f.label :iparam3, @hardware.hardware_type.iparam3 %>
   				<%=f.text_field :iparam3, class: 'form-control' %>
   			<%end%>
   		<%end%>
