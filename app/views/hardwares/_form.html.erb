@@ -4,10 +4,17 @@
 			<%=f.label :identificator, "Тип" %>
 			<%=f.select(:hardware_type_id, HardwareType.all().pluck('name','id')) %>
 			
+			<%=f.label :identificator, "Модель" %>
+			<%= f.collection_select(:hardware_model_id, HardwareModel.all, :id, :name) %>
+			
 			<%=f.label :name, "Название" %>
 			<%=f.text_field :name, class: 'form-control' %>
 			<%=f.label :description, "Описание" %>
 			<%=f.text_field :description, class: 'form-control' %>
+			
+			<%= f.label(:canBook, "Доступно для резерва") %>
+			<%= f.check_box(:canBook) %>
+			
 			
 			<%=f.label :status,"Статус" %>
 		  <%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]])%>

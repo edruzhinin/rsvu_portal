@@ -45,7 +45,7 @@
      		<tr>
         	<th>Модель</th>
         	<th>ID модели</th>
-        
+        	<th>Количество</th>
         
       	</tr>
   		</thead>
@@ -54,6 +54,7 @@
         	<tr>
           	<td><%= link_to hmodel.name, hardware_type_hardware_model_path(@hardware_type,hmodel) %></td>
           	<td><%= hmodel.modelNo %> </td>
+          	<td><%= hmodel.hardwares.count %> </td>
         	</tr>
       	<% end %>
   		</tbody>

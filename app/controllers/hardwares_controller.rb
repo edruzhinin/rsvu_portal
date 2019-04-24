@@ -2,6 +2,20 @@ class HardwaresController < ApplicationController
 	before_action :admin_user, only: [:edit, :update, :destroy]
   def new
   	@hardware = Hardware.new
+  	
+  	if(params.has_key?(:hardware_type_id)) 
+  		@hardware_type = HardwareType.find(params[:hardware_type_id])
+  		@hardware.hardware_type = @hardware_type
+  	end
+  		
+  	if(params.has_key?(:hardware_model_id))
+  		@hardware_model = HardwareModel.find(params[:hardware_model_id])
+  		@hardware.hardware_model = @hardware_model
+  	end
+  	
+  	
+  	
+  	
   end
   
   def create
@@ -42,7 +56,7 @@ class HardwaresController < ApplicationController
   private
   
   	def hardware_params
-			params.require(:hardware).permit(:name,:hardware_type_id,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:location_id,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3, :height, :place)		
+			params.require(:hardware).permit(:name,:canBook,:hardware_type_id,:hardware_model_id,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:location_id,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3, :height, :place)		
 		end
 		
 		def admin_user
