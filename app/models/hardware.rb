@@ -18,7 +18,12 @@ class Hardware < ActiveRecord::Base
 	def reserved?
 	end
 	def get_hardware_name
-		output = name
+		if (hardware_model)
+			output = hardware_model.name
+		else
+			output = name
+		end
+		
 		if (identificator)
 			output = output+' '+identificator
 		end

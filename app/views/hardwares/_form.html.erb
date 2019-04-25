@@ -8,7 +8,7 @@
 			<%= f.collection_select(:hardware_model_id, HardwareModel.all, :id, :name) %>
 			
 			<%=f.label :identificator, "Родительское устройство" %>
-			<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_name) %>
+			<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_name, include_blank: true) %>
 			<%=f.label :name, "Название" %>
 			<%=f.text_field :name, class: 'form-control' %>
 			<%=f.label :description, "Описание" %>

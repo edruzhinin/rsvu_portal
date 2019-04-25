@@ -1,9 +1,13 @@
 <% hardwares.each do |h| %>
 	<div class="row table">
-		<div class="col-lg-3"><%= link_to h.name, h %></div>
+		<div class="col-lg-3"><%= link_to h.hardware_model.name, h %></div>
   	<div class="col-lg-2"><%=h.identificator%></div>
-  	<div class="col-lg-2"><%=h.hardware_type.name%></div>
-  	<div class="col-lg-2"><%=h.location.name%></div>
+  	<div class="col-lg-2"><%=h.serial_number%></div>
+  	<% if h.parent_hardware %>
+  		<div class="col-lg-2"><%=link_to h.parent_hardware.get_hardware_name, h.parent_hardware%></div>
+  	<% else %>
+  		<div class="col-lg-2"><%=h.location.name%></div>
+  	<% end %>
   	<div class="col-lg-2"><%=h.place%></div>
   
     
