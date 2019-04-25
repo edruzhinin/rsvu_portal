@@ -17,7 +17,7 @@ class Hardware < ActiveRecord::Base
 	
 	def reserved?
 	end
-	def get_hardware_name
+	def get_hardware_full_name
 		if (hardware_model)
 			output = hardware_model.name
 		else
@@ -31,6 +31,23 @@ class Hardware < ActiveRecord::Base
 			output = output+' '+serial_number
 		end
 	end
+	
+	def get_hardware_name
+		if (hardware_model)
+			output = hardware_model.name
+		else
+			output = name
+		end
+		
+	end
+	def get_hardware_location
+		if parent_hardware
+			parent_hardware.get_hardware_full_name
+		else
+			location.name
+		end
+	end
+	
 	def get_status
 		if status.nil?
 			"Не определен"
