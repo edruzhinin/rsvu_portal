@@ -13,7 +13,7 @@ class HardwareTypesController < ApplicationController
 	end
 
   def create
-  	@hardware_type = HardwareType.build(hardware_model_params)
+  	@hardware_type = HardwareType.new(hardware_type_params)
   	
   	if @hardware_type.save
 			redirect_to @hardware_type

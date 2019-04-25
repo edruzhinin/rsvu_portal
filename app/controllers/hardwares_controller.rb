@@ -52,11 +52,12 @@ class HardwaresController < ApplicationController
 	def index
 		@hardwares = Hardware.all
 	end
-
+	
+	
   private
   
   	def hardware_params
-			params.require(:hardware).permit(:name,:canBook,:hardware_type_id,:hardware_model_id,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:location_id,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3, :height, :place)		
+			params.require(:hardware).permit(:name,:canBook,:parent_id,:hardware_type_id,:hardware_model_id,:status,:description,:model, :model_number, :serial_number,:inv_number,:identificator,:location_id,:ip_adr_adm,:ip_adr,:el_power,:comment, :login, :password, :sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3, :height, :place)		
 		end
 		
 		def admin_user
