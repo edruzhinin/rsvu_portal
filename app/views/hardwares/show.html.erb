@@ -1,6 +1,6 @@
  
     			<% if (@hardware.parent_hardware) %>
-  						<p><b>Родительское утройство</b> <%=link_to @hardware.parent_hardware.name, @hardware.parent_hardware%></p>
+  						<p><b>Родительское утройство</b> <%=link_to @hardware.parent_hardware.get_hardware_full_name, @hardware.parent_hardware%></p>
   						<br>
   				<% end %>
     			<ul class="nav nav-tabs">
@@ -88,7 +88,7 @@
   					<div class="tab-pane" id="hardware">
   						<% @hardware.child_hardware.each do |h| %>
   							<div class="row">
-  								<div class="col-lg-3"><b><%=h.hardware_type.name%></b> <%=h.hardware_model.name%> <%=h.name%></div>
+  								<div class="col-lg-5"><b><%=h.hardware_type.name%></b> <%=link_to h.get_hardware_full_name,h%></div>
   							</div>
   						<% end %>
   					</div>

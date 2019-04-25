@@ -38,11 +38,23 @@ class Hardware < ActiveRecord::Base
 		else
 			output = name
 		end
-		
 	end
+	
+	def get_hardware_identificator
+		if identificator
+			identificator
+		else
+			if inv_number
+				get_hardware_name+' Inv: '+inv_number
+			else
+				get_hardware_name+'SN: '+serial_number
+			end	
+		end
+	end
+	
 	def get_hardware_location
 		if parent_hardware
-			parent_hardware.get_hardware_full_name
+			parent_hardware.get_hardware_identificator
 		else
 			location.name
 		end

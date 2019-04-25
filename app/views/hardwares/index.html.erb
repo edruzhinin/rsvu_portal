@@ -10,7 +10,11 @@
     			<div class="col-lg-3"><%= link_to hardware.get_hardware_name, hardware %></div>
     			<div class="col-lg-2"><%=hardware.identificator%></div>
     			<div class="col-lg-2"><%=hardware.hardware_type.name%></div>
-    			<div class="col-lg-2"><%=hardware.get_hardware_location%></div>
+    			<% if hardware.parent_hardware %>
+    				<div class="col-lg-2"><%=link_to hardware.get_hardware_location, hardware.parent_hardware%></div>
+    			<% else %>
+    				<div class="col-lg-2"><%=hardware.get_hardware_location%></div>
+    			<% end %>	
   				<div class="col-lg-2">
 						
 						<% if hardware.status.nil? || hardware.status < 0 %> <!-- оборудование сломано -->
