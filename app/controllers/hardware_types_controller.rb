@@ -1,6 +1,6 @@
 class HardwareTypesController < ApplicationController
   def index
-  	@hardware_types = HardwareType.all
+  	@hardware_types = HardwareType.all.order(:name)
   end
 
 	def edit

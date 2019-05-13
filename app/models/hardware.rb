@@ -25,10 +25,11 @@ class Hardware < ActiveRecord::Base
 		end
 		
 		if (identificator)
-			output = output+' '+identificator
-		end
-		if (serial_number)
-			output = output+' '+serial_number
+			output = output+' ['+identificator+']'
+		else
+			if (serial_number)
+			output = output+' sn:'+serial_number
+			end
 		end
 	end
 	
