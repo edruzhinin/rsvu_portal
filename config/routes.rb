@@ -22,6 +22,8 @@ RsvuPortal::Application.routes.draw do
   get "hardware_reservations/create"
   get "hardwares/new"
   get "hardwares/index"
+  get "search_hardwares", to: "hardwares#search"
+  
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :hardwares

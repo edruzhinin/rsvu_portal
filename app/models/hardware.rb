@@ -15,7 +15,7 @@ class Hardware < ActiveRecord::Base
 	
 	#scope :order_location, order("location_id desc")
 	
-	def reserved?
+		def reserved?
 	end
 	def get_hardware_full_name
 		if (hardware_model)
@@ -42,13 +42,13 @@ class Hardware < ActiveRecord::Base
 	end
 	
 	def get_hardware_identificator
-		if identificator
+		if identificator and identificator!=''
 			identificator
 		else
-			if inv_number
-				get_hardware_name+' Inv: '+inv_number
+			if inv_number and inv_number!=''
+				'№: '+inv_number
 			else
-				get_hardware_name+'SN: '+serial_number
+				'sn: '+serial_number
 			end	
 		end
 	end
@@ -76,5 +76,9 @@ class Hardware < ActiveRecord::Base
 			end
 		end
 			
+	end
+	
+	def self.new_from_lookup(search_string)
+		where("identificator like ? or serial_number like ?", [search_string], [search_string])
 	end
 end

@@ -1,0 +1,17 @@
+<div class="results-block">
+	<%= render 'layouts/messages' %>
+
+</div>
+
+<% if @hardwares %>
+	<div class="well results-block">
+		<ul>
+			<% @hardwares.each do |h| %>
+				<li>
+					<%= link_to h.get_hardware_full_name,h %> 
+				</li>
+			<% end %>
+		</ul>
+	</div>
+
+<% end %>

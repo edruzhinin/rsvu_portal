@@ -52,7 +52,19 @@ class HardwaresController < ApplicationController
 	def index
 		@hardwares = Hardware.all
 	end
-	
+	def search
+		if params[:selection].blank?
+			flash.now[:danger]="Необходимо ввести критерий поиска"
+		else
+			@hardwares=Hardware.new_from_lookup(params[:selection])
+			
+			flash.now[:danger]= "Ничего не найдено" unless @hardwares.size > 0
+		
+		end	
+		render partial: 'hardwares/result'
+				
+		
+	end
 	
   private
   

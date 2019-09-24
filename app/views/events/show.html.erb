@@ -15,17 +15,36 @@
   		</div>
   		
   		
-  		<%if !@event.reservations.find_by(reservable_type: "Hardware").nil? %>
-  			<div class="panel panel-default">
-  				<div class="panel-heading">
-    				<h3 class="panel-title">Оборудование</h3>
-  				</div>
-  				<div class="panel-body">
-  					<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: @event.reservations.where(reservable_type: "Hardware"), show_user: false} %>
-  									
-  				</div>
+  		
+  		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Оборудование</h3>
   			</div>
-  		<% end %>
+  			<div class="panel-body">
+ 					<%if !@event.reservations.find_by(reservable_type: "Hardware").nil? %>
+ 						<%= render partial: "shared/show_reservable_hardwares", locals: {reserve: @event.reservations.where(reservable_type: "Hardware"), show_user: false} %>
+  				<% end %>
+  				<div id="hardware-lookup">
+  				  <%= form_tag search_hardwares_path,remote: true, method: :get, id: "lookup-form" do %>
+    					<div class="form-group row no-padding text-center col-md-12">
+    						<div class="col-md-10">
+    							<%= text_field_tag :selection, params[:selection], placeholder: "Оборудование", autofocus: true,
+    									class: "form-control search-box input-lg" %>
+    						</div>
+    						<div class="col-md-2">
+    							<%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+    								<i class="fa fa-search"></i> Найти
+    							<% end %>
+    						</div>
+    					</div>
+  				  <% end %>
+  				</div>
+  				<div id='results'>
+  					<%= render 'hardwares/result' %>
+  				</div>				
+  			</div>
+  		</div>
+  		
   		
   		<%if !@event.reservations.find_by(reservable_type: "Vm").nil? %>
   			<div class="panel panel-default">
@@ -47,6 +66,8 @@
   			</div>
   		</div>
   		
+  		
+			
 			<div class="btn-group pull-right">
 				<% if (current_user.admin? || @event.user==current_user) %>
 					<%=link_to "Редактировать",  edit_event_path(@event), class: "btn btn-default"  %>

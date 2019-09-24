@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190424093445) do
+ActiveRecord::Schema.define(version: 20190514192714) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20190424093445) do
     t.boolean  "canBook"
     t.integer  "parent_id"
     t.integer  "group_id"
+    t.integer  "position"
   end
 
   create_table "locations", force: :cascade do |t|

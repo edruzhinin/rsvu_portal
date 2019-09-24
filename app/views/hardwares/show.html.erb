@@ -86,11 +86,28 @@
   						</div>
   					</div>
   					<div class="tab-pane" id="hardware">
-  						<% @hardware.child_hardware.each do |h| %>
-  							<div class="row">
-  								<div class="col-lg-5"><b><%=h.hardware_type.name%></b> <%=link_to h.get_hardware_full_name,h%></div>
-  							</div>
-  						<% end %>
+  						<table class="table table-striped">	
+  						 	<thead>
+     							<tr>
+        						<th>Позиция</th>
+        						<th>Оборудование</th>
+        						<th>ID</th>
+        						<th>Тип</th>
+        					</tr>
+  							</thead>
+  							<tbody>
+      						<% @hardware.child_hardware.order(position: :desc).each do |h| %>
+  									<tr>
+          						<td><%=h.position%></td>
+          						<td><%=link_to h.get_hardware_name,h%></td>
+          						<td><%=h.get_hardware_identificator%></td>
+          						<td><%=h.hardware_type.name%></td>
+        						</tr>
+      						<% end %>
+  							</tbody>
+							</table>
+  						
+							
   					</div>
   					<div class="tab-pane" id="software">
   						<% @hardware.softwares.each do |s| %>
