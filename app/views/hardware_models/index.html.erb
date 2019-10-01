@@ -1,2 +1,30 @@
-<h1>HardwareModels#index</h1>
-<p>Find me in app/views/hardware_models/index.html.erb</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Модели оборудования</h3>
+  </div>
+  <div class="panel-body">
+  	<table class="table table-striped">
+			<thead>
+				<tr>
+       		<th>Модель</th>
+       		<th>ID модели</th>
+       		<th>Тип</th>
+       		<th>Количество</th>
+    		</tr>
+			</thead>
+			<tbody>
+				<% @hardware_models.order(:hardware_type_id, :name).each do |hmodel| %>
+ 	   			<tr>
+       			<td><%= link_to hmodel.name, hmodel %></td>
+      			<td><%= hmodel.modelNo %> </td>
+       			<td><%= hmodel.hardware_type.name %> </td>
+       			<td><%= hmodel.hardwares.count %> </td>
+    			</tr>
+				<% end %>
+			</tbody>
+		<table>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,76 @@
+<% provide(:title, @group.name) %>
+<div class="row">
+	
+		<section>
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title"><b><%=@group.short_name %></b>:   <%=@group.name%></h3>
+  			</div>
+  			<div class="panel-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-5">
+                <%if !@group.global %>
+                  <b>Пользовательская</b>
+                <% end %>
+              </div>
+            
+              <div class="col-lg-5"> 
+                <%if @group.user %>
+                  <b>Владелец: </b> <%=@group.user.get_fullname%>
+                <%end%>
+                </div>
+            <div class="col-lg-12">  
+              <pre><%= @group.description %></pre>
+            </div>
+         	</div>
+         </div>
+  			</div>
+  		</div>
+  		
+  		
+  		<%if !@group.group_relations.find_by(groupable_type: "Hardware").nil? %>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">Оборудование</h3>
+  				</div>
+  				<div class="panel-body">
+ 					
+ 						<% @group.group_relations.where(groupable_type: "Hardware").each do |h| %>
+              <%= render partial: "shared/show_hardware", locals: {hardware: h.groupable} %>
+            <% end %>
+  				
+  				</div>
+  			</div>
+  		<%end%>
+  		
+  		<%if !@group.group_relations.find_by(groupable_type: "Vm").nil? %>
+  			<div class="panel panel-default">
+  				<div class="panel-heading">
+    				<h3 class="panel-title">Виртуальные машины</h3>
+  				</div>
+  				<div class="panel-body">
+  					<%= render partial: "shared/show_reservable_vms", locals: {reserve: @group.group_relations.where(groupable_type: "Vm"), show_user: false} %>
+  				</div>
+  			</div>
+  		<% end %>
+  		
+  		</section>	
+  		
+  		
+			
+			<div class="btn-group pull-right">
+				<% if (current_user.admin? || @group.user==current_user ) %>
+					<%=link_to "Редактировать",  edit_group_path(@group), class: "btn btn-default"  %>
+					<%= link_to "Удалить", group_path(@group), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-default" %>
+					
+				<% end %>
+				
+				
+			</div>
+			
+	
+	
+
+
+

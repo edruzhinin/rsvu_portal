@@ -52,7 +52,7 @@
   		<tbody>
       	<% @hardware_type.hardware_models.order(:name).each do |hmodel| %>
         	<tr>
-          	<td><%= link_to hmodel.name, hardware_type_hardware_model_path(@hardware_type,hmodel) %></td>
+          	<td><%= link_to hmodel.name, hmodel %></td>
           	<td><%= hmodel.modelNo %> </td>
           	<td><%= hmodel.hardwares.count %> </td>
         	</tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190514192714) do
+ActiveRecord::Schema.define(version: 20190927092711) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,27 @@ ActiveRecord::Schema.define(version: 20190514192714) do
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id"
+
+  create_table "group_relations", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "groupable_id"
+    t.string   "groupable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "group_relations", ["group_id"], name: "index_group_relations_on_group_id"
+  add_index "group_relations", ["groupable_type", "groupable_id"], name: "index_group_relations_on_groupable_type_and_groupable_id"
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.boolean  "global"
+    t.string   "short_name"
+  end
 
   create_table "hardware_models", force: :cascade do |t|
     t.string   "name"

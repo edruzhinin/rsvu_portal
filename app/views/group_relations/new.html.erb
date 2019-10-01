@@ -1,0 +1,39 @@
+<% provide(:title, 'Группы') %>
+<h1>Добавить в группу</h1>
+<%= render 'shared/error_messages', obj: @group_relation%>		
+<div class="container">
+
+
+
+
+	<div class="panel panel-info">
+ 		<div class="panel-heading">Выбрать группу</div>
+  	<div class="panel-body">
+  		<%= form_for [@context, @group_relation] do |f| %>
+  			<div class="form-group">
+  			 	
+  				 
+		  	  		  	
+		  	
+  				<div class="form-inline">
+    				<% if (current_user.admin?) %>
+              <%=f.collection_select(:group_id, Group.all, :id,:name) %>
+            <% else %> 
+              <%=f.collection_select(:group_id, current_user.groups, :id,:name) %>
+            <% end %>
+    				
+    				
+    				
+  				</div>
+  				
+				
+				
+				
+				
+  				
+      		<div><%= f.submit "Создать", class: "btn btn-primary vert-align" %></div>
+      	</div>
+      	
+			<% end %>
+		</div>
+  </div>

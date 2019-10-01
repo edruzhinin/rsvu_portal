@@ -1,5 +1,7 @@
 class Hardware < ActiveRecord::Base
 	has_many :reservations, as: :reservable
+	has_many :group_relations, as: :groupable
+	has_many :groups, through: :group_relations
 	has_many :devices
 	has_many :softwares
 	has_many :user_messages, as: :commentable

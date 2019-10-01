@@ -24,18 +24,32 @@ RsvuPortal::Application.routes.draw do
   get "hardwares/index"
   get "search_hardwares", to: "hardwares#search"
   
+
+  resources :hardware_models, only: [:show, :edit, :destroy, :update]
+
+  resources :hardware_types do
+    resources :hardware_models, only: [:new, :create]
+  end
+    
+  resources :hardware_models do 
+    resources :hardwares, only: [:new, :create]
+  end
+  
+  resources :group_relations, only: [:create]
   resources :users
+  resources :groups do
+    get "search_hardwares", to: "hardwares#search"
+    resources :group_relations, only: [:create]
+  end
+
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :hardwares
   resources :events
 	resources :reservations, only: [:destroy]
 	resources :user_messages, only: [:destroy, :edit, :update]
   
-  resources :hardware_types do
-  	resources :hardware_models do
-  		resources :hardwares
-  	end
-  end
+  
   
   resources :vmhosts, only: [:index, :show]
   
@@ -50,7 +64,8 @@ RsvuPortal::Application.routes.draw do
   
   resources :hardwares do
   	resources :reservations
-  	resources :devices
+  	resources :group_relations, only: [:new, :create]
+    resources :devices
   	resources :softwares
   	resources :user_messages
   end

@@ -4,13 +4,15 @@
 			<%=f.label :identificator, "Тип" %>
 			<%=f.select(:hardware_type_id, HardwareType.all().pluck('name','id')) %>
 			
-			<%=f.label :identificator, "Модель" %>
+			<%=f.label :hardware_model_id, "Модель" %>
 			<%= f.collection_select(:hardware_model_id, HardwareModel.all, :id, :name) %>
 			
-			<%=f.label :identificator, "Родительское устройство" %>
+			<%=f.label :parent_id, "Родительское устройство" %>
 			<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_full_name, include_blank: true) %>
-			<%=f.label :name, "Название" %>
-			<%=f.text_field :name, class: 'form-control' %>
+			
+			<%=f.label :identificator, "Идентификатор" %>
+			<%=f.text_field :identificator, class: 'form-control' %>
+
 			<%=f.label :description, "Описание" %>
 			<%=f.text_field :description, class: 'form-control' %>
 			
@@ -19,22 +21,18 @@
 			
 			
 			<%=f.label :status,"Статус" %>
-		  <%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]])%>
+		  	<%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]])%>
 			
-			<%=f.label :model, "Модель" %>
-			<%=f.text_field :model, class: 'form-control' %>
-			<%=f.label :model_number, "ID модели" %>
-			<%=f.text_field :model_number, class: 'form-control' %>
+			
 			<%=f.label :serial_number, "Серийный №" %>
 			<%=f.text_field :serial_number, class: 'form-control' %>
 			<%=f.label :inv_number, "Инвентарный №" %>
 			<%=f.text_field :inv_number, class: 'form-control' %>
-			<%=f.label :identificator, "Метка" %>
-			<%=f.text_field :identificator, class: 'form-control' %>
-			<%=f.label :identificator, "Стойка" %>
+			
+			<%=f.label :location_id, "Размещение" %>
 			<%=f.select(:location_id, Location.all().pluck('name','id')) %>
-			<%=f.label :place, "Позиция  " %>
-			<%= f.number_field(:place, in: 1..42, step: 1) %>
+			<%=f.label :position, "Позиция  " %>
+			<%= f.number_field(:position, in: 1..42, step: 1) %>
 			<%=f.label :height, "Высота (U)" %>
 			<%= f.number_field(:height, in: 1..42, step: 1) %>
 			<%=f.label :el_power, "Эл. мощность (Вт)" %>

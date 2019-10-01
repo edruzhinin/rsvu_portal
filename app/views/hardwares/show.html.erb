@@ -1,47 +1,69 @@
- 
-    			<% if (@hardware.parent_hardware) %>
-  						<p><b>Родительское утройство</b> <%=link_to @hardware.parent_hardware.get_hardware_full_name, @hardware.parent_hardware%></p>
-  						<br>
-  				<% end %>
-    			<ul class="nav nav-tabs">
+          <div class="panel panel-default">
+          	<div class="panel-heading">
+          		<h3 class="panel-title"><%=@hardware.hardware_type.name%> <b><%=@hardware.hardware_model.name%> [<%=@hardware.get_hardware_identificator%>]</b></h3>
+          		<% if (@hardware.parent_hardware) %>
+  							<p><b>Родительское утройство</b> <%=link_to @hardware.parent_hardware.get_hardware_full_name, @hardware.parent_hardware%></p>
+  						<% end %>
+          	</div>
+            <div class="panel-body">
+            	<ul class="nav nav-tabs">
   					<li class="active"><a href="#general" data-toggle="tab">Общие</a></li>
-  					<li><a href="#serial" data-toggle="tab">Описание</a></li>
   					<li><a href="#about" data-toggle="tab">Параметры</a></li>
-  					<li><a href="#access" data-toggle="tab">Доступ</a></li>
+  					<li><a href="#model" data-toggle="tab">Модель</a></li>
+            <li><a href="#access" data-toggle="tab">Доступ</a></li>
   					<li><a href="#hardware" data-toggle="tab">Оборудование</a></li>
   					<li><a href="#software" data-toggle="tab">ПО</a></li>
   					<li><a href="#message" data-toggle="tab">Сообщения</a></li>
-					</ul>
-    			
+            <li><a href="#groups" data-toggle="tab">Группы</a></li>
+							</ul>
+    					<section>
     			<div class="tab-content">
   					<div class="tab-pane active" id="general">
   						<div class="col-lg-6">
   							<br>
   							<p><b>Тип:</b> <%=@hardware.hardware_type.name%></p>
-  							<p><b>Статус:</b> <%=@hardware.get_status%></p>
-  							<p><b>Название:</b> <%=@hardware.name%></p>
-  							<p><b>Описание:</b> <%=@hardware.description%></p>
+                <p><b>Модель:</b> <%=link_to @hardware.hardware_model.name,@hardware.hardware_model %></p>
+                <p><b>Имя:</b> <%=@hardware.identificator%></p>
+                <p>
+                  <b>Размещение:</b>
+                  <% if @hardware.parent_hardware %>
+                    <%= link_to @hardware.parent_hardware.get_hardware_identificator, @hardware.parent_hardware %> 
+                  <% else %>
+                    <%=@hardware.location.name%> 
+                    
+                  <% end %>
+                  <% if @hardware.position && @hardware.position>0  %>
+                      <%=@hardware.position %> (сверху)
+                    <% end %>
+                </p>
+   							<p><b>Статус:</b> <%=@hardware.get_status%></p>
+  							
+  							
   						</div>
   						<div class="col-lg-6">
   							<br>
-  							<p><b>Модель:</b> <%=@hardware.model%></p>
-  							<p><b>ID Модели:</b> <%=@hardware.model_number%></p>
-  							<p><b>Метка:</b> <%=@hardware.identificator%></p>
+  							<p><b>Серийный №:</b> <%=@hardware.serial_number%></p>
+                <p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
+  							<p><b>Описание:</b> <%=@hardware.description%></p>
   							
   						</div>
+              <div class="col-lg-12">
+                <pre><%=@hardware.comment%></pre>
+              </div>
   					</div>
-  					<div class="tab-pane" id="serial">
-  						<div class="col-lg-6">
-  							<p><b>Серийный №:</b> <%=@hardware.serial_number%></p>
-  							<p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
-  							<p><b>Стойка:</b> <%=@hardware.location.name%></p>
-  							<p><b>Позиция (сверху):</b> <%=@hardware.place%></p>
-							</div>
-							<div class="col-lg-6">
-  							<p><b>Высота (U):</b> <%=@hardware.height%></p>
-  							<p><b>Эл. мощность (Вт):</b> <%=@hardware.el_power%></p>
-							</div>
-  					</div>
+  					<div class="tab-pane" id="model">
+              <div class="col-lg-6">
+                <p><b>Модель:</b> <%=link_to @hardware.hardware_model.name,
+                    hardware_model_path(@hardware.hardware_model)%></p>
+                <p><b>ID модели:</b> <%=@hardware.hardware_model.modelNo%></p>
+              </div>
+              <div class="col-lg-6">
+                <%= render partial: "hardware_models/model_params", object: @hardware.hardware_model %>
+              </div>
+              <div class="col-lg-12">
+                <pre><%=@hardware.hardware_model.comment%></pre>
+              </div>
+            </div>
   					<div class="tab-pane" id="about">
   						<div class="col-lg-6">
   							<br>
@@ -66,7 +88,9 @@
  							</div>
   						<div class="col-lg-6">
   							<br>
-  							<pre><%=@hardware.comment%></pre>
+  							<p><b>Высота (U):</b> <%=@hardware.height%></p>
+                <p><b>Эл. мощность (Вт):</b> <%=@hardware.el_power%></p>
+                
   						</div>
   					</div>
   					<div class="tab-pane" id="access">
@@ -74,15 +98,12 @@
   							<br>
   							<p><b>IP адм.</b> <%=@hardware.ip_adr_adm%></p>
   							<p><b>IP сервера</b> <%=@hardware.ip_adr%></p>
-  							<p><b>Пользоваетль:</b> <%=@hardware.login%></p>
+  							<p><b>Пользователь:</b> <%=@hardware.login%></p>
   							<p><b>Пароль:</b> <%=@hardware.password%></p>
 							</div>
   						<div class="col-lg-6">
   							<br>
-  							<p><b>Инв. номер:</b> <%=@hardware.inv_number%></p>
-  							<p><b>Метка:</b> <%=@hardware.identificator%></p>
-  							<p><b>Стойка:</b> <%=@hardware.location.name%></p>
-  							<p><b>Место:</b> <%=@hardware.place%></p>
+  							
   						</div>
   					</div>
   					<div class="tab-pane" id="hardware">
@@ -154,10 +175,23 @@
   					<div class="tab-pane" id="message">
   						<%= render partial: "shared/show_user_messages", locals: {messages:  @hardware.user_messages} %>
   					</div>
+            <div class="tab-pane" id="groups">
+               <ul>
+               	  <% @hardware.groups.each do |grp|%>
+                    <li><b><%=grp.short_name%>:</b><%=grp.name%></li>
+               	  <% end %>
+                  
+                   <%=link_to "Добавить",  new_hardware_group_relation_path(@hardware), class: "btn btn-default pull-right" %>
+                  
+            	 </ul>
+              
+            </div>
 					</div>
-  			</div>
-			</div>
-			
+  						</section>
+  					</div>
+  				</div>
+          
+    	<br>
 			<div class="btn-group pull-right">
   			<%=link_to "Сообщение",  new_hardware_user_message_path(@hardware), class: "btn btn-default"  %>
   			<%=link_to "Назад",  hardwares_path, class: "btn btn-default"   %>
@@ -166,11 +200,3 @@
   				<%=link_to "Редактировать", edit_hardware_path(@hardware), class: "btn btn-default"   %>
   			<% end %>
 			</div>
-		
-		</section>
-	
-
-
-
-	
-</div>
