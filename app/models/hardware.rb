@@ -81,6 +81,6 @@ class Hardware < ActiveRecord::Base
 	end
 	
 	def self.new_from_lookup(search_string)
-		where("identificator like ? or serial_number like ?", [search_string], [search_string])
+		where("identificator like ? or serial_number like ? or inv_number like ?", [search_string], [search_string], [search_string])
 	end
 end

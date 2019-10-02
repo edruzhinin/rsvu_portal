@@ -1,9 +1,18 @@
-<div class="col-lg-3"><%= link_to hardware.get_hardware_identificator, hardware%></div>
-<div class="col-lg-3"><%= hardware.hardware_model.name %></div>
+<td><%= link_to hardware.get_hardware_identificator, hardware%></td>
 
-<% if hardware.parent_hardware %>
-	<div class="col-lg-3"><%=link_to hardware.parent_hardware.get_hardware_full_name, hardware.parent_hardware%></div>
-<% else %>
-	<div class="col-lg-2"><%=hardware.location.name%></div>
+<% if show_model %>
+	<td><%= hardware.hardware_model.name %></td>
 <% end %>
-<div class="col-lg-2"><%=hardware.place%></div>
+
+<% if show_number %>
+	<td><%= hardware.serial_number%></td>
+	<td><%= hardware.inv_number%></td>
+<% end %>
+
+<td>
+	<% if hardware.parent_hardware %>
+		<%=link_to hardware.parent_hardware.get_hardware_full_name, hardware.parent_hardware%>
+	<% else %>
+		<%=hardware.location.name%>
+	<% end %>
+</td>

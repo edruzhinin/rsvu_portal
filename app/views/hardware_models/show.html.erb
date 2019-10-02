@@ -1,11 +1,11 @@
 <% provide(:title, @hardware_model.name) %>
-<div class="row">
+
 	
-		<section>
+
 				
 			<div class="panel panel-default">
   			<div class="panel-heading">
-    			<h3 class="panel-title"><b>Модель: </b><%=@hardware_model.hardware_type.name%> <%= @hardware_model.name %></h3>
+    			<h3 class="panel-title"><b>Тип: </b><%=@hardware_model.hardware_type.name%> <b>Модель: </b><%= @hardware_model.name %></h3>
     			    			
     			
   			</div>
@@ -16,22 +16,31 @@
   				<pre><%=@hardware_model.comment%></pre>
   				<br>
   			     <%= render partial: "model_params", object: @hardware_model %>
-				</div>
+  			     
+  			<% if (current_user.admin?) %>
+  				<div class="btn-group pull-right">
+						<%=link_to "Редактировать", edit_hardware_model_path(@hardware_model), class: "btn btn-default"   %>
+					</div>  			
+  			<% end %>
+				
 			</div>
 			<div class="panel panel-default">
   			<div class="panel-heading">
     			<h3 class="panel-title">Оборудование модели</h3>
     		</div>
   			<div class="panel-body">
-  				<%= render partial: "shared/show_hardwares", locals: {hardwares: @hardware_model.hardwares} %>
+  				<%= render partial: "shared/show_hardwares", locals: {hardwares: @hardware_model.hardwares, show_model: false, show_number: true} %>
+					
+					<% if (current_user.admin?) %>
+						<div class="btn-group pull-right">
+							<%=link_to "Добавить", new_hardware_model_hardware_path(@hardware_model), class: "btn btn-default"   %>
+						</div>	
+					<% end %>
 				</div>
 			</div>
-			<div class="btn-group pull-right">
-				<% if (current_user.admin?) %>
-  				<%=link_to "Добавить", new_hardware_model_hardware_path(@hardware_model), class: "btn btn-default"   %>
-  				<%=link_to "Редактировать", edit_hardware_model_path(@hardware_model), class: "btn btn-default"   %>
-  			<% end %>
-  
-</div>
-		</section>
-	</div>
+			
+			<section>
+				
+			</section>
+			
+

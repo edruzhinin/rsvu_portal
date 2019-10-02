@@ -1,5 +1,25 @@
-<% hardwares.each do |h| %>
-	<div class="row table">
-		<%=render partial: "shared/show_hardware", locals: {hardware: h} %>
-  </div>
-<% end %>
+<table class="table table-striped">	
+	<thead>
+ 		<tr>
+ 			<th>Идентификатор</th>
+ 			<% if show_model %> 
+ 				<th>Модель</th>
+ 			<% end %>
+ 			
+ 			<% if show_number %> 
+ 				<th>Серийный №</th>
+ 				<th>Инв. №</th>
+ 			<% end %>
+ 			
+ 			<th>Местоположение</th>
+ 		</tr>
+ 	</thead>
+	<tbody>
+		<% hardwares.each do |h| %>
+			<tr>
+      	<%= render partial: "shared/show_hardware", locals: {hardware: h, show_model: show_model, show_number: show_number} %>
+      </tr>
+    <% end %>
+	
+	</tbody>
+</table>

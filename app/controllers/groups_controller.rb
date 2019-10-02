@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
   	@group = Group.new(group_params)
   	@group.user=current_user
   	if @group.save
-			redirect_to group_path(@group)
+			redirect_to groups_path
 		else
 		
 			render 'new'
@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
 		@group = Group.find(params[:id])
 
 		if @group.update_attributes(group_params)
-			redirect_to @group
+			redirect_to group_path(@group)
 		else
 			render 'edit'
 		end

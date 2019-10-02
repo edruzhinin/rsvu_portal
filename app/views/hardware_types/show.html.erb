@@ -1,11 +1,12 @@
-<h1><%=@hardware_type.name%></h1>
 
+
+<section>
 <div class="panel panel-default">
 	<div class="panel-heading">
-  	<h3 class="panel-title">Тип оборудования</h3>
+  	<h3 class="panel-title"><b>Тип оборудования:</b> <%= @hardware_type.name %></h3>
   </div>
   <div class="panel-body">
-  	<p><b>Тип:</b> <%= @hardware_type.name %></p>
+  	
   	<p><b>Характерные параметры:</b></p>
   	<ul>
   		<% if @hardware_type.sparam1 %>
@@ -31,6 +32,12 @@
   	<p><b>Комментарий:</b></p>
   	<pre><%=@hardware_type.comment%></pre>
   	
+  	
+  	<% if (current_user.admin?) %>
+  		<div class="btn-group pull-right">
+				<%=link_to "Редактировать", edit_hardware_type_path(@hardware_type), class: "btn btn-default"   %>
+  		</div>
+  	<% end %>
   	
   </div>
 </div>
@@ -60,14 +67,18 @@
   		</tbody>
 		<table>
 	</div>
-</div>		
-<div class="btn-group pull-right">
-	<% if (current_user.admin?) %>
-  	<%=link_to "Добавить", new_hardware_type_hardware_model_path(@hardware_type), class: "btn btn-default"   %>
-  	<%=link_to "Редактировать", edit_hardware_type_path(@hardware_type), class: "btn btn-default"   %>
-  <% end %>
-  
+
+<% if (current_user.admin?) %>
+	<div class="btn-group pull-right">
+	  	<%=link_to "Добавить", new_hardware_type_hardware_model_path(@hardware_type), class: "btn btn-default"   %>
+  </div>
+<% end %>
+
 </div>
 
+</section>
+<section>
+
+</section>
 
 
