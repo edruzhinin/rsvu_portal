@@ -1,0 +1,32 @@
+<table class="table table-striped">	
+	<thead>
+		<tr>
+			<th>Устновлено</th>
+			<th>Лицензия</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+
+
+	<tbody>
+		<% show_softwares.each do |s| %>
+			<tr>
+				
+				
+				<td>
+					<%=link_to s.installable.name, s.installable %>
+				</td>
+					
+				<td>
+					<% if s.license %>
+						<%=s.license.name%>
+					<% end %>
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+	

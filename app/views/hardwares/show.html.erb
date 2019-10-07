@@ -24,18 +24,10 @@
   							<p><b>Тип:</b> <%=@hardware.hardware_type.name%></p>
                 <p><b>Модель:</b> <%=link_to @hardware.hardware_model.name,@hardware.hardware_model %></p>
                 <p><b>Имя:</b> <%=@hardware.identificator%></p>
-                <p>
-                  <b>Размещение:</b>
-                  <% if @hardware.parent_hardware %>
-                    <%= link_to @hardware.parent_hardware.get_hardware_identificator, @hardware.parent_hardware %> 
-                  <% else %>
-                    <%=@hardware.location.name%> 
-                    
-                  <% end %>
-                  <% if @hardware.position && @hardware.position>0  %>
-                      <%=@hardware.position %> (сверху)
-                    <% end %>
-                </p>
+                <p><b>Размещение:</b><%= @hardware.get_hardware_location %></p>
+                  
+                      
+                          
    							<p><b>Статус:</b> <%=@hardware.get_status%></p>
   							
   							
@@ -131,42 +123,49 @@
 							
   					</div>
   					<div class="tab-pane" id="software">
-  						<% @hardware.softwares.each do |s| %>
-  							<div class="row">
-  								<div class="col-lg-3">
-  									<b><%=s.software_type.name%></b> <%=s.name%> 
-  								</div>
-  								<div class="col-lg-3">
-  									<%=s.description%> <%=s.comment%>
-  								</div>
-  								<div class="col-lg-4">	
-  									<% if !s.software_type.sparam1.nil? %>
-  										<b><%=s.software_type.sparam1%>:</b> <%=s.sparam1%>
-  									<% end %>
-  									<% if !s.software_type.sparam2.nil? %>
-  										<b><%=s.software_type.sparam2%>:</b> <%=s.sparam2%>
-  									<% end %>
-  									<% if !s.software_type.sparam3.nil? %>
-  										<b><%=s.software_type.sparam3%>:</b> <%=s.sparam3%>
-  									<% end %>
-  									<% if !s.software_type.iparam1.nil? %>
-  										<b><%=s.software_type.iparam1%>:</b> <%=s.iparam1%>
-  									<% end %>
-  									<% if !s.software_type.iparam2.nil? %>
-  										<b><%=s.software_type.iparam2%>:</b> <%=s.iparam2%>
-  									<% end %>
-  									<% if !s.software_type.iparam3.nil? %>
-  										<b><%=s.software_type.iparam3%>:</b> <%=s.iparam3%>
-  									<% end %>
-  								</div>
-  								<div class="col-lg-2">	
-  									<% if (current_user.admin?) %>
-  										<%= link_to "Редактировать", edit_hardware_software_path(@hardware, s) %>
-  										<%= link_to "Удалить", hardware_software_path(@hardware, s), method: :delete, data: {confirm: "Вы уверены?"} %>
-  									<% end %>
-  								</div>	
-  							</div>
-  						<% end %>
+  						<table class="table table-striped">	
+  						
+  						<tbody>
+  							<% @hardware.softwares.each do |s| %>
+  								<tr>
+  									<td><%=link_to s.software_type.get_full_name, hardware_software_path(@hardware, s)%></td>
+  									<td>
+  										<% if s.software_type.sparam1 && s.software_type.sparam1!=''%>
+  											<b><%=s.software_type.sparam1%>:</b> <%=s.sparam1%>
+  										<% end %>
+  									</td>
+  									<td>
+  										<% if s.software_type.sparam2 && s.software_type.sparam2!='' %>
+  											<b><%=s.software_type.sparam2%>:</b> <%=s.sparam1%>
+  										<% end %>
+  									</td>
+  									<td>
+  										<% if s.software_type.sparam3 && s.software_type.sparam3!=''%>
+  											<b><%=s.software_type.sparam3%>:</b> <%=s.sparam1%>
+  										<% end %>
+  									</td>
+  									<td>
+  										<% if s.software_type.iparam1 &&s.software_type.iparam1!='' %>
+  											<b><%=s.software_type.iparam1%>:</b> <%=s.iparam1%>
+  										<% end %>
+  									</td>
+  									<td>
+  										<% if s.software_type.iparam2 && s.software_type.iparam2!=''%>
+  											<b><%=s.software_type.iparam2%>:</b> <%=s.iparam2%>
+  										<% end %>
+  									</td>
+  									<td>
+  										<% if s.software_type.iparam3 && s.software_type.iparam3!='' %>
+  											<b><%=s.software_type.iparam3%>:</b> <%=s.iparam3%>
+  										<% end %>
+  									</td>
+  								</tr>
+  							<% end %>
+  						</tbody>
+  					</table>
+  						
+  							
+  						
   						
   						<% if (current_user.admin?) %>
   								<%=link_to "Добавить",  new_hardware_software_path(@hardware), class: "btn btn-default pull-right" %>

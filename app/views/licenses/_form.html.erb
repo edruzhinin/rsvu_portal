@@ -1,0 +1,36 @@
+<div class="row">
+	<%=form_for( @license, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+		<div class="col-md-6">
+			
+			<%=f.label :software_type_id,"Тип" %>
+		  <%= f.collection_select(:software_type_id, SoftwareType.all, :id, :get_full_name) %>
+			
+			<%=f.label :name, "Название" %>
+			<%=f.text_field :name, class: 'form-control' %>
+
+			<%=f.label :from_time, "c" %>
+			<%=f.date_field :from_time, class: 'form-control' %>
+			
+			<%= f.label(:to_time, "по") %>
+			<%= f.date_field(:to_time) %>
+			
+					
+			<%= f.label(:lic_count, "Количество") %>
+			<%= f.number_field(:lic_count) %>
+			
+				
+			<%=f.label :description,"Описание" %>
+			<%=f.text_area :description,  size: "60x12" %>
+			
+		
+			
+						
+		</div>	
+		
+		<div class="col-md-12">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>
+
+

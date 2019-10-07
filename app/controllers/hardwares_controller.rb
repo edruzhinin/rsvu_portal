@@ -29,7 +29,9 @@ class HardwaresController < ApplicationController
 		end 
 	end
   
-  def show
+  
+	
+	def show
 		@hardware = Hardware.find(params[:id])
 		
 	end
@@ -52,6 +54,11 @@ class HardwaresController < ApplicationController
 	def index
 		@hardwares = Hardware.all
 	end
+	
+	def show_reservable
+		@hardwares = Hardware.all
+	end
+	
 	def search
 		if params[:selection].blank?
 			flash.now[:danger]="Необходимо ввести критерий поиска"

@@ -1,0 +1,42 @@
+<section>
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title"><b>ПО:</b> <%= @license.name %></h3>
+  </div>
+  <div class="panel-body">
+  	<div class="row">
+  		<div class="col-md-6">
+  			<p><b>ПО: </b><%=@license.software_type.get_full_name%></p>
+  			
+  		<div class="col-md-12">
+  			<p><b>Описание:</b></p>
+  			<pre><%=@license.description%></pre>
+  		</div>
+  	</div>
+  	 	
+  	
+  		<div class="btn-group pull-right">
+				<% if (current_user.admin?) %>
+					<%=link_to "Редактировать", edit_license_path(@license), class: "btn btn-default"   %>
+					<%= link_to "Удалить",license_path(@license), class: "btn btn-default", method: :delete, data: {confirm: "Вы уверены?"} %>
+  			<% end %>
+  			<%=link_to "Назад", licenses_path, class: "btn btn-default"   %>
+  		</div>
+  	
+  	
+  </div>
+</div>
+
+<% if @license.softwares.count > 0 %>
+	<div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Инсталяции</h3>
+    </div>
+    <div class="panel-body">
+    	<%= render partial: "softwares/show_softwares", object: @license.softwares %>
+    </div>
+  </div>
+<% end %>
+
+
+</section>

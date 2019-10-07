@@ -1,0 +1,51 @@
+<div class="row">
+	<%=form_for( @software_type, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+		<div class="col-md-6">
+			
+			<%=f.label :vendor_id,"Вендор" %>
+		  <%=f.select(:vendor_id,Vendor.all().pluck('name','id'))%>
+			
+			<%=f.label :name, "Название" %>
+			<%=f.text_field :name, class: 'form-control' %>
+
+			<%=f.label :version, "Версия" %>
+			<%=f.text_field :version, class: 'form-control' %>
+			
+			<%= f.label(:commercial, "Коммерческое") %>
+			<%= f.check_box(:commercial) %>
+			
+			
+						
+			<%=f.label :comment,"Описание" %>
+			<%=f.text_area :comment,  size: "60x12" %>
+			
+		
+			
+						
+		</div>	
+		<div class="col-md-6">
+			<%=f.label :sparam1, "Текстовый параметр 1" %>
+			<%=f.text_field :sparam1, class: 'form-control' %>
+			
+			<%=f.label :sparam2, "Текстовый параметр 2" %>
+			<%=f.text_field :sparam2, class: 'form-control' %>
+			
+			<%=f.label :sparam3, "Текстовый параметр 3" %>
+			<%=f.text_field :sparam3, class: 'form-control' %>
+			
+			<%=f.label :iparam1, "Числовой параметр 1" %>
+			<%=f.text_field :iparam1, class: 'form-control' %>
+			
+			<%=f.label :iparam2, "Числовой параметр 2" %>
+			<%=f.text_field :iparam2, class: 'form-control' %>
+			
+			<%=f.label :iparam3, "Числовой параметр 3" %>
+			<%=f.text_field :iparam3, class: 'form-control' %>
+		</div>
+		<div class="col-md-12">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>
+
+

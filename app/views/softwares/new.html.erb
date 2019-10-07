@@ -1,33 +1,5 @@
 
 <h1>Добавить ПО</h1>
 
-<div class="row">
-	<%=form_for([@hardware, @software]) do |f| %>
-		<div class="col-md-6">
-			
-			<%=f.label :software_type_id,"Тип" %>
-		  	  
-		  <%=f.select(:software_type_id,SoftwareType.all().pluck('name','id'))%>
-			
-			<%=f.label :name, "Название" %>
-			<%=f.text_field :name, class: 'form-control' %>
-			<%=f.label :description, "Описание" %>
-			<%=f.text_field :description, class: 'form-control' %>
-			
-			<%=f.label :status,"Статус" %>
-		  <%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]])%>
-			
-			
-		</div>	
-			
-		<div class="col-md-6">
-					
-			<%=f.label :comment,"Коментарий" %>
-			<%=f.text_area :comment,  size: "60x12" %>
 
-		</div>
-		<div class="col-md-12">
-			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
-		</div>
-	<%end%>
-</div>
+<%=render 'form'%>

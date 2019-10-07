@@ -24,9 +24,14 @@ RsvuPortal::Application.routes.draw do
   get "hardwares/index"
   get "search_hardwares", to: "hardwares#search"
   
+  get "show_reservable", to: "hardwares#show_reservable"
+  
 
   resources :hardware_models, only: [:show, :edit, :destroy, :update]
-
+	
+	resources :software_types
+	resources :licenses
+	
   resources :hardware_types do
     resources :hardware_models, only: [:new, :create]
   end

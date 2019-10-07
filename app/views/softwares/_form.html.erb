@@ -1,0 +1,56 @@
+<div class="row">
+	<%=form_for([@context, @software]) do |f| %>
+		<div class="col-md-6">
+			
+			<%=f.label :software_type_id,"Тип" %>
+		  	  
+		  <%= f.collection_select(:software_type_id, SoftwareType.all, :id, :get_full_name) %>
+			<%=f.label :license_id,"Лицензия" %>
+		
+			<%=f.select(:license_id, License.all.all().pluck('name','id'),:include_blank => true) %>
+					
+		</div>
+		<%if @software.software_type %>
+		<div class="col-md-6">
+			<% if @software.software_type.sparam1%>
+    		<%=f.label :sparam1, @software.software_type.sparam1 %>
+  			<%=f.text_field :sparam1, class: 'form-control' %>
+  		<%end%>
+  			
+  		<% if @software.software_type.sparam2%>
+    		<%=f.label :sparam2, @software.software_type.sparam2 %>
+  			<%=f.text_field :sparam2, class: 'form-control' %>
+  		<%end%>	
+  			
+  		<% if @software.software_type.sparam3 %>
+    		<%=f.label :sparam3, @software.software_type.sparam3 %>
+  			<%=f.text_field :sparam3, class: 'form-control' %>
+  		<%end%>
+  			
+  		<% if @software.software_type.iparam1 %>
+    		<%=f.label :iparam1, @software.software_type.iparam1 %>
+  			<%=f.text_field :iparam1, class: 'form-control' %>
+  		<%end%>
+  			
+  		<% if @software.software_type.iparam2 %>
+    			<%=f.label :iparam2, @software.software_type.iparam2 %>
+  				<%=f.text_field :iparam2, class: 'form-control' %>
+  			<%end%>	
+  			
+  			<% if @software.software_type.iparam3 %>
+    			<%=f.label :iparam3, @software.software_type.iparam3 %>
+  				<%=f.text_field :iparam3, class: 'form-control' %>
+  			<%end%>	
+		</div>
+		<%end%>	
+		<div class="col-md-12">
+					
+			<%=f.label :comment,"Коментарий" %>
+			<%=f.text_area :comment,  size: "60x12" %>
+
+		</div>
+		<div class="col-md-12">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>

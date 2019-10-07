@@ -25,12 +25,26 @@
         	<li id="fat-menu" class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Оборудование <b class="caret"></b></a>
           	<ul class="dropdown-menu">
+            	<li><%= link_to "Для заказа", show_reservable_path %></li>
             	<li><%= link_to "Все оборудование", hardwares_path %></li>
 							<li><%= link_to "Типы оборудования", hardware_types_path %></li>
 							<li><%= link_to "Модели оборудования", hardware_models_path %></li>
 							
           	</ul>
         	</li>
+      		
+      		<li id="fat-menu" class="dropdown">
+          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">ПО<b class="caret"></b></a>
+          	<ul class="dropdown-menu">
+            	<li><%= link_to "Добавить ПО", new_software_type_path %></li>
+							<li><%= link_to "Список ПО", software_types_path %></li>
+							<li><%= link_to "Список лицензий", licenses_path %></li>
+							
+							
+          	</ul>
+        	</li>
+      		
+      		
       		<li><%= link_to "Виртуальные машины", vmhosts_path %></li>
       		 		
       		

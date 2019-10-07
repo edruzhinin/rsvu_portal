@@ -1,0 +1,70 @@
+<section>
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title"><b>ПО:</b> <%= @software_type.name %></h3>
+  </div>
+  <div class="panel-body">
+  	<div class="row">
+  		<div class="col-md-6">
+  			<p><b>Вендор: </b><%=@software_type.vendor.name%></p>
+  			<p><b>Название: </b><%=@software_type.name%></p>
+  			<p><b>Версия: </b><%=@software_type.version%></p>
+  			<% if @software_type.commercial %>
+  				<p><b>Тип лицензии: </b>Коммерческая</p>
+  			<% else %>
+  				<p><b>Тип лицензии: </b>Свободная</p
+  			<% end %>
+  		</div>
+  		<div class="col-md-6">
+  			<p><b>Характерные параметры:</b></p>
+  			
+  			<% if @software_type.sparam1 %>
+  				<p><%= @software_type.sparam1 %></p>
+  			<% end %>
+  			<% if @software_type.sparam2 %>
+  				<p><%= @software_type.sparam2 %></p>
+  			<% end %>
+  			<% if @software_type.sparam3 %>
+  				<p><%= @software_type.sparam3 %></p>
+  			<% end %>
+  			<% if @software_type.iparam1 %>
+  				<p><%= @software_type.iparam1 %></p>
+  			<% end %>
+  			<% if @software_type.iparam2 %>
+  				<p><%= @software_type.iparam2 %></p>
+  			<% end %>
+  			<% if @software_type.iparam3 %>
+  				<p><%= @software_type.iparam3 %></p>
+  			<% end %>
+			</div>  	
+  		<div class="col-md-12">
+  			<p><b>Описание:</b></p>
+  			<pre><%=@software_type.comment%></pre>
+  		</div>
+  	</div>
+  	 	
+  	
+  		<div class="btn-group pull-right">
+				<% if (current_user.admin?) %>
+					<%=link_to "Редактировать", edit_software_type_path(@software_type), class: "btn btn-default"   %>
+					<%= link_to "Удалить",software_type_path(@software_type), class: "btn btn-default", method: :delete, data: {confirm: "Вы уверены?"} %>
+  			<% end %>
+  			<%=link_to "Назад", software_types_path, class: "btn btn-default"   %>
+  		</div>
+  	
+  	
+  </div>
+ </div>
+  
+<% if @software_type.softwares.count > 0 %>
+	<div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Инсталяции</h3>
+    </div>
+    <div class="panel-body">
+    	<%= render partial: "softwares/show_softwares", object: @software_type.softwares %>
+    </div>
+  </div>
+<% end %>
+
+</section>

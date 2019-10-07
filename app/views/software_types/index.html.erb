@@ -1,0 +1,40 @@
+<section>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Программное обеспечение</h3>
+  </div>
+  <div class="panel-body">
+  	<table class="table table-striped">	
+  		<thead>
+  			<tr>
+  				<th>Вендор</th>
+  				<th>Название</th>
+  				<th>Версия</th>
+  				<th>Установок</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<% @software_types.each do |s| %>
+  				<tr>
+  					<td><%=s.vendor.name%></td>
+  					<td><%=link_to s.name, software_type_path(s)%></td>
+  					<td><%=s.version%></td>
+  					<td><%=s.softwares.count%></td>
+  				</tr>
+  			<% end %>
+  		</tbody>
+  	</table>
+  	
+  	
+		
+  </div>
+</div>
+
+
+</section>
+
+
+<div class="btn-group pull-right">
+	<%=link_to "Добавить", new_software_type_path, class: "btn btn-default"   %>
+</div>

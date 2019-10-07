@@ -1,0 +1,61 @@
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3><%=@software.software_type.get_full_name%></h3>
+  </div>
+  <div class="panel-body">
+  	<div class="row">
+  		<div class="col-md-6">
+  			<p><b>Вендор: </b><%=@software.software_type.vendor.name%></p>
+  			<p><b>Название: </b><%=@software.software_type.name%></p>
+  			<p><b>Версия: </b><%=@software.software_type.version%></p>
+  			<% if @software.software_type.commercial %>
+  				<p><b>Тип лицензии: </b>Коммерческая</p>
+  			<% else %>
+  				<p><b>Тип лицензии: </b>Свободная</p
+  			<% end %>
+  			
+  			<% if @software.license %>
+  				<p><b>Лицензия: </b>@software.license.name</p>
+  			<% end %>
+  		</div>
+  		<div class="col-md-6">
+  			<p><b>Характерные параметры:</b></p>
+  			
+  			<% if @software.software_type.sparam1 %>
+  				<p><%= @software.sparam1 %></p>
+  			<% end %>
+  			<% if @software.software_type.sparam2 %>
+  				<p><%= @software.sparam2 %></p>
+  			<% end %>
+  			<% if @software.software_type.sparam3 %>
+  				<p><%= @software.sparam3 %></p>
+  			<% end %>
+  			<% if @software.software_type.iparam1 %>
+  				<p><%= @software.iparam1 %></p>
+  			<% end %>
+  			<% if @software.software_type.iparam2 %>
+  				<p><%= @software.iparam2 %></p>
+  			<% end %>
+  			<% if @software.software_type.iparam3 %>
+  				<p><%= @software.iparam3 %></p>
+  			<% end %>
+			</div>  	
+  		<div class="col-md-12">
+  			<p><b>Описание:</b></p>
+  			<pre><%=@software.comment%></pre>
+  		</div>
+  	</div>
+  		
+  										
+  </div>
+</div>
+
+
+
+<div class="col-lg-2">	
+  									<% if (current_user.admin?) %>
+  										<%= link_to "Редактировать", edit_hardware_software_path(@context, @software) %>
+  										<%= link_to "Удалить", hardware_software_path(@context, @software), method: :delete, data: {confirm: "Вы уверены?"} %>
+  									<% end %>
+  								</div>	

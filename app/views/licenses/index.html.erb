@@ -1,0 +1,44 @@
+<section>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Лицензии</h3>
+  </div>
+  <div class="panel-body">
+  	<table class="table table-striped">	
+  		<thead>
+  			<tr>
+  				<th>ПО</th>
+  				<th>Лицензия</th>
+  				<th>Срок с</th>
+  				<th>Срок до</th>
+  				<th>Количество</th>
+  				<th>Используется</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<% @licenses.each do |l| %>
+  				<tr>
+  					<td><%=link_to l.software_type.get_full_name, software_type_path(l.software_type)%></td>
+  					<td><%=link_to l.name, license_path(l)%></td>
+  					<td><%=l.from_time%></td>
+  					<td><%=l.to_time%></td>
+  					<td><%=l.lic_count%></td>
+  					<td><%=l.softwares.count%></td>
+  				</tr>
+  			<% end %>
+  		</tbody>
+  	</table>
+  	
+  	
+		
+  </div>
+</div>
+
+
+</section>
+
+
+<div class="btn-group pull-right">
+	<%=link_to "Добавить", new_license_path, class: "btn btn-default"   %>
+</div>

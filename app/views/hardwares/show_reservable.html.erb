@@ -1,0 +1,4 @@
+<% provide(:title, 'Оборудование полигона') %>
+<h1>Доступное для заказа</h1>
+
+<%= render partial: "hardware_list", object: @hardwares.where('canBook') %>

@@ -10,9 +10,6 @@
 <% end %>
 
 <td>
-	<% if hardware.parent_hardware %>
-		<%=link_to hardware.parent_hardware.get_hardware_full_name, hardware.parent_hardware%>
-	<% else %>
-		<%=hardware.location.name%>
-	<% end %>
+	<%= hardware.get_hardware_location %>
+	
 </td>

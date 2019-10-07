@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190927092711) do
+ActiveRecord::Schema.define(version: 20191006195237) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -144,6 +144,18 @@ ActiveRecord::Schema.define(version: 20190927092711) do
     t.integer  "position"
   end
 
+  create_table "licenses", force: :cascade do |t|
+    t.integer  "lic_type"
+    t.string   "name"
+    t.datetime "from_time"
+    t.datetime "to_time"
+    t.integer  "lic_count"
+    t.text     "description"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "software_type_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.text     "comment"
@@ -173,26 +185,28 @@ ActiveRecord::Schema.define(version: 20190927092711) do
     t.string   "iparam3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "type"
+    t.integer  "vendor_id"
+    t.boolean  "commercial"
+    t.string   "version"
   end
 
   create_table "softwares", force: :cascade do |t|
-    t.integer  "hardware_id"
     t.integer  "software_type_id"
-    t.string   "name"
-    t.string   "description"
     t.string   "sparam1"
     t.string   "sparam2"
     t.string   "sparam3"
     t.integer  "iparam1"
     t.integer  "iparam2"
     t.integer  "iparam3"
-    t.integer  "status"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.text     "comment"
+    t.integer  "license_id"
+    t.integer  "installable_id"
+    t.string   "installable_type"
   end
 
-  add_index "softwares", ["hardware_id"], name: "index_softwares_on_hardware_id"
   add_index "softwares", ["software_type_id"], name: "index_softwares_on_software_type_id"
 
   create_table "user_messages", force: :cascade do |t|
@@ -222,6 +236,14 @@ ActiveRecord::Schema.define(version: 20190927092711) do
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "vendors", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "short_name"
+  end
 
   create_table "vmhosts", force: :cascade do |t|
     t.integer  "hardware_id"
