@@ -25,11 +25,10 @@
                 <p><b>Модель:</b> <%=link_to @hardware.hardware_model.name,@hardware.hardware_model %></p>
                 <p><b>Имя:</b> <%=@hardware.identificator%></p>
                 <p><b>Размещение:</b><%= @hardware.get_hardware_location %></p>
-                  
-                      
-                          
-   							<p><b>Статус:</b> <%=@hardware.get_status%></p>
+                <p><b>Статус:</b> <%=@hardware.get_status%></p>
   							
+  							
+			
   							
   						</div>
   						<div class="col-lg-6">
@@ -42,6 +41,11 @@
               <div class="col-lg-12">
                 <pre><%=@hardware.comment%></pre>
               </div>
+              <% if (current_user.admin?) %>
+  								<div class="btn-group pull-right">
+  									<%=link_to "Редактировать", edit_hardware_path(@hardware), class: "btn btn-default"   %>
+  								</div>
+  						<% end %>
   					</div>
   					<div class="tab-pane" id="model">
               <div class="col-lg-6">
@@ -136,12 +140,12 @@
   									</td>
   									<td>
   										<% if s.software_type.sparam2 && s.software_type.sparam2!='' %>
-  											<b><%=s.software_type.sparam2%>:</b> <%=s.sparam1%>
+  											<b><%=s.software_type.sparam2%>:</b> <%=s.sparam2%>
   										<% end %>
   									</td>
   									<td>
   										<% if s.software_type.sparam3 && s.software_type.sparam3!=''%>
-  											<b><%=s.software_type.sparam3%>:</b> <%=s.sparam1%>
+  											<b><%=s.software_type.sparam3%>:</b> <%=s.sparam3%>
   										<% end %>
   									</td>
   									<td>
@@ -195,7 +199,5 @@
   			<%=link_to "Сообщение",  new_hardware_user_message_path(@hardware), class: "btn btn-default"  %>
   			<%=link_to "Назад",  hardwares_path, class: "btn btn-default"   %>
   			<%=link_to "Заказать", new_hardware_reservation_path(@hardware), class: "btn btn-default"   %>
-  			<% if (current_user.admin?) %>
-  				<%=link_to "Редактировать", edit_hardware_path(@hardware), class: "btn btn-default"   %>
-  			<% end %>
+  			
 			</div>
