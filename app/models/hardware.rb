@@ -35,6 +35,29 @@ class Hardware < ActiveRecord::Base
 		end
 	end
 	
+	def get_hardware_full_name_with_number
+		
+			
+		if (hardware_model)
+			output = hardware_model.name
+		else
+			output=''
+		
+		end
+		if (identificator)
+			output = output+' ['+identificator+']'
+		end
+		if (serial_number) and serial_number!=''
+			output = output+' s/n: '+serial_number
+		end
+		
+		if (inv_number) and inv_number!=''
+			output = output+' Инв.№: '+inv_number
+		end
+		
+		return output
+	end
+	
 	def get_hardware_name
 		if (hardware_model)
 			output = hardware_model.name

@@ -75,7 +75,7 @@ class SoftwaresController < ApplicationController
  		
  		
 		def software_params
-			params.require(:software).permit(:name,:software_type_id, :description, :status, :comment, :sparam1, :sparam2, :sparam3, :iparam1, :iparam2, :iparam3, :installable_id, :installable_type)
+			params.require(:software).permit(:name,:software_type_id, :description, :status, :comment, :sparam1, :sparam2, :sparam3, :iparam1, :iparam2, :iparam3, :installable_id, :installable_type, :license_id)
 		end
 	
 end

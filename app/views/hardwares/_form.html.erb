@@ -1,14 +1,12 @@
 <div class="row">
 	<%=form_for(@hardware) do |f| %>
 		<div class="col-md-6">
-			<%=f.label :identificator, "Тип" %>
-			<%=f.select(:hardware_type_id, HardwareType.all().pluck('name','id')) %>
-			
+					
 			<%=f.label :hardware_model_id, "Модель" %>
-			<%= f.collection_select(:hardware_model_id, HardwareModel.all, :id, :name) %>
+			<%= f.collection_select(:hardware_model_id, HardwareModel.all, :id, :get_model_name_with_type) %>
 			
 			<%=f.label :parent_id, "Родительское устройство" %>
-			<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_full_name, include_blank: true) %>
+			<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_full_name_with_number, include_blank: true) %>
 			
 			<%=f.label :identificator, "Идентификатор" %>
 			<%=f.text_field :identificator, class: 'form-control' %>
@@ -21,7 +19,7 @@
 			
 			
 			<%=f.label :status,"Статус" %>
-		  	<%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]])%>
+		  	<%=f.select(:status,[['Сломан',-1],['Доступен',0],['Недоступен',1]], :selected => 0 )%>
 			
 			
 			<%=f.label :serial_number, "Серийный №" %>
