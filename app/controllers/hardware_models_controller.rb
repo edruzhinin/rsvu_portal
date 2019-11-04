@@ -1,5 +1,5 @@
 class HardwareModelsController < ApplicationController
-  before_filter :get_hardware_type, except: [:show, :index]
+  before_filter :get_hardware_type, except: [:show, :index, :edit, :update]
   
   def get_hardware_type
 		@hardware_type = HardwareType.find(params[:hardware_type_id])		

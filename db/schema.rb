@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191006195237) do
+ActiveRecord::Schema.define(version: 20191023122322) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -256,6 +256,16 @@ ActiveRecord::Schema.define(version: 20191006195237) do
     t.integer  "powerState"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "vendor"
+    t.string   "model"
+    t.string   "uuid"
+    t.integer  "cpu_thread_count"
+    t.float    "cpu_ghz"
+    t.text     "cpu"
+    t.integer  "cpu_usage"
+    t.float    "cpu_usage_percent"
+    t.integer  "memory_usage"
+    t.float    "memory_free_percent"
   end
 
   add_index "vmhosts", ["hardware_id"], name: "index_vmhosts_on_hardware_id"
