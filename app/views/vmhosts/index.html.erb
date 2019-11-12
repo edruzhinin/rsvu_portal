@@ -13,6 +13,34 @@
     				<span class="label label-<%=Vmhost.powerstate_to_label(vmhost.powerState)%>"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></span>
     				
     			</div>
+    			<div class="col-lg-2">
+    				<%if vmhost.powerState > 0 %> 
+    				  <% if vmhost.cpu_usage_percent > 90 %>
+    						<span class="label label-danger">CPU usage<%=vmhost.cpu_usage_percent%>%</span>
+    					<% elsif vmhost.cpu_usage_percent > 70 %>
+    						<span class="label label-warning">CPU usage<%=vmhost.cpu_usage_percent%>%</span>
+    					<% else %>
+    						<span class="label label-success">CPU usage<%=vmhost.cpu_usage_percent%>%</span>
+    					<% end %>
+    				<%else%>
+    						<span class="label label-default">CPU usage<%=vmhost.cpu_usage_percent%>%</span>
+    				<%end%>
+    			</div>
+    			<div class="col-lg-2">
+    				<%if vmhost.memory_free_percent > 0 %> 
+    				  <% if vmhost.cpu_usage_percent < 10 %>
+    						<span class="label label-danger">RAM free <%=vmhost.memory_free_percent%>%</span>
+    					<% elsif vmhost.memory_free_percent < 30 %>
+    						<span class="label label-warning">RAM free <%=vmhost.memory_free_percent%>%</span>
+    					<% else %>
+    						<span class="label label-success">RAM free <%=vmhost.memory_free_percent%>%</span>
+    					<% end %>
+    				<%else%>
+    						<span class="label label-default">RAM free <%=vmhost.memory_free_percent%>%</span>
+    				<%end%>		
+    				
+    			</div>
+    			
     			<div class="col-lg-3"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
     			<div class="col-lg-3"><a href='http://<%= vmhost.hardware.ip_adr%>'><%= vmhost.hardware.ip_adr%></a></div>
     		</div>
@@ -25,4 +53,25 @@
   </div>
 <%end%>
 
- 
+ create_table "vmhosts", force: :cascade do |t|
+    t.integer  "hardware_id"
+    t.string   "name"
+    t.string   "esxi_version"
+    t.integer  "cpu_count"
+    t.integer  "cpu_core_count"
+    t.integer  "memory_size"
+    t.text     "hardware_description"
+    t.integer  "powerState"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "vendor"
+    t.string   "model"
+    t.string   "uuid"
+    t.integer  "cpu_thread_count"
+    t.float    "cpu_ghz"
+    t.text     "cpu"
+    t.integer  "cpu_usage"
+    t.float    "cpu_usage_percent"
+    t.integer  "memory_usage"
+    t.float    "memory_free_percent"
+  end
