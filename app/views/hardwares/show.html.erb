@@ -1,6 +1,6 @@
           <div class="panel panel-default">
           	<div class="panel-heading">
-          		<h3 class="panel-title"><%=@hardware.hardware_type.name%> <b><%=@hardware.hardware_model.name%> [<%=@hardware.get_hardware_identificator%>]</b></h3>
+          		<h3 class="panel-title"><%=@hardware.hardware_model.hardware_type.name%> <b><%=@hardware.hardware_model.name%> [<%=@hardware.get_hardware_identificator%>]</b></h3>
           		<% if (@hardware.parent_hardware) %>
   							<p><b>Родительское утройство</b> <%=link_to @hardware.parent_hardware.get_hardware_full_name, @hardware.parent_hardware%></p>
   						<% end %>
@@ -118,7 +118,7 @@
           						<td><%=h.position%></td>
           						<td><%=link_to h.get_hardware_name,h%></td>
           						<td><%=h.get_hardware_identificator%></td>
-          						<td><%=h.hardware_type.name%></td>
+          						<td><%=h.hardware_model.hardware_type.name%></td>
         						</tr>
       						<% end %>
   							</tbody>
