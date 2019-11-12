@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191023122322) do
+ActiveRecord::Schema.define(version: 20191112091635) do
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -183,9 +183,9 @@ ActiveRecord::Schema.define(version: 20191023122322) do
     t.string   "iparam1"
     t.string   "iparam2"
     t.string   "iparam3"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "software_type"
     t.integer  "vendor_id"
     t.boolean  "commercial"
     t.string   "version"
