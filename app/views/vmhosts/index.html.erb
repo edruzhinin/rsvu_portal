@@ -16,29 +16,31 @@
     			<div class="col-lg-1">
     				<%if vmhost.powerState > 0 %> 
     				  <% if vmhost.cpu_usage_percent > 90 %>
-    						<span class="label label-danger">CPU usage <%='%3.f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-danger">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     					<% elsif vmhost.cpu_usage_percent > 70 %>
-    						<span class="label label-warning">CPU usage <%='%3.f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-warning">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     					<% elsif vmhost.cpu_usage_percent > 1 %>
-    						<span class="label label-success">CPU usage <%='%3.f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-success">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     					<% else %>
-    						<span class="label label-success">CPU usage <%='%3.2f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-success">CPU <%='%3.2f' %  vmhost.cpu_usage_percent%>%</span>
     					<% end %>
     				<%else%>
-    					<span class="label label-default">CPU usage <%='%3.f' %  vmhost.cpu_usage_percent%>%</span>
+    					<span class="label label-default">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     				<%end%>
     			</div>
     			<div class="col-lg-1">
-    				<%if vmhost.memory_free_percent > 0 %> 
-    				  <% if vmhost.cpu_usage_percent < 10 %>
-    						<span class="label label-danger">RAM free <%='%3.f' %  vmhost.memory_free_percent%>%</span>
-    					<% elsif vmhost.memory_free_percent < 30 %>
-    						<span class="label label-warning">RAM free <%='%3.f' %  vmhost.memory_free_percent%>%</span>
+    				<%if vmhost.powerState > 0 %> 
+    				  <% if vmhost.memory_free_percent > 90 %>
+    						<span class="label label-danger">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
+    					<% elsif vmhost.memory_free_percent > 70 %>
+    						<span class="label label-warning">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
+    					<% elsif vmhost.memory_free_percent > 1 %>
+    						<span class="label label-success">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
     					<% else %>
-    						<span class="label label-success">RAM free <%='%3.f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-success">RAM <%='%-3.2f' %  vmhost.memory_free_percent%>%</span>
     					<% end %>
     				<%else%>
-    						<span class="label label-default">RAM free <%='%3.f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-default">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
     				<%end%>		
     				
     			</div>
