@@ -63,23 +63,23 @@
   					<div class="tab-pane" id="about">
   						<div class="col-lg-6">
   							<br>
-  							<% if !@hardware.hardware_type.sparam1.nil? %>
-  								<p><b><%=@hardware.hardware_type.sparam1%>:</b> <%=@hardware.sparam1%></p>
+  							<% if !@hardware.hardware_model.hardware_type.sparam1.nil? %>
+  								<p><b><%=@hardware.hardware_model.hardware_type.sparam1%>:</b> <%=@hardware.sparam1%></p>
   							<%end%>
-  							<% if !@hardware.hardware_type.sparam2.nil? %>
-  								<p><b><%=@hardware.hardware_type.sparam2%>:</b> <%=@hardware.sparam2%></p>
+  							<% if !@hardware.hardware_model.hardware_type.sparam2.nil? %>
+  								<p><b><%=@hardware.hardware_model.hardware_type.sparam2%>:</b> <%=@hardware.sparam2%></p>
   							<%end%>
-  							<% if !@hardware.hardware_type.sparam3.nil? %>
-  								<p><b><%=@hardware.hardware_type.sparam3%>:</b> <%=@hardware.sparam3%></p>
+  							<% if !@hardware.hardware_model.hardware_type.sparam3.nil? %>
+  								<p><b><%=@hardware.hardware_model.hardware_type.sparam3%>:</b> <%=@hardware.sparam3%></p>
   							<%end%>
-  							<% if !@hardware.hardware_type.iparam1.nil? %>
-  								<p><b><%=@hardware.hardware_type.iparam1%>:</b> <%=@hardware.iparam1%></p>
+  							<% if !@hardware.hardware_model.hardware_type.iparam1.nil? %>
+  								<p><b><%=@hardware.hardware_model.hardware_type.iparam1%>:</b> <%=@hardware.iparam1%></p>
   							<%end%>
-  							<% if !@hardware.hardware_type.iparam2.nil? %>
-  								<p><b><%=@hardware.hardware_type.iparam2%>:</b> <%=@hardware.iparam2%></p>
+  							<% if !@hardware.hardware_model.hardware_type.iparam2.nil? %>
+  								<p><b><%=@hardware.hardware_model.hardware_type.iparam2%>:</b> <%=@hardware.iparam2%></p>
   							<%end%>
-  							<% if !@hardware.hardware_type.iparam3.nil? %>
-  								<p><b><%=@hardware.hardware_type.iparam3%>:</b> <%=@hardware.iparam3%></p>
+  							<% if !@hardware.hardware_model.hardware_type.iparam3.nil? %>
+  								<p><b><%=@hardware.hardware_model.hardware_type.iparam3%>:</b> <%=@hardware.iparam3%></p>
   							<%end%>
  							</div>
   						<div class="col-lg-6">
