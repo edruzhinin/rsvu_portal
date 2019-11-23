@@ -5,50 +5,50 @@
 <% @vmhosts.each do |vmhost| %>
   <div class="card">
    	<div class="card-header" id="headingOne">
-      <div class="container"> 
+       
   			<div class="row table">
-    			<div class="col-lg-3"><%=link_to vmhost.name,vmhost%></div>
-    			<div class="col-lg-1">
-    				
-    				<span class="label label-<%=Vmhost.powerstate_to_label(vmhost.powerState)%>"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></span>
+    			<div class="col-sm-3 col-xs-12"><%=link_to vmhost.name,vmhost%></div>
+    			<div class="col-sm-3 col-xs-12"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
+    			<div class="col-sm-2 col-xs-12"  >
+    				<span class="label label-<%=Vmhost.powerstate_to_label(vmhost.powerState)%> load-badge"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></span>
     				
     			</div>
-    			<div class="col-lg-1">
-    				<%if vmhost.powerState > 0 %> 
+    			<div class="col-sm-2 col-xs-12">
+    				<%if vmhost.powerState > 0 %>  
     				  <% if vmhost.cpu_usage_percent > 90 %>
-    						<span class="label label-danger">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-danger load-badge">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     					<% elsif vmhost.cpu_usage_percent > 70 %>
-    						<span class="label label-warning">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-warning load-badge">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     					<% elsif vmhost.cpu_usage_percent > 1 %>
-    						<span class="label label-success">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-success load-badge">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     					<% else %>
-    						<span class="label label-success">CPU <%='%3.2f' %  vmhost.cpu_usage_percent%>%</span>
+    						<span class="label label-success load-badge">CPU <%='%3.2f' %  vmhost.cpu_usage_percent%>%</span>
     					<% end %>
     				<%else%>
-    					<span class="label label-default">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
+    					<span class="label label-default  load-badge">CPU <%='%-3.f' %  vmhost.cpu_usage_percent%>%</span>
     				<%end%>
     			</div>
-    			<div class="col-lg-1">
+    			<div class="col-sm-2 col-xs-12">
     				<%if vmhost.powerState > 0 %> 
     				  <% if vmhost.memory_free_percent > 90 %>
-    						<span class="label label-danger">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-danger  load-badge">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
     					<% elsif vmhost.memory_free_percent > 70 %>
-    						<span class="label label-warning">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-warning  load-badge">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
     					<% elsif vmhost.memory_free_percent > 1 %>
-    						<span class="label label-success">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-success  load-badge">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
     					<% else %>
-    						<span class="label label-success">RAM <%='%-3.2f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-success  load-badge">RAM <%='%-3.2f' %  vmhost.memory_free_percent%>%</span>
     					<% end %>
     				<%else%>
-    						<span class="label label-default">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
+    						<span class="label label-default  load-badge">RAM <%='%-3.f' %  vmhost.memory_free_percent%>%</span>
     				<%end%>		
     				
     			</div>
     			
-    			<div class="col-lg-3"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
-    			<div class="col-lg-3"><a href='http://<%= vmhost.hardware.ip_adr%>'><%= vmhost.hardware.ip_adr%></a></div>
+    			
+    			<div class="col-sm-2 col-hidden-xs"><a href='http://<%= vmhost.hardware.ip_adr%>'><%= vmhost.hardware.ip_adr%></a></div>
     		</div>
-    	</div>
+    	
     </div>
     <div class="collapse" id="<%=vmhost.id%>">
   		<div class="card card-body">
