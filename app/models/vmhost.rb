@@ -1,6 +1,7 @@
 class Vmhost < ActiveRecord::Base
   belongs_to :hardware
   has_many :vmresourcepools
+  has_many :vms, through: :vmresourcepools
   
   def Vmhost.powerstate_to_s(_powerState)
     case _powerState

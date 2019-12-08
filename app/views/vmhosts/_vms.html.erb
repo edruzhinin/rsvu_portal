@@ -1,0 +1,27 @@
+
+<% if vms.count >0 %>
+<table class="table table-striped">	
+
+
+
+	
+	<tbody>
+		<% vms.each do |vm| %>
+			<tr>
+				<td><%=link_to vm.name, vm_path(vm)%></td>
+				<td><span class="label label-<%=Vm.powerstate_to_label(vm.state)%>"><%=Vm.powerstate_to_s(vm.state)%></span></td>
+				<td><%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %></td>
+				<% if (current_user.admin? || vm.user.nil? || vm.user==current_user ) %>
+					<td><%=link_to "Заказать",  new_vm_reservation_path(vm), class: "btn btn-default"%></td>
+  			<%end%>
+			</tr>
+		<%end%>	
+	</tbody>
+</table>
+<%end%>
+	
+	
+
+
+
+  																

@@ -1,92 +1,48 @@
 <% provide(:title, @vmhost.name) %>
-<div class="row">
-	
-		<section>
-			<h1>
-				<%= @vmhost.name %>
-			</h1>
-			<div class="panel panel-default">
-  			<div class="panel-heading">
-    			<h3 class="panel-title">Параметры хоста</h3>
-  			</div>
-  			<div class="panel-body">
-    			<ul class="nav nav-tabs">
-  					<li><a href="#general" data-toggle="tab">Общие</a></li>
-  					<li class="active"><a href="#resourcepool" data-toggle="tab">Пулы ресурсов</a></li>
-  					
-  				</ul>
-    			
-    			<div class="tab-content">
-  					<div class="tab-pane" id="general">
-  						<div class="col-lg-6">
-  							<br>
-  							<p><b>Версия ESXi:</b> <%=@vmhost.esxi_version%></p>
-  							<p><b>Количество CPU:</b> <%=@vmhost.cpu_count%></p>
-  							<p><b>Количество ядер:</b> <%=@vmhost.cpu_core_count%></p>
-  							<p><b>Объем памяти:</b> <%=@vmhost.memory_size%></p>
-  						</div>
-  						<div class="col-lg-6">
-  							<br>
-  							<p><b>Состояние питания:</b><%=Vmhost.powerstate_to_s(@vmhost.powerState)%></p>
-  							<p><b>Описание:</b> <%=@vmhost.hardware_description%></p>
-  						</div>
-  					</div>
-  					<div class="tab-pane active" id="resourcepool">
-  						<div class="panel-group" id="accordion">
-  							<% @vmhost.vmresourcepools.each do |rpool| %>
-  								<div class="panel panel-<%=Vmresourcepool.status_to_s(rpool.status)%>">
-    								<div class="panel-heading">
-      								<h4 class="panel-title">
-              					<a data-toggle="collapse" data-parent="#accordion" href="#<%=rpool.name%>">
-                					<%=rpool.name%>
-                				<a>
-            					</h4>
-            				</div>
-    								<div id="<%=rpool.name%>" class="panel-collapse collapse in">
-      								<div class="panel-body">
-      									<% rpool.vms.each do |vm| %>
-  												<div class="card">
-   													<div class="card-header" id="headingOne">
-   														<div class="container"> 
-  															<div class="row table">
-  																<div class="col-lg-5 col-lg-offset-1">
-  																	<p><b><%=link_to vm.name, vm_path(vm)%></b></p>
-  																</div>	
-  																<div class="col-lg-1 col-lg-offset-1">
-  																	<span class="label label-<%=Vm.powerstate_to_label(vm.state)%>"><%=Vm.powerstate_to_s(vm.state)%></span>
-  																</div>
-  																<div class="col-lg-2">
-  																	<%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %>
-  																</div>
-  																<div class="col-lg-1">
-  																	<% if (current_user.admin? || vm.user.nil? || vm.user==current_user ) %>
-  																		<%=link_to "Заказать",  new_vm_reservation_path(vm), class: "btn btn-default"%>
-  																	<%end%>
-  																</div>
-  														</div>
-  														</div>
-  													</div>
-  													<div class="collapse" id="<%=vm.id%>">
-  														<div class="card card-body">
-   	   													<div class="col-lg-6 col-lg-offset-1">
-   	   														<%= render partial: "shared/show_reserves", locals: {res_subject: vm} %>
- 																</div>
- 															</div>
-														</div>
-  													
-  												</div>
-  											<%end%>
-  										</div>
-  									</div>
-  								</div>	
-  							<%end%>
-  						</div>
-  						
-  					 								
-  							
-  						
-							
-  					</div>
-  				</div>
-  			</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+    <div class=row>
+  		<div class="col-lg-6">
+  			<h3 class="panel-title"><%=@vmhost.name%></h3>
   		</div>
+  		<div class="col-md-1 col-lg-offset-5">
+  			<span class="label label-<%=Vmhost.powerstate_to_label(@vmhost.powerState)%> load-badge"><%=Vmhost.powerstate_to_s(@vmhost.powerState)%></span>
+  		</div>
+    			
+    </div>
+  </div>
+  <div class="panel-body">
+  	<div class="col-lg-6">
+			<br>
+			<p><b><%=@vmhost.vendor%> <%=@vmhost.model%></b></p>
+			<p><b>CPU:</b> <%=@vmhost.cpu%> X <%=@vmhost.cpu_count%></p>
+			<p><b>Ядер:</b> <%=@vmhost.cpu_core_count%> <b>Потоков:</b> <%=@vmhost.cpu_thread_count%></p>
+			<p><b>Частота:</b> <%=@vmhost.cpu_ghz%> ГГц <b>Используется:</b> <%=@vmhost.cpu_usage%> МГц (<%=@vmhost.cpu_usage_percent%>%)</p>
+			<p><b>Память:</b> <%=@vmhost.memory_size%> Гб <b>Занято:</b> <%=@vmhost.memory_usage%> Мб (<%=@vmhost.memory_free_percent%>%)</p>
+	
+		</div>
+		<div class="col-lg-6">
+			<br>
+			<p><b>ESXi:</b> <%=@vmhost.esxi_version%></p>
+			<p><b>UUID:</b> <%=@vmhost.uuid%></p>
+			
+			<p><b>Описание:</b> <%=@vmhost.hardware_description%></p>
+		</div>
+  </div>
+</div>		
+    				
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    	<h3 class="panel-title">Виртуальные машины:</h3>
+  </div>
+  <div class="panel-body">
+  	<%= render partial: "resourcepools", object: @vmhost.vmresourcepools.where("parent_id is NULL OR parent_id < 0")%>
+  </div>
+</div>
+
+
+    				
+    					
+  					

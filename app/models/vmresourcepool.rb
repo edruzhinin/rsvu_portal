@@ -1,7 +1,8 @@
 class Vmresourcepool < ActiveRecord::Base
   belongs_to :vmhost
   has_many :vms
-  
+  has_many :child_vmresourcepool, foreign_key: :parent_id, class_name: "Vmresourcepool"
+	belongs_to :parent_vmresourcepool, foreign_key: :parent_id, class_name: "Vmresourcepool"
   
   def Vmresourcepool.status_to_s(_Status)
 		case _Status

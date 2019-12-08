@@ -1,0 +1,24 @@
+<% resourcepools.each do |rpool| %>
+	 
+  	<div class="panel-group">
+    	<div class="panel panel-default">
+      	<div class="panel-heading">
+        	<h4 class="panel-title">
+          	<a data-toggle="collapse" href=#<%=rpool.name%>><%=rpool.name%></a>
+        	</h4>
+      	</div>
+      	<div id=<%=rpool.name%> class="panel-collapse collapse">
+        	<div class="panel-body">
+        		<%= render partial: "resourcepools", object: rpool.child_vmresourcepool %>
+        		<%= render partial: "vms", object: rpool.vms %>
+        	</div>
+        </div>
+    	</div>
+  	</div>	
+	
+<%end%>
+
+
+
+
+ 
