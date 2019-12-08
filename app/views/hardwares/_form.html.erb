@@ -5,11 +5,15 @@
 			<%=f.label :hardware_model_id, "Модель" %>
 			<%= f.collection_select(:hardware_model_id, HardwareModel.all, :id, :get_model_name_with_type) %>
 			
-			<%=f.label :parent_id, "Родительское устройство" %>
-			<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_full_name_with_number, include_blank: true) %>
-			
-			<%=f.label :identificator, "Идентификатор" %>
-			<%=f.text_field :identificator, class: 'form-control' %>
+			<div class="form-group">
+				<%=f.label :parent_id, "Родительское устройство", for: 'ParentHardware' %>
+				<%= f.collection_select(:parent_id, Hardware.all, :id, :get_hardware_full_name_with_number, include_blank: true) %>
+			</div>
+
+			<div class="form-group">
+				<%=f.label :identificator, "Идентификатор", for: "IdentField"%><br>
+				<%=f.text_field :identificator, class: 'form-control', id: "IdentField"%>
+			</div>
 
 			<%=f.label :description, "Описание" %>
 			<%=f.text_field :description, class: 'form-control' %>

@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+  	<h3 class="panel-title"><b>Архив:</b> <%= @archive.name %></h3>
+  </div>
+  <div class="panel-body">
+  	<div class="row">
+  		
+  			
+  		<div class="col-md-12">
+  			<p><b>Описание:</b></p>
+  			<pre><%=@archive.description%></pre>
+  		</div>
+  	
+  	 	
+  	
+  		<div class="btn-group pull-right">
+				<% if (current_user.admin?) %>
+					<%=link_to "Редактировать", edit_archive_path(@archive), class: "btn btn-default"   %>
+					<%= link_to "Удалить",archive_path(@archive), class: "btn btn-default", method: :delete, data: {confirm: "Вы уверены?"} %>
+  			<% end %>
+  			<%=link_to "Назад", archives_path, class: "btn btn-default"   %>
+  		</div>
+  	
+  	
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,35 @@
+<section>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Архивы виртуальных машин</h3>
+  </div>
+  <div class="panel-body">
+  	<table class="table table-striped">	
+  		<thead>
+  			<tr>
+  				<th>Название диска</th>
+   			</tr>
+  		</thead>
+  		<tbody>
+  			<% @archives.each do |arc| %>
+  				<tr>
+  					<td><%=link_to arc.name, archive_path(arc)%></td>
+  				</tr>
+  			<% end %>
+  		</tbody>
+  	</table>
+  	
+  	
+		
+  </div>
+</div>
+
+
+</section>
+
+
+
+<div class="btn-group pull-right">
+	<%=link_to "Добавить", new_archive_path, class: "btn btn-default"   %>
+</div>

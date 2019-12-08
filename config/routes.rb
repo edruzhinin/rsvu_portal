@@ -31,6 +31,7 @@ RsvuPortal::Application.routes.draw do
 	
 	resources :software_types
 	resources :licenses
+	resources :archives
 	
   resources :hardware_types do
     resources :hardware_models, only: [:new, :create]

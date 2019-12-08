@@ -1,0 +1,24 @@
+<div class="row">
+	<%=form_for( @archive, :html => {class: "form", role: "form"}) do |f| %>
+		<div class="col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-3">
+			
+			<div class="form-group">
+				<%=f.label :name, "Название", for: "nameField" %>
+				<%=f.text_field :name, class: 'form-control', id: "nameField" %>
+			</div>
+			<div class="form-group">			
+			<%=f.label :description,"Описание" %>
+			<%=f.text_area :description,  size: "60x12" %>
+			</div>
+		
+			
+						
+		</div>	
+		
+		<div class="col-md-6 col-md-offset-3">
+			<%=f.submit "Сохранить", class: "btn btn-primary pull-right"%>
+		</div>
+	<%end%>
+</div>
+
+

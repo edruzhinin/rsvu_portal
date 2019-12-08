@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191112091635) do
+ActiveRecord::Schema.define(version: 20191208092412) do
+
+  create_table "archives", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "device_types", force: :cascade do |t|
     t.string   "name"
@@ -296,6 +303,7 @@ ActiveRecord::Schema.define(version: 20191112091635) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "user_id"
+    t.integer  "archive_id"
   end
 
   add_index "vms", ["vmresourcepool_id"], name: "index_vms_on_vmresourcepool_id"
