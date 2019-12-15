@@ -10,7 +10,7 @@
     			<div class="col-md-2 col-sm-4 col-xs-12"><%=link_to vmhost.name,vmhost%></div>
     			<div class="col-md-3 col-sm-4 col-xs-12"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
     			<div class="col-md-1 col-sm-1 col-xs-12">
-    				<%=vmhost.vms.where(power_state=1).count%>/<%=vmhost.vms.count%>
+    				<%=vmhost.vms.where("state=1").count%>/<%=vmhost.vms.count%>
     			</div>
     			<div class="col-md-1 col-sm-1 col-xs-12"  >
     				<span class="label label-<%=Vmhost.powerstate_to_label(vmhost.powerState)%> load-badge"><%=Vmhost.powerstate_to_s(vmhost.powerState)%></span>
