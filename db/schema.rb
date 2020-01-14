@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191208092412) do
+ActiveRecord::Schema.define(version: 20200114061627) do
 
   create_table "archives", force: :cascade do |t|
     t.string   "name"
@@ -304,6 +304,8 @@ ActiveRecord::Schema.define(version: 20191208092412) do
     t.datetime "updated_at",        null: false
     t.integer  "user_id"
     t.integer  "archive_id"
+    t.string   "instance_uuid"
+    t.integer  "mo_id"
   end
 
   add_index "vms", ["vmresourcepool_id"], name: "index_vms_on_vmresourcepool_id"
