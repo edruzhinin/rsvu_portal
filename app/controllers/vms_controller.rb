@@ -20,6 +20,21 @@ class VmsController < ApplicationController
 	
 	end
 	
+	def destroy
+		vm = Vm.find(params[:id])
+		
+		vmhost= vm.vmresourcepool.vmhost
+		
+		if (vm.state != -3) 
+			flash[:danger]=  "Невозможно удалить активную VM"	
+			redirect_to vm
+		else
+			vm.destroy
+    	flash[:danger]=  "Виртуальная машина удалена"		
+			redirect_to vmhost
+		end
+	end
+	
 	private
 	def vm_params
 			params.require(:vm).permit(:user_id)		

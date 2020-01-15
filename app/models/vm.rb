@@ -24,6 +24,8 @@ class Vm < ActiveRecord::Base
     	  
 	def Vm.powerstate_to_s(_powerState)
 		case _powerState
+			when -3
+				return "Не найдена"
 			when -1
 				return "Выключена"
     	when 1
