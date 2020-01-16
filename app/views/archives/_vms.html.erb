@@ -1,0 +1,19 @@
+
+<% if vms.count >0 %>
+
+	<% vms.each do |vm| %>
+		<div class="row">
+			<div class="col-lg-12"><%=link_to vm.name, vm_path(vm)%></div>
+			
+			
+			
+		</div>
+	
+	<%end%>	
+<%end%>
+	
+	
+
+
+
+  																

@@ -3,8 +3,15 @@ class Vm < ActiveRecord::Base
   has_many :user_messages, as: :commentable
   belongs_to :vmresourcepool
   belongs_to :user
-  
-  
+  belongs_to :archive
+
+	def isActive?
+		if (state==-3)
+			return false
+		else
+			return true
+		end
+	end  
   
 	def Vm.tools_status_to_s(_tools_status)
   	case _tools_status

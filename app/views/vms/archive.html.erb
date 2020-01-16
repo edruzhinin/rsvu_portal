@@ -1,0 +1,29 @@
+<% provide(:title, 'Постоянное резервирование') %>
+<h1>Зарезервировать оборудование</h1>
+
+<div class="container">
+
+
+
+
+	<div class="panel panel-info">
+ 		<div class="panel-heading">Переместить в архив</div>
+  	<div class="panel-body">
+  		<%= form_for [@vm] do |f| %>
+  			<div class="form-group">
+  						
+  				<%=f.label :archive_id,"Архив" %>
+		  	    		  	
+		  	
+  				<div class="form-inline">
+    				<%=f.collection_select(:archive_id,Archive.all, :id, :name) %>
+    			</div>
+  				
+									
+      		<div><%= f.submit "Сохранить", class: "btn btn-primary vert-align" %></div>
+      	</div>
+      	
+			<% end %>
+		</div>
+  </div>
+</div>

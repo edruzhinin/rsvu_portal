@@ -10,7 +10,7 @@
       	<div id=<%=rpool.name%> class="panel-collapse collapse in">
         	<div class="panel-body">
         		<%= render partial: "resourcepools", object: rpool.child_vmresourcepool %>
-        		<%= render partial: "vms", object: rpool.vms %>
+        		<%= render partial: "vms", object: rpool.vms.where("archive_id is NULL OR archive_id < 0") %>
         	</div>
         </div>
     	</div>

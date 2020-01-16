@@ -20,6 +20,16 @@ class VmsController < ApplicationController
 	
 	end
 	
+	def archive
+		@vm = Vm.find(params[:id])
+		
+		if (@vm.state != -3) 
+			flash[:danger]=  "Невозможно архивировать активную VM"	
+			redirect_to request.referrer
+		
+		end
+	end
+	
 	def destroy
 		vm = Vm.find(params[:id])
 		
@@ -27,7 +37,7 @@ class VmsController < ApplicationController
 		
 		if (vm.state != -3) 
 			flash[:danger]=  "Невозможно удалить активную VM"	
-			redirect_to vm
+			redirect_to request.referrer
 		else
 			vm.destroy
     	flash[:danger]=  "Виртуальная машина удалена"		
@@ -37,7 +47,7 @@ class VmsController < ApplicationController
 	
 	private
 	def vm_params
-			params.require(:vm).permit(:user_id)		
+			params.require(:vm).permit(:user_id, :archive_id)		
 		end
 	
 

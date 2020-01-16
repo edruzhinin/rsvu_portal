@@ -1,3 +1,4 @@
 class Archive < ActiveRecord::Base
-  belongs_to :vm
+  has_many :vms
+ 
 end

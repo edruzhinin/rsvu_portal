@@ -6,7 +6,23 @@
 		<%= render partial: "shared/show_reserves_panel", locals: {reservations:  @vm.reservations} %>
 		<section>
 			<div class="panel panel-default">
-  			<div class="panel-heading">Параметры виртуальной машины</div>
+  			<div class="panel-heading">
+  				<div class="row">
+  					<div class="col-lg-6">
+  						Параметры виртуальной машины
+  					</div>
+  					<% if @vm.archive %>
+  						<div class="col-lg-6">
+  							<b>Архив:</b> <%=@vm.archive.name%> 
+  						</div>
+  					<% end %>
+  				</div>
+  			</div>
+  			
+  				
+  				
+  		
+  			
   			<div class="panel-body">
     			<div class="row">
     				<div class="col-lg-6">
@@ -39,13 +55,19 @@
   			<%=link_to "Сообщение",  new_vm_user_message_path(@vm), class: "btn btn-default" %>
   			<% if (current_user.admin? ) %>
   				<%=link_to "Владелец",  edit_vm_path(@vm), class: "btn btn-default" %>
-  				<%= link_to "Удалить", vm_path(@vm), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-default" %>
+  				<% if !@vm.isActive?%>
+  					<%= link_to "Удалить", vm_path(@vm), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-default" %>
+	  				<% if !@vm.archive %>
+	  					<%= link_to "В архив", archive_vm_path(@vm), class: "btn btn-default" %>
+	  				<%end%>
+	  			<% end %>
   			<%end%>
   			
-  			<% if (current_user.admin? || @vm.user.nil? || @vm.user==current_user ) %>
+  			<% if (@vm.isActive? && (current_user.admin? || @vm.user.nil? || @vm.user==current_user )) %>
   				<%=link_to "Заказать",  new_vm_reservation_path(@vm), class: "btn btn-default" %>
   			<%end%>
   			<%=link_to "К хосту",  vmhost_path(@vm.vmresourcepool.vmhost), class: "btn btn-default" %>
+  			<%=link_to "Назад",  request.referrer, class: "btn btn-default" %>
 			</div>
 		</section>
 </div>

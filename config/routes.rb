@@ -25,6 +25,7 @@ RsvuPortal::Application.routes.draw do
   get "search_hardwares", to: "hardwares#search"
   
   get "show_reservable", to: "hardwares#show_reservable"
+  get "show_reservable", to: "vms#archive"
   
 
   resources :hardware_models, only: [:show, :edit, :destroy, :update]
@@ -64,6 +65,9 @@ RsvuPortal::Application.routes.draw do
   	
   end
   resources :vms do
+  	member do
+    	get 'archive'
+  	end
   	resources :reservations
   	resources :user_messages
   end
