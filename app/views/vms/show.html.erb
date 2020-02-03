@@ -11,11 +11,13 @@
   					<div class="col-lg-6">
   						Параметры виртуальной машины
   					</div>
-  					<% if @vm.archive %>
-  						<div class="col-lg-6">
+  					<div class="col-lg-6">
+  						<% if @vm.archive %>
   							<b>Архив:</b> <%=@vm.archive.name%> 
-  						</div>
-  					<% end %>
+  						<% else %>
+  							<%= render partial: "shared/show_vm_state", locals: {vm: @vm} %>
+  						<% end %>
+  					</div>
   				</div>
   			</div>
   			
@@ -27,7 +29,6 @@
     			<div class="row">
     				<div class="col-lg-6">
   						<br>
-  						<p><b>Статус:</b> <%=Vm.powerstate_to_s(@vm.state)%></p>
   						<p><b>VM tools:</b> <%=Vm.tools_status_to_s(@vm.vmtools)%></p>
   						<p><b>Тип ОС:</b> <%=@vm.guest%></p>
  							<p><b>Время старта:</b> <%=@vm.boottime%></p>

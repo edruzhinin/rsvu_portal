@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-lg-4"><%=link_to vm.name, vm_path(vm)%></div>
 			<div class="col-lg-3">
-				<span class="label state-badge label-<%=Vm.powerstate_to_label(vm.state)%>"><%=Vm.powerstate_to_s(vm.state)%></span>
+				<%= render partial: "shared/show_vm_state", locals: {vm: vm} %>
 			</div>
 			<div class="col-lg-3"><%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %></div>
 			<div class="col-lg-2">
