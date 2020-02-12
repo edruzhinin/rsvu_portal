@@ -2,6 +2,7 @@ class Vm < ActiveRecord::Base
   has_many :reservations, as: :reservable
   has_many :user_messages, as: :commentable
   belongs_to :vmresourcepool
+  has_one :vmhost, through: :vmresourcepool
   belongs_to :user
   belongs_to :archive
 
@@ -56,6 +57,10 @@ class Vm < ActiveRecord::Base
       else
       	return "default"
   		end
+	end
+	
+	def self.new_from_lookup(search_string)
+		where("name like ? or uuid like ? or instance_uuid like ? or mo_id like ? or ip like ?", [search_string], [search_string], [search_string], [search_string], [search_string])
 	end
 	
 end

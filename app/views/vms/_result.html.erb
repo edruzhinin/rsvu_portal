@@ -1,0 +1,56 @@
+<div class="results-block">
+	<%= render 'layouts/messages' %>
+
+</div>
+
+<% if @vms %>
+	<div class="well results-block">
+		<table class="table table-striped">	
+			<thead>
+				<tr>
+					<th>Имя</th>
+					<th>Хост</th>
+					<th>Пул</th>
+					<th>Состояние</th>
+					<th>Занятость</th>
+					<th>Пользователь</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @vms.each do |vm| %>
+					<tr>
+						<td><%= link_to vm.name,vm %></td>
+						<td><%= vm.vmhost.name %></td>
+						<td><%= vm.vmresourcepool.name %></td>
+						<td>
+							<% if vm.archive %>
+  							<b>Архив:</b> <%=vm.archive.name%> 
+  						<% else %>
+  							<%= render partial: "shared/show_vm_state", locals: {vm: vm} %>
+  						<% end %>
+						</td>
+						<td>
+							<% if (!vm.user.nil?) %>
+  							<p><b>Владелец:</b> <%=vm.user.get_fullname%></p>
+  						<% else %>
+  							<%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %>
+  						<%end%>
+						</td>
+						
+						<td>
+							<% if vm.reservations.occupied.last %>
+								<%= vm.reservations.occupied.last.event.user.firstname %> <%= vm.reservations.occupied.last.event.user.lastname %>
+							<% end %>
+						</td>
+							
+					</tr>
+				<% end %>			
+			</tbody>
+		</table>
+				
+				
+				
+				
+	</div>
+
+<% end %>

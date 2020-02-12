@@ -23,6 +23,7 @@ RsvuPortal::Application.routes.draw do
   get "hardwares/new"
   get "hardwares/index"
   get "search_hardwares", to: "hardwares#search"
+  get "search_vms", to: "vms#search"
   
   get "show_reservable", to: "hardwares#show_reservable"
   get "show_reservable", to: "vms#archive"

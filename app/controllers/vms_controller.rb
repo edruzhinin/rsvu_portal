@@ -45,6 +45,22 @@ class VmsController < ApplicationController
 		end
 	end
 	
+	def search
+		if params[:selection].blank?
+			flash.now[:danger]="Необходимо ввести критерий поиска"
+		else
+			@vms=Vm.new_from_lookup(params[:selection])
+			
+			flash.now[:danger]= "Ничего не найдено" unless @vms.size > 0
+		
+		end	
+		
+		 
+		render partial: 'vms/result'
+			
+		
+	end
+	
 	private
 	def vm_params
 			params.require(:vm).permit(:user_id, :archive_id)		

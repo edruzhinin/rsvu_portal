@@ -18,6 +18,9 @@
 
 $(document).ready(function(){
 	$('#hardware-lookup').on('ajax:complete', function(event,data,status){
-		$('#results').html(data.responseText)
+		$('#hardware-lookup-results').html(data.responseText)
+	})
+	$('#vm-lookup').on('ajax:complete', function(event,data,status){
+		$('#vm-lookup-results').html(data.responseText)
 	})
 })

@@ -60,3 +60,28 @@
   </div>
 <%end%>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Поиск</h3>
+  </div>
+  <div class="panel-body">
+  	<div id="vm-lookup">
+  	  <%= form_tag search_vms_path,remote: true, method: :get, id: "lookup-form" do %>
+				<div class="form-group row text-center col-md-12">
+    			<div class="col-md-10 no-right-padding">
+    				<%= text_field_tag :selection, params[:selection], placeholder: "Виртуальные машины", autofocus: true,class: "form-control search-box input-lg" %>
+    			</div>
+    			<div class="col-md-2 no-left-padding">
+    				<%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+    					<i class="fa fa-search"></i> Найти
+    				<% end %>
+    			</div>
+    		</div>
+  		<% end %>
+  	</div>
+  	<div id='vm-lookup-results'>
+  		<%= render partial: "vms/result" %>
+    </div>				
+  </div>
+</div>
+
