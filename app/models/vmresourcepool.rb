@@ -9,7 +9,7 @@ class Vmresourcepool < ActiveRecord::Base
 		if (valid_to)
 			return valid_to.to_s+" ("+creator.get_shortname+")"
 		else
-			retrun "Не используется"
+			return "Не используется"
 		end
 	end
   

@@ -21,7 +21,9 @@
   					
   					<div class="col-lg-6">
   						<p><b>Время изменения:</b> <%=@vmresourcepool.updated_at%></p>
-  						<p><b>Ответственный:</b> <%=@vmresourcepool.creator.get_shortname%></p>
+  						<% if(@vmresourcepool.creator)%>
+  							<p><b>Ответственный:</b> <%=@vmresourcepool.creator.get_shortname%></p>
+  						<%end%>
   					</div>
   					<div class="col-lg-12">
   						<% if (current_user.admin? || @vmresourcepool.creator.nil? || @vmresourcepool.creator==current_user ) %>
