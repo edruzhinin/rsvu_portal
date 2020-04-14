@@ -3,6 +3,15 @@ class Vmresourcepool < ActiveRecord::Base
   has_many :vms
   has_many :child_vmresourcepool, foreign_key: :parent_id, class_name: "Vmresourcepool"
 	belongs_to :parent_vmresourcepool, foreign_key: :parent_id, class_name: "Vmresourcepool"
+	belongs_to :creator, foreign_key: :creator_id, class_name: "User"
+  
+  def get_activity
+		if (valid_to)
+			return valid_to.to_s+" ("+creator.get_shortname+")"
+		else
+			retrun "Не используется"
+		end
+	end
   
   def Vmresourcepool.status_to_s(_Status)
 		case _Status

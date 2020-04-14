@@ -1,0 +1,37 @@
+<% provide(:title, 'Пул ресурсов') %>
+
+<div class="container">
+
+
+
+
+	<div class="panel panel-info">
+ 		<div class="panel-heading">Указать предполагаемое окнчание использования</div>
+  	<div class="panel-body">
+  		<%= form_for [@vmresourcepool] do |f| %>
+  			<div class="form-group">
+  			 	
+  			 	  			 	
+  			 	<%=f.collection_select(:creator_id,User.all, :id,:get_fullname) %>	
+  				
+  				
+  				<%=f.label :valid_to,"Срок окончания" %>
+		  	  
+		  	  <%= f.date_field :valid_to, class: "form-control"%>		  	
+		  	   				
+  				</div>
+  				
+				
+				
+				
+				
+  				
+      		<div><%= f.submit "Сохранить", class: "btn btn-primary vert-align" %></div>
+      	</div>
+      	
+			<% end %>
+		</div>
+  </div>
+</div>
+
+

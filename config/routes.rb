@@ -61,10 +61,13 @@ RsvuPortal::Application.routes.draw do
   
   resources :vmhosts, only: [:index, :show]
   
+  resources :vmresourcepools, only: [:show, :edit, :update]
+  
   resources :vmhosts do
-  	resources :vms
   	
+  	resources :vms
   end
+  
   resources :vms do
   	member do
     	get 'archive'

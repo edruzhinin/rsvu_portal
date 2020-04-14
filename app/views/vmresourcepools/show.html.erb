@@ -1,0 +1,42 @@
+<% provide(:title, "Пул ресурсов") %>
+
+<h1>Пул ресурсов</h1>
+<div class="row">
+	<section>
+			<div class="panel panel-default">
+  			<div class="panel-heading">
+  				<%= @vmresourcepool.name %>
+  			</div>
+  			
+  			<div class="panel-body">
+    			<div class="row">
+    				<div class="col-lg-6">
+  						
+  						<p><b>Время создания:</b> <%=@vmresourcepool.created_at%></p>
+  						  						
+  						<p><b>Используется до:</b> <%=@vmresourcepool.valid_to%></p>
+ 							
+ 							
+ 						</div>
+  					
+  					<div class="col-lg-6">
+  						<p><b>Время изменения:</b> <%=@vmresourcepool.updated_at%></p>
+  						<p><b>Ответственный:</b> <%=@vmresourcepool.creator.get_shortname%></p>
+  					</div>
+  					<div class="col-lg-12">
+  						<% if (current_user.admin? || @vmresourcepool.creator.nil? || @vmresourcepool.creator==current_user ) %>
+								<%=link_to "Редактировать",  edit_vmresourcepool_path(@vmresourcepool), class: "btn btn-default pull-right"%>
+  						<%end%>
+  					</div>
+  				</div>
+  				
+  			
+  				
+  			</div>
+  		</div>
+		
+  			<%=link_to "К хосту",  vmhost_path(@vmresourcepool.vmhost), class: "btn btn-default" %>
+  			<%=link_to "Назад",  request.referrer, class: "btn btn-default" %>
+			
+		</section>
+</div>

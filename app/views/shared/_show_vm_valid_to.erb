@@ -1,0 +1,20 @@
+<%if (_subject.parent_vmresourcepool && _subject.parent_id > 0)%>
+		
+	<%if (_subject.valid_to)%>
+		
+		<% if (_subject.valid_to > Time.now.to_date + 1.month ) %>
+			<%= link_to _subject.get_activity , vmresourcepool_path(_subject), class: "btn btn-success pull-right"%>
+  	<% else %>
+  		<% if (_subject.valid_to >= Time.now.to_date ) %>
+  			<%= link_to _subject.get_activity , vmresourcepool_path(_subject), class: "btn btn-warning pull-right"%>
+  		<%else%>
+  			<%= link_to _subject.get_activity , vmresourcepool_path(_subject), class: "btn btn-danger pull-right"%>
+  		<%end%>
+  	<%end%>
+
+	<%else%>
+	
+		<%= link_to _subject.get_activity , vmresourcepool_path(_subject), class: "btn btn-danger pull-right"%>
+	
+	<%end%>
+<%end%>

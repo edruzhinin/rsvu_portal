@@ -1,0 +1,2 @@
+module VmresourcepoolsHelper
+end

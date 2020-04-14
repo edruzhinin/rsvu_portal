@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	has_many :events
 	has_many :groups
 	has_many :vms
+	has_many :vmresourcepools
 	before_save { self.email = email.downcase}
 	before_create :create_remember_token
 	validates :firstname, presence: true
@@ -23,6 +24,10 @@ class User < ActiveRecord::Base
 	
 	def get_fullname
 		self.lastname+" "+self.firstname
+	end
+	
+	def get_shortname
+		self.lastname+" "+self.firstname[0].upcase+"."
 	end
 	
 	def User.encrypt(token)
