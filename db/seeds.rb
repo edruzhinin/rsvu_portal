@@ -85,8 +85,10 @@ Hardware.create(hardware_model: HardwareModel.find_by(name: "HP Proliant DL580 G
 
 
 srv1 = Hardware.find_by(name: "esxiSrv1")
-Vmhost.create(hardware: srv1, name: "esxi-srv1", esxi_version: "VMware ESXi 5.5.0 build-2068190", cpu_count: 2, cpu_core_count: 12, memory_size: 96,hardware_description: "Intel(R) Xeon(R) CPU           X5675  @ 3.07GHz", powerState:1, cpu_usage_percent: "0", memory_free_percent: "90")
+Vmhost.create(hardware: srv1, name: "esxi-srv1", esxi_version: "VMware ESXi 5.5.0 build-2068190", cpu_count: 2, cpu_core_count: 12,cpu_usage: 99, cpu_ghz: 3, memory_size: 96,memory_usage: 45, hardware_description: "Intel(R) Xeon(R) CPU           X5675  @ 3.07GHz", powerState:1, cpu_usage_percent: "0", memory_free_percent: "90")
 vmhost=Vmhost.find_by(name: "esxi-srv1")
+Vmdatasource.create(vmhost: vmhost, ds_id: "vim.Datastore:5474d385-fa498c9b-986d-441ea15f6930", ds_name: "DataStore1", ds_status: 1, ds_url: "/vmfs/volumes/5474d385-fa498c9b-986d-441ea15f6930", ds_type: "VMFS", ds_accessible: true, ds_capacity: 513517027328/1024/1024, ds_freespace: 11582570496/1024/1024, ds_uncommited: 87578162815/1024/1024) 
+Vmdatasource.create(vmhost: vmhost, ds_id: "vim.Datastore:172.16.181.251:/data/nfs", ds_name: "DSVU_NFS", ds_status: 1, ds_url: "/vmfs/volumes/43ad14e3-5e03c6c7", ds_type: "NFS", ds_accessible: true, ds_capacity: 2952418435072/1024/1024, ds_freespace: 2478806786048/1024/1024, ds_uncommited: 0) 
 Vmresourcepool.create(vmhost: vmhost,name: "Resource",status: 1)
 rootres = Vmresourcepool.find_by(vmhost: vmhost, name: "Resource")
 Vmresourcepool.create(vmhost: vmhost,name: "TC_test_alarm_AES-2006",status: 1,parent_id: rootres.id)

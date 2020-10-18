@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    	<h3 class="panel-title">Хранилище</h3>
+  </div>
+  <div class="panel-body">
+  	
+  	<% vmdatasources.each do |ds| %>
+  		<div class="row">
+  			<div class="col-lg-3">
+  				<b>Имя:</b> <%=ds.ds_name%>
+  			</div>
+  			<div class="col-lg-2">
+  				<%if (ds.ds_accessible)%>
+  					Доступен
+  				<% else %>
+  					Недоступен
+  				<% end %>
+  			</div>
+  			<div class="col-lg-2">
+  				<b>Тип:</b> <%=ds.ds_type%>
+  			</div>
+  		</div>
+  		
+  		<div class="row">
+  			<div class="col-lg-6">
+  				<b>ID:</b> <%=ds.ds_id%>
+  			</div>
+  			<div class="col-lg-6">
+  				<b>URL:</b> <%=ds.ds_url%>
+  			</div>
+  		</div>
+  		<br>
+  		<div class="row">
+  			<div class="col-lg-3">
+  				<b>Объем:</b> <%=Vmdatasource.readable_size(ds.ds_capacity)%>
+  			</div>
+  			<div class="col-lg-3">
+  				<b>Свободно:</b> <%=Vmdatasource.readable_size(ds.ds_freespace)%> <%=ds.free_percent%> %
+  			</div>
+  			
+  			<div class="col-lg-3">
+  				<b>Резерв:</b> <%=Vmdatasource.readable_size(ds.ds_uncommited)%>
+  			</div>
+  			
+  			<div class="col-lg-3">
+  				<b>Сверх:</b> <%=Vmdatasource.readable_size(ds.over_provisioned)%> <%=ds.overp_percent%> %
+  			</div>
+  		</div>
+  		<br>
+    <% end %>
+  </div>
+  	
+  </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200414115814) do
+ActiveRecord::Schema.define(version: 20201018131657) do
 
   create_table "archives", force: :cascade do |t|
     t.string   "name"
@@ -251,6 +251,23 @@ ActiveRecord::Schema.define(version: 20200414115814) do
     t.datetime "updated_at",  null: false
     t.string   "short_name"
   end
+
+  create_table "vmdatasources", force: :cascade do |t|
+    t.integer  "vmhost_id"
+    t.string   "ds_id"
+    t.string   "ds_name"
+    t.integer  "ds_status"
+    t.string   "ds_url"
+    t.string   "ds_type"
+    t.boolean  "ds_accessible"
+    t.integer  "ds_capacity"
+    t.integer  "ds_freespace"
+    t.integer  "ds_uncommited"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "vmdatasources", ["vmhost_id"], name: "index_vmdatasources_on_vmhost_id"
 
   create_table "vmhosts", force: :cascade do |t|
     t.integer  "hardware_id"

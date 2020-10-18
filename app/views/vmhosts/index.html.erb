@@ -8,7 +8,7 @@
        
   			<div class="row table">
     			<div class="col-md-2 col-sm-4 col-xs-12"><%=link_to vmhost.name,vmhost%></div>
-    			<div class="col-md-3 col-sm-4 col-xs-12"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
+    			<div class="col-md-2 col-sm-4 col-xs-12"><%=link_to vmhost.hardware.name,vmhost.hardware%></div>
     			<div class="col-md-1 col-sm-1 col-xs-12">
     				<%=vmhost.vms.where("state=1").count%>/<%=vmhost.vms.count%>
     			</div>
@@ -47,7 +47,17 @@
     				<%end%>		
     				
     			</div>
-    			
+    			<div class="col-md-1 col-sm-1 col-xs-12">
+    				<%if vmhost.powerState > 0 %> 
+    				  <% if vmhost.get_freespace_percent < 10 %>
+    						<span class="label label-danger  load-badge">HDD <%='%-3.f' %  vmhost.get_freespace_percent%>%</span>
+    					<% elsif vmhost.memory_free_percent < 30 %>
+    						<span class="label label-warning  load-badge">HDD <%='%-3.f' %  vmhost.get_freespace_percent%>%</span>
+    					<% else %> 
+    						<span class="label label-success  load-badge">HDD <%='%-3.2f' %  vmhostget_freespace_percent%>%</span>
+    	  			<% end%>		
+    				<% end %>
+    			</div>
     			
     			<div class="col-md-3 hidden-sm hidden-xs"><a href='http://<%= vmhost.hardware.ip_adr%>'><%= vmhost.hardware.ip_adr%></a></div>
     		</div>
