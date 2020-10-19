@@ -54,7 +54,7 @@
     					<% elsif vmhost.memory_free_percent < 30 %>
     						<span class="label label-warning  load-badge">HDD <%='%-3.f' %  vmhost.get_freespace_percent%>%</span>
     					<% else %> 
-    						<span class="label label-success  load-badge">HDD <%='%-3.2f' %  vmhostget_freespace_percent%>%</span>
+    						<span class="label label-success  load-badge">HDD <%='%-3.2f' %  vmhost.get_freespace_percent%>%</span>
     	  			<% end%>		
     				<% end %>
     			</div>
