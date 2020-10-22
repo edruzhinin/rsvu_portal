@@ -3,23 +3,20 @@
 
 	<% vms.each do |vm| %>
 		<div class="row">
-			<div class="col-lg-4"><%=link_to vm.name, vm_path(vm)%></div>
-			<div class="col-lg-3">
+			<div class="col-lg-3"><%=link_to vm.name, vm_path(vm)%></div>
+			<div class="col-lg-2">
 				<%= render partial: "shared/show_vm_state", locals: {vm: vm} %>
 			</div>
-			<div class="col-lg-3"><%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %></div>
+			<div class="col-lg-2"><%= render partial: "shared/show_reserves_badge", locals: {res_subject: vm} %></div>
+			<div class="col-lg-3">
+				<%= render partial: "shared/show_vm_ownership", locals: {vm: vm} %>
+			</div>
 			<div class="col-lg-2">
-				<% if (current_user.admin? || vm.user.nil? || vm.user==current_user ) %>
-					<%=link_to "Заказать",  new_vm_reservation_path(vm), class: "btn btn-default"%>
+				<% if (current_user.admin? || vm.user==current_user || vm.use_type==0 ) %>
+					<%=link_to "Заказать",  new_vm_reservation_path(vm), class: "btn btn-default pull-left"%>
   			<%end%>
 			</div>
 		</div>
-	
-	<%end%>	
+
+	<%end%>
 <%end%>
-	
-	
-
-
-
-  																

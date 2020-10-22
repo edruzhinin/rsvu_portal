@@ -12,8 +12,15 @@ class Vm < ActiveRecord::Base
 		else
 			return true
 		end
-	end  
-  
+	end
+  def get_activity
+		if (valid_to)
+			return valid_to.to_s+" ("+user.get_shortname+")"
+		else
+			return "Не используется"
+		end
+	end
+
 	def Vm.tools_status_to_s(_tools_status)
   	case _tools_status
   		when -1
@@ -28,8 +35,8 @@ class Vm < ActiveRecord::Base
   			return "Не определено"
   	end
 	end
-  	
-    	  
+
+
 	def Vm.powerstate_to_s(_powerState)
 		case _powerState
 			when -3
@@ -43,11 +50,11 @@ class Vm < ActiveRecord::Base
 			else
 				return "Не определено"
 		end
-	end		
-	
+	end
+
 	def Vm.powerstate_to_label(_powerState)
     case _powerState
-    	
+
     	when -1
     		return "warning"
       when 1
@@ -58,9 +65,9 @@ class Vm < ActiveRecord::Base
       	return "default"
   		end
 	end
-	
+
 	def self.new_from_lookup(search_string)
 		where("name like ? or uuid like ? or instance_uuid like ? or mo_id like ? or ip like ?", [search_string], [search_string], [search_string], [search_string], [search_string])
 	end
-	
+
 end

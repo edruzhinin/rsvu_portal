@@ -2,7 +2,7 @@
 
 <h1><%= @vm.name %></h1>
 <div class="row">
-		
+
 		<%= render partial: "shared/show_reserves_panel", locals: {reservations:  @vm.reservations} %>
 		<section>
 			<div class="panel panel-default">
@@ -11,20 +11,23 @@
   					<div class="col-lg-6">
   						Параметры виртуальной машины
   					</div>
-  					<div class="col-lg-6">
-  						<% if @vm.archive %>
-  							<b>Архив:</b> <%=@vm.archive.name%> 
-  						<% else %>
+						<% if @vm.archive %>
+							<div class="col-lg-6">
+								<b>Архив:</b> <%=@vm.archive.name%>
+							</div>
+						<% else %>
+							<div class="col-lg-4">
   							<%= render partial: "shared/show_vm_state", locals: {vm: @vm} %>
-  						<% end %>
-  					</div>
+  						</div>
+
+						<% end %>
   				</div>
   			</div>
-  			
-  				
-  				
-  		
-  			
+
+
+
+
+
   			<div class="panel-body">
     			<div class="row">
     				<div class="col-lg-6">
@@ -36,8 +39,13 @@
  							<% if (!@vm.user.nil?) %>
   							<p><b>Владелец:</b> <%=@vm.user.get_fullname%></p>
   						<%end%>
+
+							<% if @vm.valid_to %>
+								<p><b>Используется до:</b> <%=@vm.valid_to%></p>
+							<% end %>
+
  						</div>
-  					
+
   					<div class="col-lg-6">
   						<br>
   						<p><b>IP адрес:</b> <%=@vm.ip%></p>
@@ -48,8 +56,8 @@
   					</div>
   				</div>
   				<%= render partial: "shared/show_user_messages", locals: {messages:  @vm.user_messages} %>
-  			
-  				
+
+
   			</div>
   		</div>
 			<div class="btn-group pull-right">
@@ -63,7 +71,7 @@
 	  				<%end%>
 	  			<% end %>
   			<%end%>
-  			
+
   			<% if (@vm.isActive? && (current_user.admin? || @vm.user.nil? || @vm.user==current_user )) %>
   				<%=link_to "Заказать",  new_vm_reservation_path(@vm), class: "btn btn-default" %>
   			<%end%>

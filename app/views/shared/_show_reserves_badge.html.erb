@@ -1,6 +1,6 @@
-<% unless res_subject.user.nil? %>
+<% if res_subject.use_type && res_subject.use_type > 0 %>
 	<a class="btn btn-primary btn-block" data-toggle="collapse" href="#<%=res_subject.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  	<span class="badge"><%=res_subject.user.firstname%> <%=res_subject.user.lastname%></span>
+  	<span class="badge">Служебная</span>
   </a>
 <% else %>
 	<% if res_subject.reservations.occupied.count > 0 %>
@@ -16,12 +16,12 @@
   		<% else %>
   			<div class="btn btn-info btn-block" data-toggle="collapse" href="#<%=res_subject.id%>" role="button" aria-expanded="false" aria-controls="collapseExample">
   				<span class="badge"><%=res_subject.reservations.active.first.event.from_time.to_date%></span>
-  			</div>	
+  			</div>
   		<% end %>
   	<% else %>
   		<div class="btn btn-success btn-block">
   			<span class="badge">Свободно</span>
-  		</div>	
+  		</div>
   	<% end %>
   <% end %>
 <% end %>
