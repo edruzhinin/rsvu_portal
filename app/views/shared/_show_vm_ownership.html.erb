@@ -2,7 +2,7 @@
   <% if (vm.valid_to > Time.now.to_date + 1.month ) %>
     <span class="btn btn-success pull-left"><%= vm.get_activity %></span>
   <% else %>
-    <% if (_subject.valid_to >= Time.now.to_date ) %>
+    <% if (vm.valid_to >= Time.now.to_date ) %>
       <span class="btn btn-warning pull-left"><%= vm.get_activity %></span>
     <%else%>
       <span class="btn btn-danger pull-left"><%= vm.get_activity %></span>
