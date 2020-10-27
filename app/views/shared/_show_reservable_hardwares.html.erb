@@ -3,7 +3,7 @@
 	<div class="row table">
 		<div class="col-lg-3"><%= link_to r.reservable.get_hardware_full_name, r.reservable %></div>
   	<div class="col-lg-2"><%=r.reservable.identificator%></div>
-  	<div class="col-lg-1"><%=r.reservable.hardware_type.name%></div>
+  	<div class="col-lg-1"><%=r.reservable.hardware_model.hardware_type.name%></div>
   	<div class="col-lg-2"><%=r.reservable.get_hardware_location%></div>
   	<div class="col-lg-1"><%=r.reservable.place%></div>
   	<% if show_user %>
@@ -11,15 +11,12 @@
   			<%=r.event.user.lastname%> <%=r.event.user.firstname%>
   		</div>
   	<%end%>
-  	
+
   	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
     	<% if current_user.admin? || current_user?(r.event.user) %>
      		<%=link_to "Освободить", reservation_path(r), method: :delete, data: {confirm: "Вы уверены?"}%>
      	<%end%>
     </div>
-  	
+
 	</div>
 <% end %>
-
-
-
