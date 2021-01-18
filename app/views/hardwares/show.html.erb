@@ -1,3 +1,7 @@
+          
+          
+          <%= render partial: "shared/show_reserves_panel", locals: {reservations:  @hardware.reservations} %>
+          
           <div class="panel panel-default">
           	<div class="panel-heading">
           		<h3 class="panel-title"><%=@hardware.hardware_model.hardware_type.name%> <b><%=@hardware.hardware_model.name%> [<%=@hardware.get_hardware_identificator%>]</b></h3>
