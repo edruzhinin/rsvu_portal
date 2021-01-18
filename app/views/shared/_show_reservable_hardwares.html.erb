@@ -1,7 +1,7 @@
 
 <% reserve.each do |r| %>
 	<div class="row table">
-		<div class="col-lg-3"><%= link_to r.reservable.name, r.reservable %></div>
+		<div class="col-lg-3"><%= link_to r.reservable.get_hardware_full_name, r.reservable %></div>
   	<div class="col-lg-2"><%=r.reservable.identificator%></div>
   	<div class="col-lg-1"><%=r.reservable.hardware_type.name%></div>
   	<div class="col-lg-2"><%=r.reservable.get_hardware_location%></div>
