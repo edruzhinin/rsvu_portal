@@ -3,5 +3,6 @@ class Event < ActiveRecord::Base
   has_many :reservations
   
   scope :active,lambda { where('to_time >= ?',Time.now.to_date)}
+  scope :notactive,lambda { where('to_time < ?',Time.now.to_date)}
   
 end
