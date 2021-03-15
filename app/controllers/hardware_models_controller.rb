@@ -1,5 +1,5 @@
 class HardwareModelsController < ApplicationController
-  before_filter :get_hardware_type, except: [:show, :index, :edit, :update]
+  before_filter :get_hardware_type, except: [:show, :index, :edit, :update, :create]
   
   def get_hardware_type
 		@hardware_type = HardwareType.find(params[:hardware_type_id])		
@@ -8,10 +8,10 @@ class HardwareModelsController < ApplicationController
   def create
   		
   	
-  	@hardware_model = @hardware_type.hardware_models.build(hardware_model_params)
+  	@hardware_model = HardwareModel.new(hardware_model_params)
   	
   	if @hardware_model.save
-			redirect_to @hardware_type
+			redirect_to @hardware_model.hardware_type
 		else
 		
 			render 'new'
@@ -51,5 +51,5 @@ class HardwareModelsController < ApplicationController
 end
 private
 	def hardware_model_params
-	  params.require(:hardware_model).permit(:name,:modelNo,:comment,:sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3)		
+	  params.require(:hardware_model).permit(:name,:modelNo,:comment,:sparam1,:sparam2, :sparam3,:iparam1,:iparam2,:iparam3,:hardware_type_id)		
 	end
