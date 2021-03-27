@@ -3,10 +3,10 @@ class Vmdatasource < ActiveRecord::Base
   
   def Vmdatasource.readable_size(_size)
 		if (_size > 1024*1024)
-			return '%-3.1f Тб' % (_size/1024/1024)
+			return '%-3.3f Тб' % (_size/1024.0/1024.0)
 		else
 			if (_size > 1024)
-				return '%-3.f Гб' % (_size/1024)
+				return '%-3.f Гб' % (_size/1024.0)
 			else
 				return '%d Мб' % _size
 			end
