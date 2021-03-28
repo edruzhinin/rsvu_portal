@@ -1,0 +1,15 @@
+<% if ( ds.free_percent < 10) %>
+	<span class="label label-danger">
+  	<%=Vmdatasource.readable_size(ds.ds_capacity)%> (<%=Vmdatasource.readable_size(ds.ds_freespace)%> <%=ds.free_percent%> %)
+  </span>
+<% else %>
+	<% if ( ds.free_percent < 30) %>
+		<span class="label label-warning">
+			<%=Vmdatasource.readable_size(ds.ds_capacity)%> (<%=Vmdatasource.readable_size(ds.ds_freespace)%> <%=ds.free_percent%> %)
+		</span>
+	<% else %>
+		<span class="label label-success">
+			<%=Vmdatasource.readable_size(ds.ds_capacity)%> (<%=Vmdatasource.readable_size(ds.ds_freespace)%> <%=ds.free_percent%> %)
+		</span>
+	<% end %>
+<% end %>

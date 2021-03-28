@@ -14,21 +14,66 @@
   </div>
   <div class="panel-body">
   	<div class="col-lg-6">
-			<br>
 			<p><b><%=@vmhost.vendor%> <%=@vmhost.model%></b></p>
 			<p><b>CPU:</b> <%=@vmhost.cpu%> X <%=@vmhost.cpu_count%></p>
 			<p><b>Ядер:</b> <%=@vmhost.cpu_core_count%> <b>Потоков:</b> <%=@vmhost.cpu_thread_count%></p>
-			<p><b>Частота:</b> <%=@vmhost.cpu_ghz%> ГГц <b>Используется:</b> <%='%-3.1f' %  @vmhost.cpu_usage%> МГц (<%='%-3.1f' %  @vmhost.cpu_usage_percent%>%)</p>
-			<p><b>Память:</b> <%=@vmhost.memory_size%> Гб <b>Занято:</b> <%='%-3.f' %  @vmhost.memory_usage%> Мб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)</p>
-			
-		</div>
-		<div class="col-lg-6">
-			<br>
 			<p><b>ESXi:</b> <%=@vmhost.esxi_version%></p>
 			<p><b>UUID:</b> <%=@vmhost.uuid%></p>
-			
 			<p><b>Описание:</b> <%=@vmhost.hardware_description%></p>
-			<p><b>Диск:</b> <%=Vmdatasource.readable_size(@vmhost.get_space)%> <b>Свободно:</b> <%=Vmdatasource.readable_size(@vmhost.get_freespace)%> (<%='%-3.1f' %  @vmhost.get_freespace_percent%>%)</p>
+		</div>
+		<div class="col-lg-6">
+			<p>
+				<b>Частота:</b>
+				<% if (@vmhost.cpu_usage_percent > 90) %>
+					<span class="label label-danger">
+						<%=@vmhost.cpu_ghz%> ГГц <b>
+						<%='%-3.1f' %  @vmhost.cpu_usage%> МГц (<%='%-3.1f' %  @vmhost.cpu_usage_percent%>%)
+					</span>
+				<% else %>
+					<% if (@vmhost.cpu_usage_percent > 70) %>
+						<span class="label label-warning">
+							<%=@vmhost.cpu_ghz%> ГГц <b>
+							<%='%-3.1f' %  @vmhost.cpu_usage%> МГц (<%='%-3.1f' %  @vmhost.cpu_usage_percent%>%)
+						</span>
+					<% else %>
+						<span class="label label-success">
+							<%=@vmhost.cpu_ghz%> ГГц <b>
+							<%='%-3.1f' %  @vmhost.cpu_usage%> МГц (<%='%-3.1f' %  @vmhost.cpu_usage_percent%>%)
+						</span>
+					<% end %>
+				<% end %>
+			</p>
+			<p>
+				<b>Память:</b>
+				<% if (@vmhost.memory_free_percent > 90) %>
+					<span class="label label-danger">
+						 <%=@vmhost.memory_size%> Гб
+						<%='%-3.f' %  @vmhost.memory_usage%> Гб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
+					</span>
+				<% else %>
+					<% if (@vmhost.memory_free_percent > 70) %>
+						<span class="label label-warning">
+							<%=@vmhost.memory_size%> Гб
+							<%='%-3.f' %  @vmhost.memory_usage%> Гб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
+						</span>
+					<% else %>
+						<span class="label label-success">
+							<%=@vmhost.memory_size%> Гб
+							<%='%-3.f' %  @vmhost.memory_usage%> Гб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
+						</span>
+					<% end %>
+				<% end %>
+			</p>	
+			<p>
+				<b>Диск:</b>
+				<% @vmhost.vmdatasources.each do |ds| %>
+					<% if (ds.ds_type=="VMFS") %>
+						<br>
+						<%= render partial: "shared/show_vm_datastore", locals: {ds: ds} %>
+					<% end %>
+				<% end %>
+			</p>	
+			
 		</div>
   </div>
 </div>		
