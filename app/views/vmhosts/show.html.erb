@@ -48,18 +48,18 @@
 				<% if (@vmhost.memory_free_percent > 90) %>
 					<span class="label label-danger">
 						 <%=@vmhost.memory_size%> Гб
-						<%='%-3.f' %  @vmhost.memory_usage%> Гб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
+						<%='%-3.f' %  @vmhost.memory_usage %> Мб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
 					</span>
 				<% else %>
 					<% if (@vmhost.memory_free_percent > 70) %>
 						<span class="label label-warning">
 							<%=@vmhost.memory_size%> Гб
-							<%='%-3.f' %  @vmhost.memory_usage%> Гб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
+							<%='%-3.f' %  @vmhost.memory_usage  %> Мб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
 						</span>
 					<% else %>
 						<span class="label label-success">
 							<%=@vmhost.memory_size%> Гб
-							<%='%-3.f' %  @vmhost.memory_usage%> Гб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
+							<%='%-3.f' %  @vmhost.memory_usage0 %> Мб (<%='%-3.1f' %  @vmhost.memory_free_percent%>%)
 						</span>
 					<% end %>
 				<% end %>
