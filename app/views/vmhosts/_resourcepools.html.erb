@@ -1,5 +1,5 @@
 <% resourcepools.each do |rpool| %>
-	<% if rpool.child_vmresourcepool.count > 0  or rpool.vms.count > 0 %>
+	<% if rpool.child_vmresourcepool.count > 0  or rpool.vms.where("archive_id is NULL OR archive_id < 0").count > 0 %>
 	
 	<div class="panel-group">
   	<div class="panel panel-default">
