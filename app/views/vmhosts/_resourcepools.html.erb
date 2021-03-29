@@ -1,39 +1,30 @@
 <% resourcepools.each do |rpool| %>
-	 
-  	<div class="panel-group">
-    	<div class="panel panel-default">
-      	<div class="panel-heading">
-        	<h4 class="panel-title">
-          	<div class="row">
-          	<div class="col-lg-6">
+	<% if rpool.child_vmresourcepool.count > 0  or rpool.vms.count > 0 %>
+	
+	<div class="panel-group">
+  	<div class="panel panel-default">
+    	<div class="panel-heading">
+      	<h4 class="panel-title">
+        	<div class="row">
+   	      	<div class="col-lg-6">
           		<a data-toggle="collapse"href=#<%=rpool.name%>><%=rpool.name%></a>
-          	</div>
-          	
-          	
+          	</div>       	
           	<div class="col-lg-6">
           		<%= render partial: "shared/show_vm_valid_to", locals: {_subject: rpool} %>
-          		
-          		
-          		
           	</div>
           </div>
-          	
-          	
-          	
-          	
-          	
-          	
-        	</h4>
-      	</div>
-      	<div id=<%=rpool.name%> class="panel-collapse collapse">
-        	<div class="panel-body">
-        		<%= render partial: "resourcepools", object: rpool.child_vmresourcepool %>
-        		<%= render partial: "vms", object: rpool.vms.where("archive_id is NULL OR archive_id < 0") %>
-        	</div>
+        </h4>
+      </div>
+      <div id=<%=rpool.name%> class="panel-collapse collapse">
+       	<div class="panel-body">
+        	<%= render partial: "resourcepools", object: rpool.child_vmresourcepool %>
+        	<%= render partial: "vms", object: rpool.vms.where("archive_id is NULL OR archive_id < 0") %>
         </div>
-    	</div>
-  	</div>	
-	
+      </div>
+    </div>
+  </div>	
+	<%end%>
+
 <%end%>
 
 
