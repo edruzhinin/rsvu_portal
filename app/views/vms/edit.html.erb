@@ -10,29 +10,32 @@
  		<div class="panel-heading">Установить постоянного владельца</div>
   	<div class="panel-body">
   		<%= form_for [@vm] do |f| %>
-  			<div class="form-group">
-  			 		
-  				<%=f.label :user_id,"Пользователь" %>
-		  	  
-		  	  		  	
-		  	
-  				<div class="form-inline">
-    				<%=f.collection_select(:user_id,User.all, :id,:get_fullname) %>
-    				
-    				
-    				
-  				</div>
-  				
-					<label class="control-label">Начало: </label>
-      		<%= f.date_field :valid_to, class: "form-control"%>
-				
-				
-				
-  				
-      		<div><%= f.submit "Сохранить", class: "btn btn-primary vert-align" %></div>
-      	</div>
-      	
-			<% end %>
+				<div class="form-group ">
+					<%=f.label :user_id,"Владелец:" %>
+					<%=f.collection_select(:user_id,User.all, :id,:get_fullname) %>
+				</div>
+
+				<div class="form-group">
+			  	<%=f.label :user_id,  "Срок использования:" %>
+					<%= f.date_field :valid_to, class: "form-control"%>
+				</div>
+
+				<% if (current_user.admin?) %>
+					<div class="form-inline ">
+
+					<div class="form-group">
+						<%=f.label :use_type, "Назначение:" %>
+						<%=f.select(:use_type,[['Полигон',0],['Инфраструктура',1]], :selected => 0 )%>
+					</div>
+					<div class="form-group">
+						<%= f.label(:always_on, "Используется непрерывно") %>
+						<%= f.check_box(:always_on) %>
+					</div>
+
+						</div>
+				<% end %>
+    		<div><%= f.submit "Сохранить", class: "btn btn-primary vert-align" %></div>
+      <% end %>
 		</div>
   </div>
 </div>
