@@ -33,6 +33,7 @@ RsvuPortal::Application.routes.draw do
 	
 	resources :software_types
 	resources :licenses
+	resources :ip_addresses
 	resources :archives
 	
   resources :hardware_types do

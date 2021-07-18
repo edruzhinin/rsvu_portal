@@ -1,0 +1,40 @@
+<section>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Лицензии</h3>
+  </div>
+  <div class="panel-body">
+  	<table class="table table-striped">	
+  		<thead>
+  			<tr>
+  				<th>IP Адрес</th>
+  				<th>Имя хоста</th>
+  				<th>Аренда с</th>
+  				<th>Аренда по</th>
+  				<th>MAC</th>
+  				<th>Комментарий</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<% @ip_addresses.each do |l| %>
+  				<tr>
+  					<td><%=l.ip%></td>
+  					<td><%=l.hostname%></td>
+  					<td><%=l.lease_starts%></td>
+  					<td><%=l.lease_ends%></td>
+  					<td><%=l.mac_addresses.mac%></td>
+  					<td><%=l.comment%></td>
+  				</tr>
+  			<% end %>
+  		</tbody>
+  	</table>
+  	
+  	
+		
+  </div>
+</div>
+
+
+</section>
+

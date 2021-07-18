@@ -1,0 +1,2 @@
+class MacAddressesController < ApplicationController
+end

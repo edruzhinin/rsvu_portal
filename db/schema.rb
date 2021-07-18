@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210403135127) do
+ActiveRecord::Schema.define(version: 20210716205447) do
 
   create_table "archives", force: :cascade do |t|
     t.string   "name"
@@ -151,6 +151,21 @@ ActiveRecord::Schema.define(version: 20210403135127) do
     t.integer  "position"
   end
 
+  create_table "ip_addresses", force: :cascade do |t|
+    t.string   "ip"
+    t.string   "hostname"
+    t.integer  "vlan"
+    t.boolean  "is_static"
+    t.datetime "lease_starts"
+    t.datetime "lease_ends"
+    t.string   "comment"
+    t.integer  "mac_address_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "ip_addresses", ["mac_address_id"], name: "index_ip_addresses_on_mac_address_id"
+
   create_table "licenses", force: :cascade do |t|
     t.integer  "lic_type"
     t.string   "name"
@@ -168,6 +183,13 @@ ActiveRecord::Schema.define(version: 20210403135127) do
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "mac_addresses", force: :cascade do |t|
+    t.string   "mac"
+    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reservations", force: :cascade do |t|
