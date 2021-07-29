@@ -9,7 +9,11 @@
     <%end%>
   <%end%>
 <% else %>
-  <span class="btn btn-danger pull-left">Неизвестно</span>
+  <% if vm.user %>
+  	<span class="btn btn-primary pull-left"><%= vm.get_activity %></span>
+  <% else %>
+  	<span class="btn btn-danger pull-left">Неизвестно</span>
+  <% end %>
 <% end %>
 
 

@@ -17,7 +17,11 @@ class Vm < ActiveRecord::Base
 		if (valid_to)
 			return valid_to.to_s+" ("+user.get_shortname+")"
 		else
-			return "Не используется"
+			if (user)
+				return user.get_shortname
+			else
+				return "Не используется"
+			end
 		end
 	end
 

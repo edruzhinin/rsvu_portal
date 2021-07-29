@@ -62,8 +62,10 @@
   		</div>
 			<div class="btn-group pull-right">
   			<%=link_to "Сообщение",  new_vm_user_message_path(@vm), class: "btn btn-default" %>
-  			<% if (current_user.admin? ) %>
+  			<% if (current_user.admin? || @vm.user.nil? || @vm.user == current_user )%>
   				<%=link_to "Владелец",  edit_vm_path(@vm), class: "btn btn-default" %>
+  			<% end %>
+  			<% if (current_user.admin? ) %>
   				<% if !@vm.isActive?%>
   					<%= link_to "Удалить", vm_path(@vm), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-default" %>
 	  				<% if !@vm.archive %>
