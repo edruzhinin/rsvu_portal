@@ -17,7 +17,7 @@
       </div>
       <div id=<%=rpool.name%> class="panel-collapse collapse">
        	<div class="panel-body">
-        	<%= render partial: "resourcepools", object: rpool.child_vmresourcepool %>
+        	<%= render partial: "resourcepools", object: rpool.child_vmresourcepool.order(:name) %>
         	<%= render partial: "vms", object: rpool.vms.where("archive_id is NULL OR archive_id < 0").order(:name) %>
         </div>
       </div>
