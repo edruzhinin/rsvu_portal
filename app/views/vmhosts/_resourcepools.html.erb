@@ -6,10 +6,13 @@
     	<div class="panel-heading">
       	<h4 class="panel-title">
         	<div class="row">
-   	      	<div class="col-lg-6">
+   	      	<div class="col-lg-4">
           		<a data-toggle="collapse"href=#<%=rpool.name%>><%=rpool.name%></a>
-          	</div>       	
-          	<div class="col-lg-6">
+          	</div>       
+            <div class="col-lg-4">
+              VM всего <%=rpool.get_vm_count%> запущено <%=rpool.get_active_vm_count%>
+            </div>	
+          	<div class="col-lg-4">
           		<%= render partial: "shared/show_vm_valid_to", locals: {_subject: rpool} %>
           	</div>
           </div>

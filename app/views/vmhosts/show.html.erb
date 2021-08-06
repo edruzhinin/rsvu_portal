@@ -19,6 +19,7 @@
 			<p><b>Ядер:</b> <%=@vmhost.cpu_core_count%> <b>Потоков:</b> <%=@vmhost.cpu_thread_count%></p>
 			<p><b>ESXi:</b> <%=@vmhost.esxi_version%></p>
 			<p><b>UUID:</b> <%=@vmhost.uuid%></p>
+			<p><b>Vm</b> всего: <%=@vmhost.vms.count%> запущено: <%=@vmhost.vms.where("state=1").count%></p>
 			<p><b>Описание:</b> <%=@vmhost.hardware_description%></p>
 		</div>
 		<div class="col-lg-6">
