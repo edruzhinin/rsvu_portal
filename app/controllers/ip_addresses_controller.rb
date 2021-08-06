@@ -9,7 +9,7 @@ class IpAddressesController < ApplicationController
 	end
 	
 	def index
-		@ip_addresses =  IpAddress.all
+		@ip_addresses =  IpAddress.order(:ip).all
 	end
 	
 #	def destroy
