@@ -17,7 +17,7 @@ class Hardware < ActiveRecord::Base
 	
 	#scope :order_location, order("location_id desc")
 	
-		def reserved?
+	def reserved?
 	end
 	def get_hardware_full_name
 		if (hardware_model)
@@ -83,6 +83,15 @@ class Hardware < ActiveRecord::Base
 			parent_hardware.get_hardware_location
 		else
 			location.name
+		end
+	end
+	
+	
+	def use_type
+		if canBook
+			return 1
+		else 
+			return 0
 		end
 	end
 	
