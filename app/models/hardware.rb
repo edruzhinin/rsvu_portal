@@ -89,9 +89,9 @@ class Hardware < ActiveRecord::Base
 	
 	def use_type
 		if canBook
-			return 1
-		else 
 			return 0
+		else 
+			return 1
 		end
 	end
 	
