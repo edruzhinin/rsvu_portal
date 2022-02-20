@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210716205447) do
+ActiveRecord::Schema.define(version: 20220117202125) do
 
   create_table "archives", force: :cascade do |t|
     t.string   "name"
@@ -341,8 +341,8 @@ ActiveRecord::Schema.define(version: 20210716205447) do
     t.string   "annotation"
     t.boolean  "vmtools"
     t.string   "path"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
     t.integer  "archive_id"
     t.string   "instance_uuid"
@@ -350,6 +350,15 @@ ActiveRecord::Schema.define(version: 20210716205447) do
     t.integer  "use_type"
     t.boolean  "always_on"
     t.date     "valid_to"
+    t.date     "storage_timestamp"
+    t.float    "storage_commmitted"
+    t.float    "storage_uncommmitted"
+    t.float    "storage_unshared"
+    t.string   "hardware_timestamp"
+    t.integer  "hardware_numCPU"
+    t.integer  "hardware_numCoresPerSocket"
+    t.integer  "hardware_memory"
+    t.string   "place_before_archive"
   end
 
   add_index "vms", ["vmresourcepool_id"], name: "index_vms_on_vmresourcepool_id"
