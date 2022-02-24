@@ -1,0 +1,4 @@
+class ChangeVmsAddSnapshot < ActiveRecord::Migration
+  def change
+  end
+end

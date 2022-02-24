@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220117202125) do
+ActiveRecord::Schema.define(version: 20220224123924) do
 
   create_table "archives", force: :cascade do |t|
     t.string   "name"
@@ -274,6 +274,37 @@ ActiveRecord::Schema.define(version: 20220117202125) do
     t.string   "short_name"
   end
 
+  create_table "vm_devices", force: :cascade do |t|
+    t.integer  "vm_id"
+    t.string   "type"
+    t.string   "lavel"
+    t.string   "summary"
+    t.boolean  "start_connected"
+    t.boolean  "connected"
+    t.string   "status"
+    t.string   "mac"
+    t.string   "devicename"
+    t.string   "network"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "vm_devices", ["vm_id"], name: "index_vm_devices_on_vm_id"
+
+  create_table "vm_snapshots", force: :cascade do |t|
+    t.integer  "vm_id"
+    t.integer  "VmSnapshot_id"
+    t.string   "snapshot"
+    t.string   "name"
+    t.datetime "create_time"
+    t.string   "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "vm_snapshots", ["VmSnapshot_id"], name: "index_vm_snapshots_on_VmSnapshot_id"
+  add_index "vm_snapshots", ["vm_id"], name: "index_vm_snapshots_on_vm_id"
+
   create_table "vmdatasources", force: :cascade do |t|
     t.integer  "vmhost_id"
     t.string   "ds_id"
@@ -359,6 +390,7 @@ ActiveRecord::Schema.define(version: 20220117202125) do
     t.integer  "hardware_numCoresPerSocket"
     t.integer  "hardware_memory"
     t.string   "place_before_archive"
+    t.string   "currentSnapshot"
   end
 
   add_index "vms", ["vmresourcepool_id"], name: "index_vms_on_vmresourcepool_id"

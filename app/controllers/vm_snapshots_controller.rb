@@ -1,0 +1,2 @@
+class VmSnapshotsController < ApplicationController
+end

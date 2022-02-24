@@ -1,0 +1,2 @@
+module VmSnapshotsHelper
+end
