@@ -293,16 +293,15 @@ ActiveRecord::Schema.define(version: 20220224123924) do
 
   create_table "vm_snapshots", force: :cascade do |t|
     t.integer  "vm_id"
-    t.integer  "VmSnapshot_id"
+    t.integer  "parent_id"
     t.string   "snapshot"
     t.string   "name"
     t.datetime "create_time"
     t.string   "description"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "vm_snapshots", ["VmSnapshot_id"], name: "index_vm_snapshots_on_VmSnapshot_id"
   add_index "vm_snapshots", ["vm_id"], name: "index_vm_snapshots_on_vm_id"
 
   create_table "vmdatasources", force: :cascade do |t|
